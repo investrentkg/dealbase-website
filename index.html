@@ -241,6 +241,37 @@
   .footer-legal{ display:flex; gap:20px; }
   .footer-legal a{ font-size:13px; color:var(--muted); transition:color 0.2s ease; }
   .footer-legal a:hover{ color:var(--ink); }
+
+  /* CONTACT WIDGET */
+  .cw{ position:fixed; bottom:24px; right:24px; z-index:80; font-family:'Inter',sans-serif; }
+  .cw-bubble{ width:56px; height:56px; border-radius:50%; background:var(--ink); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 30px -10px rgba(16,24,43,0.45); transition:transform 0.2s ease; position:relative; }
+  .cw-bubble:hover{ transform:scale(1.06); }
+  .cw-bubble svg{ width:24px; height:24px; stroke:var(--cream); transition:opacity 0.15s ease, transform 0.15s ease; }
+  .cw-bubble .icon-close{ position:absolute; opacity:0; transform:rotate(-90deg) scale(0.6); }
+  .cw-bubble.open .icon-chat{ opacity:0; transform:rotate(90deg) scale(0.6); }
+  .cw-bubble.open .icon-close{ opacity:1; transform:rotate(0) scale(1); }
+  .cw-dot{ position:absolute; top:-2px; right:-2px; width:14px; height:14px; border-radius:50%; background:var(--teal); border:2px solid var(--cream); }
+  .cw-bubble.open ~ .cw-dot, .cw-bubble.open .cw-dot{ display:none; }
+  .cw-panel{ position:absolute; bottom:72px; right:0; width:312px; max-width:88vw; background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:0 24px 60px -20px rgba(16,24,43,0.35); padding:22px; opacity:0; transform:translateY(12px) scale(0.97); pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease; transform-origin:bottom right; }
+  .cw-panel.open{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .cw-head{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .cw-avatar{ width:36px; height:36px; border-radius:50%; background:var(--ink); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .cw-avatar svg{ width:18px; height:18px; }
+  .cw-name{ font-size:14.5px; font-weight:600; }
+  .cw-status{ font-size:12px; color:var(--muted); display:flex; align-items:center; gap:5px; }
+  .cw-status::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); }
+  .cw-msg{ background:var(--teal-light); color:#0F6E56; font-size:13.5px; border-radius:12px; padding:12px 14px; margin:14px 0 16px; line-height:1.5; }
+  .cw-actions{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+  .cw-action{ display:flex; align-items:center; gap:10px; padding:11px 12px; border:1px solid var(--border); border-radius:10px; font-size:13.5px; font-weight:600; transition:border-color 0.2s ease, background 0.2s ease; }
+  .cw-action:hover{ border-color:var(--ink); background:var(--cream); }
+  .cw-action svg{ width:16px; height:16px; color:var(--teal); flex-shrink:0; }
+  .cw-divider{ display:flex; align-items:center; gap:10px; margin:14px 0; font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; }
+  .cw-divider::before, .cw-divider::after{ content:''; flex:1; height:1px; background:var(--border); }
+  .cw-field{ width:100%; border:1px solid var(--border); border-radius:9px; padding:10px 12px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--cream); margin-bottom:8px; resize:none; }
+  .cw-field:focus{ outline:none; border-color:var(--teal); }
+  .cw-send{ width:100%; background:var(--ink); color:var(--cream); border:none; border-radius:9px; padding:11px; font-size:13.5px; font-weight:600; cursor:pointer; transition:background 0.2s ease; }
+  .cw-send:hover{ background:var(--coral); }
+  @media(max-width:480px){ .cw{ bottom:16px; right:16px; } .cw-panel{ right:-4px; } }
 </style>
 </head>
 <body>
@@ -588,6 +619,45 @@
 
 </div>
 
+<div class="cw">
+  <div class="cw-panel" id="cwPanel">
+    <div class="cw-head">
+      <div class="cw-avatar">
+        <svg viewBox="0 0 24 28" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FAF8F3"/>
+          <circle cx="12" cy="9" r="2.6" fill="#10182B"/>
+        </svg>
+      </div>
+      <div>
+        <div class="cw-name">Zespół DealBase</div>
+        <div class="cw-status">Zwykle odpowiadamy w 1 dzień roboczy</div>
+      </div>
+    </div>
+    <div class="cw-msg">Cześć! Masz pytanie o DealBase albo chcesz zobaczyć demo? Napisz nam, odpiszemy osobiście.</div>
+    <div class="cw-actions">
+      <a class="cw-action" href="mailto:zarzad@investrent.com.pl?subject=Demo%20DealBase%20CRM&body=Cze%C5%9B%C4%87%2C%20chcia%C5%82bym%20um%C3%B3wi%C4%87%20demo%20DealBase%20CRM%20dla%20mojego%20biura.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+        Umów demo
+      </a>
+      <a class="cw-action" href="mailto:zarzad@investrent.com.pl?subject=Pytanie%20o%20DealBase%20CRM">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3V4z"/></svg>
+        Napisz e-mail
+      </a>
+    </div>
+    <div class="cw-divider">albo zostaw wiadomość</div>
+    <form id="cwForm">
+      <input class="cw-field" type="text" id="cwName" placeholder="Imię i nazwa biura" required>
+      <textarea class="cw-field" id="cwMsg" rows="3" placeholder="W czym możemy pomóc?" required></textarea>
+      <button type="submit" class="cw-send">Wyślij wiadomość</button>
+    </form>
+  </div>
+  <button class="cw-bubble" id="cwBubble" aria-label="Otwórz kontakt" aria-expanded="false">
+    <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    <span class="cw-dot"></span>
+  </button>
+</div>
+
 <script>
   window.addEventListener('scroll', function(){
     document.getElementById('navOuter').classList.toggle('scrolled', window.scrollY > 8);
@@ -658,6 +728,38 @@
       document.querySelector('.tour-panel[data-panel="'+tab.dataset.tab+'"]').classList.add('active');
     });
   });
+
+  var cwBubble = document.getElementById('cwBubble');
+  var cwPanel = document.getElementById('cwPanel');
+  if(cwBubble && cwPanel){
+    cwBubble.addEventListener('click', function(){
+      var open = cwPanel.classList.toggle('open');
+      cwBubble.classList.toggle('open', open);
+      cwBubble.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && cwPanel.classList.contains('open')){
+        cwPanel.classList.remove('open'); cwBubble.classList.remove('open'); cwBubble.setAttribute('aria-expanded','false');
+      }
+    });
+    document.addEventListener('click', function(e){
+      if(cwPanel.classList.contains('open') && !cwPanel.contains(e.target) && !cwBubble.contains(e.target)){
+        cwPanel.classList.remove('open'); cwBubble.classList.remove('open'); cwBubble.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  var cwForm = document.getElementById('cwForm');
+  if(cwForm){
+    cwForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('cwName').value;
+      var msg = document.getElementById('cwMsg').value;
+      var subject = encodeURIComponent('Zapytanie ze strony DealBase — ' + name);
+      var body = encodeURIComponent('Od: ' + name + '\n\n' + msg);
+      window.location.href = 'mailto:zarzad@investrent.com.pl?subject=' + subject + '&body=' + body;
+    });
+  }
 </script>
 
 </body>
