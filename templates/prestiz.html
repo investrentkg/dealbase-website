@@ -167,6 +167,25 @@
   .form-success.show{ display:block; }
 
   footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
+
+  .about-split{ display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center; background:#fff; border:1px solid var(--border); border-radius:14px; padding:32px; }
+  @media(max-width:780px){ .about-split{ grid-template-columns:1fr; } }
+  .ab-stats{ display:grid; grid-template-columns:1fr; gap:14px; }
+  .ab-stat{ border-left:2px solid var(--gold); padding-left:14px; }
+  .ab-stat-num{ font-size:22px; font-weight:700; }
+  .ab-stat-label{ font-size:12px; color:var(--muted); margin-top:2px; }
+  .why-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media(max-width:700px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-item{ background:#fff; border:1px solid var(--border); border-radius:12px; padding:22px; }
+  .why-num{ font-size:12px; font-weight:700; color:var(--gold); margin-bottom:8px; letter-spacing:1px; }
+  .why-item h3{ font-size:16px; margin-bottom:6px; }
+  .why-item p{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+  .testimonial-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:700px){ .testimonial-grid{ grid-template-columns:1fr; } }
+  .testimonial-card{ background:#fff; border:1px solid var(--border); border-radius:12px; padding:26px; }
+  .tq{ font-size:34px; color:var(--gold); line-height:1; margin-bottom:6px; font-family:serif; }
+  .testimonial-card p{ font-size:14px; line-height:1.6; margin-bottom:12px; }
+  .testimonial-card span{ font-size:12.5px; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -238,7 +257,31 @@
     <p>Nie sprzedajemy skali — sprzedajemy uwagę. Każdy klient ma jednego, dedykowanego agenta przez cały proces.</p>
   </div>
 
+  
   <div class="section reveal-inline">
+    <div class="about-split">
+      <div>
+        <h2 style="font-size:26px; margin-bottom:14px;">Aurum Nieruchomości — kim jesteśmy</h2>
+        <p style="color:var(--muted); font-size:14.5px; line-height:1.7; max-width:520px;">Działamy w Kołobrzegu od 2011 roku, budując portfel nieruchomości, za którym stoi coś więcej niż transakcja — osobista znajomość każdej okolicy, każdego budynku i każdego klienta. Zaczynaliśmy jako dwuosobowe biuro; dziś prowadzimy transakcje o wartości liczonej w milionach złotych, nie tracąc z oczu tego, co było ważne od początku: uwaga do detalu.</p>
+      </div>
+      <div class="ab-stats"><div class="ab-stat"><div class="ab-stat-num">15 lat</div><div class="ab-stat-label">na rynku premium</div></div><div class="ab-stat"><div class="ab-stat-num">180+</div><div class="ab-stat-label">zamkniętych transakcji</div></div><div class="ab-stat"><div class="ab-stat-num">3</div><div class="ab-stat-label">agentów z dedykowaną specjalizacją</div></div></div>
+    </div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Dlaczego my</h2>
+    </div>
+    <div class="why-grid"><div class="why-item"><div class="why-num">01</div><h3>Dedykowany agent</h3><p>Każdy klient ma jedną osobę kontaktową od pierwszej rozmowy do podpisu aktu — nie zespół anonimowych kontaktów.</p></div><div class="why-item"><div class="why-num">02</div><h3>Dyskrecja transakcji</h3><p>Wysokobudżetowe transakcje prowadzimy z pełną dyskrecją, bez zbędnej ekspozycji marketingowej, jeśli klient tego wymaga.</p></div><div class="why-item"><div class="why-num">03</div><h3>Portfel bez przypadkowości</h3><p>Każda oferta w naszym portfelu przechodzi osobistą weryfikację agenta, zanim trafi do klienta.</p></div><div class="why-item"><div class="why-num">04</div><h3>Pełna obsługa transakcji</h3><p>Od wyceny, przez negocjacje, po akt notarialny — koordynujemy cały proces, nie tylko prezentację.</p></div></div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Co mówią klienci</h2>
+    </div>
+    <div class="testimonial-grid"><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Sprzedaliśmy dom w Grzybowie w mniej niż dwa miesiące, po cenie wyższej niż zakładaliśmy. Agent był dostępny na każdym etapie.</p><span>&mdash; Klientka, transakcja w Grzybowie</span></div><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Kupiłem apartament inwestycyjny bez wychodzenia z biura — pełna dokumentacja przygotowana zawczasu, zero niespodzianek u notariusza.</p><span>&mdash; Klient, transakcja w Kołobrzegu</span></div></div>
+  </div>
+<div class="section reveal-inline">
     <div class="section-head">
       <h2 style="font-size:26px;">Ludzie, z którymi rozmawiasz</h2>
       <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
