@@ -9,201 +9,273 @@
 <style>
   :root{ --sand:#F5EFE3; --sea:#2B6E6B; --sea-dark:#1B4F4D; --sun:#E0954B; --ink:#20302C; --muted:#6B7570; --border:#E3DACB; }
   *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; }
   body{ font-family:'Inter',sans-serif; color:var(--ink); background:var(--sand); line-height:1.6; }
-  a{ color:inherit; text-decoration:none; }
+  a{ color:inherit; text-decoration:none; cursor:pointer; }
   h1,h2,h3{ font-family:'Fraunces',serif; font-weight:500; }
+  button{ font-family:'Inter',sans-serif; cursor:pointer; }
 
   .demo-tag{ position:fixed; top:14px; left:14px; z-index:99; background:var(--sea); color:#fff; font-size:11px; font-weight:600; padding:6px 12px; border-radius:100px; letter-spacing:0.5px; }
 
-  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 48px; }
-  .logo{ font-family:'Fraunces',serif; font-size:21px; font-weight:600; }
-  .nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; }
-  @media(max-width:760px){ .nav-links{ display:none; } }
-  .btn-sea{ background:var(--sea); color:#fff; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:600; }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:22px 48px; position:sticky; top:0; background:rgba(245,239,227,0.92); backdrop-filter:blur(8px); z-index:50; border-bottom:1px solid var(--border); }
+  .logo{ font-family:'Fraunces',serif; font-size:20px; font-weight:600; }
+  .nav-links{ display:flex; gap:28px; font-size:14px; font-weight:500; }
+  .nav-links a{ padding-bottom:4px; border-bottom:2px solid transparent; transition:border-color 0.15s ease; }
+  .nav-links a:hover, .nav-links a.active{ border-color:var(--sun); }
+  @media(max-width:820px){ .nav-links{ display:none; } }
+  .btn-sea{ background:var(--sea); color:#fff; padding:11px 22px; border-radius:8px; font-size:13.5px; font-weight:600; border:none; }
+  .hamburger{ display:none; width:36px; height:36px; border:1px solid var(--border); border-radius:8px; align-items:center; justify-content:center; background:none; }
+  @media(max-width:820px){ .hamburger{ display:flex; } }
+  .mobile-menu{ display:none; flex-direction:column; padding:8px 48px 18px; border-bottom:1px solid var(--border); }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{ padding:12px 0; border-bottom:1px solid var(--border); font-size:14.5px; }
+  .mobile-menu a:last-child{ border-bottom:none; }
 
-  .hero{ padding:50px 48px 0; max-width:1300px; margin:0 auto; }
-  .hero-visual{ height:480px; border-radius:22px; position:relative; overflow:hidden; }
+  .view{ display:none; }
+  .view.active{ display:block; animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
+
+  .hero{ padding:40px 48px 0; max-width:1300px; margin:0 auto; }
+  .hero-visual{ height:min(440px,65vw); border-radius:22px; position:relative; overflow:hidden; }
   .hero-visual svg{ width:100%; height:100%; display:block; }
-  .hero-caption{ position:absolute; bottom:32px; left:32px; color:#fff; max-width:440px; z-index:2; }
-  .hero-caption .eyebrow{ font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.9; margin-bottom:8px; display:block; }
-  .hero-caption h1{ font-size:32px; line-height:1.2; }
+  .hero-caption{ position:absolute; bottom:28px; left:28px; color:#fff; max-width:420px; z-index:2; }
+  .hero-caption .eyebrow{ font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.9; margin-bottom:8px; display:block; }
+  .hero-caption h1{ font-size:clamp(24px,4vw,32px); line-height:1.2; }
 
-  .quick-search{ max-width:1300px; margin:-34px auto 0; padding:0 48px; position:relative; z-index:5; }
-  .search-box{ background:#fff; border-radius:16px; padding:22px 26px; box-shadow:0 20px 40px -20px rgba(32,48,44,0.25); display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .quick-search{ max-width:1300px; margin:-32px auto 0; padding:0 48px; position:relative; z-index:5; }
+  .search-box{ background:#fff; border-radius:16px; padding:20px 24px; box-shadow:0 20px 40px -20px rgba(32,48,44,0.25); display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
   .search-box select, .search-box input{ border:1px solid var(--border); border-radius:8px; padding:11px 14px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--sand); flex:1; min-width:140px; }
-  .search-box button{ background:var(--sun); color:#fff; border:none; padding:11px 26px; border-radius:8px; font-size:13.5px; font-weight:600; cursor:pointer; }
+  .search-box button{ background:var(--sun); color:#fff; border:none; padding:11px 24px; border-radius:8px; font-size:13.5px; font-weight:600; }
 
-  .section{ padding:80px 48px; max-width:1300px; margin:0 auto; }
-  .section-head{ text-align:center; margin-bottom:44px; }
+  .section{ padding:70px 48px; max-width:1300px; margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:38px; }
   .section-head .eyebrow{ color:var(--sea); font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; display:block; }
-  .section-head h2{ font-size:30px; }
+  .section-head h2{ font-size:28px; }
+  .view-all-link{ text-align:center; margin-top:30px; }
+  .view-all-link a{ font-size:13.5px; font-weight:600; color:var(--sea); border-bottom:1px solid var(--sea); padding-bottom:3px; }
 
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-  @media(max-width:860px){ .grid{ grid-template-columns:1fr; } }
-  .listing{ background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--border); }
-  .listing-img{ height:210px; position:relative; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media(max-width:900px){ .grid3{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:620px){ .grid3{ grid-template-columns:1fr; } }
+  .listing{ background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--border); cursor:pointer; transition:transform 0.2s ease; }
+  .listing:hover{ transform:translateY(-3px); }
+  .listing-img{ height:180px; position:relative; }
   .listing-img svg{ width:100%; height:100%; display:block; }
-  .listing-info{ padding:20px; }
-  .listing-price{ font-family:'Fraunces',serif; font-size:21px; }
-  .listing-loc{ color:var(--muted); font-size:13.5px; margin:4px 0 12px; }
-  .listing-meta{ display:flex; gap:12px; font-size:12.5px; color:var(--muted); }
+  .listing-info{ padding:18px; }
+  .listing-price{ font-family:'Fraunces',serif; font-size:19px; }
+  .listing-loc{ color:var(--muted); font-size:13px; margin:4px 0 10px; }
+  .listing-meta{ display:flex; gap:10px; font-size:12px; color:var(--muted); }
 
-  .map-section{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
-  @media(max-width:860px){ .map-section{ grid-template-columns:1fr; } }
-  .map-visual{ height:360px; border-radius:20px; overflow:hidden; }
-  .map-visual svg{ width:100%; height:100%; display:block; }
-  .regions{ display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; }
-  .region-pill{ background:#fff; border:1px solid var(--border); border-radius:100px; padding:10px 20px; font-size:13.5px; font-weight:600; }
+  .filter-bar{ display:flex; gap:12px; flex-wrap:wrap; background:#fff; border:1px solid var(--border); border-radius:16px; padding:18px; margin-bottom:26px; }
+  .filter-bar select{ border:1px solid var(--border); border-radius:8px; padding:10px 12px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--sand); flex:1; min-width:140px; }
+  .filter-count{ font-size:13px; color:var(--muted); margin-bottom:20px; }
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--muted); font-size:14px; }
 
-  .testimonial-card{ background:#fff; border-radius:20px; padding:48px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:center; border:1px solid var(--border); }
-  @media(max-width:700px){ .testimonial-card{ grid-template-columns:1fr; } }
-  .testimonial-avatar{ width:64px; height:64px; border-radius:50%; overflow:hidden; }
-  .testimonial-avatar svg{ width:100%; height:100%; display:block; }
-  .testimonial-card p{ font-family:'Fraunces',serif; font-size:20px; color:var(--ink); }
-  .testimonial-card span{ color:var(--muted); font-size:13px; display:block; margin-top:10px; }
+  .detail-wrap{ max-width:1200px; margin:0 auto; padding:36px 48px 90px; }
+  .back-link{ font-size:13px; font-weight:600; color:var(--muted); margin-bottom:20px; display:inline-block; }
+  .back-link:hover{ color:var(--ink); }
+  .detail-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:40px; }
+  @media(max-width:860px){ .detail-grid{ grid-template-columns:1fr; } }
+  .gallery-main{ height:360px; border-radius:18px; overflow:hidden; margin-bottom:10px; }
+  .gallery-main svg{ width:100%; height:100%; display:block; }
+  .gallery-thumbs{ display:flex; gap:8px; }
+  .gallery-thumb{ width:70px; height:52px; border-radius:8px; overflow:hidden; cursor:pointer; border:2px solid transparent; opacity:0.6; transition:opacity 0.15s ease, border-color 0.15s ease; flex-shrink:0; }
+  .gallery-thumb.active{ opacity:1; border-color:var(--sun); }
+  .gallery-thumb svg{ width:100%; height:100%; display:block; }
+  .detail-title{ font-size:24px; margin:24px 0 6px; }
+  .detail-loc{ color:var(--muted); font-size:14px; margin-bottom:18px; }
+  .detail-desc{ font-size:14.5px; color:#3A4A44; line-height:1.7; }
+  .side-card{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:26px; }
+  .side-price{ font-family:'Fraunces',serif; font-size:26px; margin-bottom:16px; }
+  .side-specs{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px; }
+  .spec-item{ font-size:13px; }
+  .spec-label{ color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
+  .agent-mini{ display:flex; gap:12px; align-items:center; border-top:1px solid var(--border); padding-top:18px; margin-top:18px; }
+  .agent-mini-photo{ width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+  .agent-mini-photo svg{ width:100%; height:100%; display:block; }
+  .agent-mini-name{ font-size:13px; font-weight:600; }
+  .agent-mini-role{ font-size:11px; color:var(--muted); }
+  .similar-strip{ margin-top:56px; }
 
-  footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
+  .team-hero{ padding:56px 48px 0; text-align:center; max-width:640px; margin:0 auto; }
+  .team{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+  @media(max-width:820px){ .team{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:600px){ .team{ grid-template-columns:1fr; } }
+  .agent-card{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:24px; text-align:center; }
+  .agent-photo{ width:80px; height:80px; margin:0 auto 14px; border-radius:50%; overflow:hidden; }
+  .agent-photo svg{ width:100%; height:100%; display:block; }
+  .agent-name{ font-size:16px; margin-bottom:2px; }
+  .agent-role{ color:var(--sea); font-size:11.5px; letter-spacing:0.5px; text-transform:uppercase; font-weight:600; margin-bottom:8px; }
+  .agent-bio{ color:var(--muted); font-size:13px; }
+
+  .contact-wrap{ max-width:1100px; margin:0 auto; padding:56px 48px 100px; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
+  @media(max-width:820px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .contact-info h2{ font-size:26px; margin-bottom:14px; }
+  .contact-info p{ color:var(--muted); font-size:14.5px; margin-bottom:26px; }
+  .contact-detail{ display:flex; gap:12px; margin-bottom:14px; font-size:14px; }
+  .contact-detail strong{ display:block; font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
+  .contact-form{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:30px; }
+  .form-row{ margin-bottom:14px; }
+  .form-row label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; }
+  .form-row input, .form-row textarea{ width:100%; border:1px solid var(--border); border-radius:8px; padding:11px; font-size:14px; font-family:'Inter',sans-serif; background:var(--sand); }
+  .form-row textarea{ resize:vertical; min-height:90px; }
+  .form-submit{ width:100%; margin-top:4px; padding:13px; }
+  .form-success{ display:none; background:#E4EEE0; border:1px solid #B9D6A8; color:#3B5A2C; padding:14px 16px; border-radius:8px; font-size:13.5px; margin-top:14px; }
+  .form-success.show{ display:block; }
+
+  footer{ padding:40px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
 </style>
 </head>
 <body>
-<span class="demo-tag">Szablon DealBase — Nadmorski</span>
+<span class="demo-tag">Szablon DealBase — Nadmorski (w pełni funkcjonalny)</span>
 
 <nav>
   <div class="logo">Wybrzeże Nieruchomości</div>
-  <div class="nav-links">
-    <a href="#">Oferty</a>
-    <a href="#">Lokalizacje</a>
-    <a href="#">Inwestycje</a>
-    <a href="#">Kontakt</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#/" data-route="/">Start</a>
+    <a href="#/oferty" data-route="/oferty">Oferty</a>
+    <a href="#/zespol" data-route="/zespol">Zespół</a>
+    <a href="#/kontakt" data-route="/kontakt">Kontakt</a>
   </div>
-  <a href="#" class="btn-sea">Umów prezentację</a>
+  <a href="#/kontakt" class="btn-sea">Umów prezentację</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#20302C" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
 </nav>
-
-<section class="hero">
-  <div class="hero-visual">
-    <svg viewBox="0 0 1300 480" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="skyC" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#E8D9B8"/>
-          <stop offset="60%" stop-color="#8FBDB8"/>
-          <stop offset="100%" stop-color="#2B6E6B"/>
-        </linearGradient>
-      </defs>
-      <rect width="1300" height="480" fill="url(#skyC)"/>
-      <circle cx="1080" cy="120" r="70" fill="#F5EFE3" opacity="0.8"/>
-      <path d="M0,300 Q325,260 650,300 T1300,300 V480 H0 Z" fill="#1B4F4D" opacity="0.9"/>
-      <path d="M0,340 Q325,300 650,340 T1300,340 V480 H0 Z" fill="#2B6E6B"/>
-      <path d="M0,380 Q325,350 650,380 T1300,380 V480 H0 Z" fill="#3A8A85" opacity="0.8"/>
-      <rect x="180" y="220" width="30" height="80" fill="#20302C" opacity="0.5"/>
-      <rect x="900" y="240" width="24" height="60" fill="#20302C" opacity="0.4"/>
-      <rect x="0" y="0" width="1300" height="480" fill="#000" opacity="0.15"/>
-    </svg>
-    <div class="hero-caption">
-      <span class="eyebrow">Kołobrzeg i okolice</span>
-      <h1>Życie bliżej morza zaczyna się od dobrego adresu</h1>
-    </div>
-  </div>
-</section>
-
-<div class="quick-search">
-  <div class="search-box">
-    <select><option>Typ nieruchomości</option><option>Mieszkanie</option><option>Dom</option></select>
-    <select><option>Lokalizacja</option><option>Kołobrzeg</option><option>Ustronie Morskie</option><option>Sianożęty</option></select>
-    <input type="text" placeholder="Budżet do (zł)">
-    <button>Szukaj</button>
-  </div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#/" data-route="/">Start</a>
+  <a href="#/oferty" data-route="/oferty">Oferty</a>
+  <a href="#/zespol" data-route="/zespol">Zespół</a>
+  <a href="#/kontakt" data-route="/kontakt">Kontakt</a>
 </div>
 
-<section class="section">
-  <div class="section-head">
-    <span class="eyebrow">Wybrane oferty</span>
-    <h2>Nieruchomości blisko wybrzeża</h2>
-  </div>
-  <div class="grid">
-    <div class="listing">
-      <div class="listing-img">
-        <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
-          <defs><linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EFE3C8"/><stop offset="100%" stop-color="#D8C79E"/></linearGradient></defs>
-          <rect width="400" height="210" fill="url(#c1)"/>
-          <path d="M0,150 Q100,130 200,150 T400,150 V210 H0 Z" fill="#8FBDB8"/>
-          <rect x="140" y="70" width="120" height="80" rx="6" fill="#F5EFE3"/>
-          <rect x="160" y="90" width="20" height="20" fill="#E0954B" opacity="0.6"/><rect x="220" y="90" width="20" height="20" fill="#2B6E6B" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="listing-info">
-        <div class="listing-price">890 000 zł</div>
-        <div class="listing-loc">Apartament, Sianożęty — 300 m od plaży</div>
-        <div class="listing-meta"><span>2 pokoje</span><span>52 m²</span></div>
-      </div>
-    </div>
-    <div class="listing">
-      <div class="listing-img">
-        <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
-          <defs><linearGradient id="c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E4EEE0"/><stop offset="100%" stop-color="#B8CDA8"/></linearGradient></defs>
-          <rect width="400" height="210" fill="url(#c2)"/>
-          <rect x="100" y="80" width="200" height="100" fill="#3A8A85" opacity="0.85"/>
-          <polygon points="100,80 200,30 300,80" fill="#1B4F4D"/>
-          <rect x="180" y="120" width="40" height="60" fill="#F5EFE3"/>
-        </svg>
-      </div>
-      <div class="listing-info">
-        <div class="listing-price">1 450 000 zł</div>
-        <div class="listing-loc">Dom, Ustronie Morskie</div>
-        <div class="listing-meta"><span>Dom</span><span>180 m²</span></div>
-      </div>
-    </div>
-    <div class="listing">
-      <div class="listing-img">
-        <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
-          <defs><linearGradient id="c3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F0E8D4"/><stop offset="100%" stop-color="#DCCBA0"/></linearGradient></defs>
-          <rect width="400" height="210" fill="url(#c3)"/>
-          <rect x="70" y="90" width="260" height="90" fill="#E0954B" opacity="0.3"/>
-          <rect x="120" y="60" width="60" height="120" fill="#8A7A54"/>
-          <rect x="220" y="90" width="60" height="90" fill="#6B5F3E"/>
-        </svg>
-      </div>
-      <div class="listing-info">
-        <div class="listing-price">620 000 zł</div>
-        <div class="listing-loc">Mieszkanie, Kołobrzeg-Radzikowo</div>
-        <div class="listing-meta"><span>3 pokoje</span><span>68 m²</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0;">
-  <div class="map-section">
-    <div>
-      <span class="eyebrow" style="color:var(--sea); font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:10px;">Obszar działania</span>
-      <h2>Znamy każdą z tych lokalizacji od podszewki</h2>
-      <div class="regions">
-        <span class="region-pill">Kołobrzeg</span>
-        <span class="region-pill">Ustronie Morskie</span>
-        <span class="region-pill">Sianożęty</span>
-        <span class="region-pill">Dźwirzyno</span>
-        <span class="region-pill">Podczele</span>
-      </div>
-    </div>
-    <div class="map-visual">
-      <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice">
-        <rect width="600" height="360" fill="#EFE9DC"/>
-        <path d="M0,60 Q150,20 300,60 T600,60 V0 H0 Z" fill="#8FBDB8"/>
-        <circle cx="180" cy="140" r="8" fill="#E0954B"/>
-        <circle cx="300" cy="200" r="8" fill="#2B6E6B"/>
-        <circle cx="420" cy="150" r="8" fill="#E0954B"/>
-        <circle cx="250" cy="260" r="8" fill="#2B6E6B"/>
-        <path d="M180,140 L300,200 L420,150 M300,200 L250,260" stroke="#8A7A54" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+<section class="view" id="view-home">
+  <div class="hero">
+    <div class="hero-visual">
+      <svg viewBox="0 0 1300 440" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="skyC" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8D9B8"/><stop offset="60%" stop-color="#8FBDB8"/><stop offset="100%" stop-color="#2B6E6B"/></linearGradient></defs>
+        <rect width="1300" height="440" fill="url(#skyC)"/>
+        <circle cx="1080" cy="110" r="65" fill="#F5EFE3" opacity="0.8"/>
+        <path d="M0,270 Q325,235 650,270 T1300,270 V440 H0 Z" fill="#1B4F4D" opacity="0.9"/>
+        <path d="M0,310 Q325,280 650,310 T1300,310 V440 H0 Z" fill="#2B6E6B"/>
+        <rect x="0" y="0" width="1300" height="440" fill="#000" opacity="0.12"/>
       </svg>
+      <div class="hero-caption">
+        <span class="eyebrow">Kołobrzeg i okolice</span>
+        <h1>Życie bliżej morza zaczyna się od dobrego adresu</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-search">
+    <div class="search-box">
+      <select id="homeType"><option value="">Typ nieruchomości</option><option value="Mieszkanie">Mieszkanie</option><option value="Dom">Dom</option></select>
+      <select id="homeLoc"><option value="">Lokalizacja</option><option value="Kołobrzeg">Kołobrzeg</option><option value="Ustronie Morskie">Ustronie Morskie</option><option value="Sianożęty">Sianożęty</option></select>
+      <button onclick="location.hash='#/oferty'">Szukaj</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="eyebrow">Wybrane oferty</span>
+      <h2>Nieruchomości blisko wybrzeża</h2>
+    </div>
+    <div class="grid3" id="homeListings"></div>
+    <div class="view-all-link"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
+  </div>
+</section>
+
+<section class="view" id="view-oferty">
+  <div class="section" style="padding-bottom:0;">
+    <div class="section-head" style="margin-bottom:20px;"><h2>Wszystkie oferty</h2></div>
+    <div class="filter-bar">
+      <select id="filterType">
+        <option value="">Typ nieruchomości</option>
+        <option value="Mieszkanie">Mieszkanie</option>
+        <option value="Dom">Dom</option>
+        <option value="Działka">Działka</option>
+      </select>
+      <select id="filterLoc">
+        <option value="">Lokalizacja</option>
+        <option value="Kołobrzeg">Kołobrzeg</option>
+        <option value="Ustronie Morskie">Ustronie Morskie</option>
+        <option value="Sianożęty">Sianożęty</option>
+        <option value="Dźwirzyno">Dźwirzyno</option>
+      </select>
+      <select id="filterSort">
+        <option value="default">Sortowanie: domyślne</option>
+        <option value="price-asc">Cena: od najniższej</option>
+        <option value="price-desc">Cena: od najwyższej</option>
+      </select>
+    </div>
+    <div class="filter-count" id="filterCount"></div>
+    <div class="grid3" id="allListings"></div>
+    <div id="emptyState" class="empty-state" style="display:none;">Brak ofert spełniających wybrane kryteria. Zmień filtry, żeby zobaczyć więcej wyników.</div>
+  </div>
+</section>
+
+<section class="view" id="view-detail">
+  <div class="detail-wrap">
+    <a href="#/oferty" class="back-link">← Wróć do listy ofert</a>
+    <div class="detail-grid">
+      <div>
+        <div class="gallery-main" id="galleryMain"></div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+        <h1 class="detail-title" id="detailTitle"></h1>
+        <div class="detail-loc" id="detailLoc"></div>
+        <p class="detail-desc" id="detailDesc"></p>
+      </div>
+      <div>
+        <div class="side-card">
+          <div class="side-price" id="detailPrice"></div>
+          <div class="side-specs" id="detailSpecs"></div>
+          <a href="#/kontakt" class="btn-sea" style="display:block; text-align:center; width:100%; padding:13px;">Zapytaj o ofertę</a>
+          <div class="agent-mini">
+            <div class="agent-mini-photo"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#2B6E6B"/><circle cx="22" cy="18" r="8" fill="#F5EFE3"/></svg></div>
+            <div><div class="agent-mini-name" id="detailAgentName">Kasia Lewandowska</div><div class="agent-mini-role">Agentka prowadząca</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="similar-strip">
+      <div class="section-head" style="text-align:left; margin-bottom:22px;"><h2 style="font-size:20px;">Podobne oferty</h2></div>
+      <div class="grid3" id="similarListings"></div>
     </div>
   </div>
 </section>
 
-<section class="section" style="padding-top:0;">
-  <div class="testimonial-card">
-    <div class="testimonial-avatar"><svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#2B6E6B"/><circle cx="32" cy="26" r="12" fill="#F5EFE3"/></svg></div>
-    <div>
-      <p>Kupiliśmy apartament bez wychodzenia z domu — wszystko pokazane na wideo, dokumenty przygotowane zawczasu.</p>
-      <span>— Klienci z Warszawy, apartament wakacyjny w Sianożętach</span>
+<section class="view" id="view-zespol">
+  <div class="team-hero">
+    <h1 style="font-size:30px; margin-bottom:14px;">Ludzie, z którymi rozmawiasz</h1>
+    <p style="color:var(--muted); font-size:15px;">Znamy każdą plażę, każdą gminę i każdy przepis budowlany w regionie.</p>
+  </div>
+  <div class="section">
+    <div class="team">
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#2B6E6B"/><circle cx="40" cy="32" r="14" fill="#F5EFE3"/></svg></div><div class="agent-name">Kasia Lewandowska</div><div class="agent-role">Właścicielka</div><div class="agent-bio">Nieruchomości nadmorskie od 12 lat.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#E0954B"/><circle cx="40" cy="32" r="14" fill="#20302C"/></svg></div><div class="agent-name">Robert Wiśniewski</div><div class="agent-role">Agent</div><div class="agent-bio">Specjalizacja: nieruchomości inwestycyjne.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#8FBDB8"/><circle cx="40" cy="32" r="14" fill="#20302C"/></svg></div><div class="agent-name">Marta Jabłońska</div><div class="agent-role">Agentka</div><div class="agent-bio">Obsługa klientów wypoczynkowych i sezonowych.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="view-kontakt">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h2>Napisz do nas, odpowiadamy tego samego dnia</h2>
+      <p>Wypełnij formularz albo skontaktuj się bezpośrednio — dane biura poniżej.</p>
+      <div class="contact-detail"><div><strong>Adres</strong>ul. Nadmorska 8, 78-100 Kołobrzeg</div></div>
+      <div class="contact-detail"><div><strong>Telefon</strong>+48 94 222 22 22</div></div>
+      <div class="contact-detail"><div><strong>E-mail</strong>kontakt@wybrzeze-nieruchomosci.pl</div></div>
+      <div class="contact-detail"><div><strong>Godziny</strong>Pon–Sob 9:00–17:00 (sezon: 7 dni w tygodniu)</div></div>
+    </div>
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="form-row"><label>Imię i nazwisko</label><input type="text" required></div>
+        <div class="form-row"><label>E-mail</label><input type="email" required></div>
+        <div class="form-row"><label>Wiadomość</label><textarea required placeholder="W czym możemy pomóc?"></textarea></div>
+        <button type="submit" class="btn-sea form-submit">Wyślij wiadomość</button>
+        <div class="form-success" id="formSuccess">Dziękujemy! To demonstracja — w realnym wdrożeniu wiadomość trafiłaby prosto do Twojego CRM-a.</div>
+      </form>
     </div>
   </div>
 </section>
@@ -211,5 +283,110 @@
 <footer>
   Wybrzeże Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Grafiki ilustracyjne, do zastąpienia własnymi zdjęciami.
 </footer>
+
+<script>
+const OFFERS = [
+  { id:1, title:'Apartament nad plażą', type:'Mieszkanie', price:890000, area:52, rooms:2, loc:'Sianożęty', desc:'300 metrów od plaży, w pełni umeblowany, gotowy pod wynajem sezonowy od pierwszego dnia.', colors:['#EFE3C8','#D8C79E'] },
+  { id:2, title:'Dom z widokiem na morze', type:'Dom', price:1450000, area:180, rooms:5, loc:'Ustronie Morskie', desc:'Dom na wzniesieniu z panoramicznym widokiem, duży taras, garaż na dwa auta.', colors:['#E4EEE0','#B8CDA8'] },
+  { id:3, title:'Mieszkanie, Radzikowo', type:'Mieszkanie', price:620000, area:68, rooms:3, loc:'Kołobrzeg, Radzikowo', desc:'Nowe osiedle, blisko lasu i ścieżek rowerowych, 10 minut do centrum.', colors:['#F0E8D4','#DCCBA0'] },
+  { id:4, title:'Domek letniskowy', type:'Dom', price:540000, area:75, rooms:3, loc:'Dźwirzyno', desc:'Klimatyczny domek 5 minut od jeziora i morza, idealny na wynajem wakacyjny.', colors:['#EFE3C8','#8FBDB8'] },
+  { id:5, title:'Apartament z tarasem', type:'Mieszkanie', price:1050000, area:71, rooms:3, loc:'Kołobrzeg, Promenada', desc:'Duży taras z widokiem na port, miejsce parkingowe podziemne w cenie.', colors:['#E4EEE0','#8FBDB8'] },
+  { id:6, title:'Działka nad jeziorem', type:'Działka', price:290000, area:1100, rooms:null, loc:'Dźwirzyno', desc:'Rzadka okazja — działka z dostępem do jeziora, warunki zabudowy letniskowej.', colors:['#F0E8D4','#8A7A54'] },
+  { id:7, title:'Mieszkanie inwestycyjne', type:'Mieszkanie', price:480000, area:38, rooms:1, loc:'Kołobrzeg, Centrum', desc:'Kawalerka pod wynajem sezonowy, historyczne obłożenie ponad 85% w lipcu-sierpniu.', colors:['#EFE3C8','#D8C79E'] },
+  { id:8, title:'Dom z basenem', type:'Dom', price:2150000, area:175, rooms:5, loc:'Dźwirzyno', desc:'Dom z prywatnym basenem i sauną, dotąd wynajmowany sezonowo z bardzo dobrym wynikiem.', colors:['#E4EEE0','#3A8A85'] },
+  { id:9, title:'Działka budowlana', type:'Działka', price:380000, area:950, rooms:null, loc:'Sianożęty', desc:'Uzbrojona działka blisko plaży, idealna pod pensjonat lub dom wielorodzinny.', colors:['#F0E8D4','#DCCBA0'] }
+];
+
+const fmt = n => n.toLocaleString('pl-PL') + ' zł';
+
+function listingCard(o){
+  const [c1,c2] = o.colors;
+  return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
+    <div class="listing-img">
+      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="lg${o.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>
+        <rect width="400" height="180" fill="url(#lg${o.id})"/>
+        <path d="M0,130 Q100,110 200,130 T400,130 V180 H0 Z" fill="#8FBDB8" opacity="0.7"/>
+        <rect x="140" y="55" width="120" height="70" rx="6" fill="#F5EFE3" opacity="0.9"/>
+        <rect x="160" y="75" width="18" height="18" fill="#E0954B" opacity="0.6"/><rect x="220" y="75" width="18" height="18" fill="#2B6E6B" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="listing-info">
+      <div class="listing-price">${fmt(o.price)}</div>
+      <div class="listing-loc">${o.title} — ${o.loc}</div>
+      <div class="listing-meta">${o.rooms ? `<span>${o.rooms} pok.</span>` : ''}<span>${o.area} m²</span></div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('homeListings').innerHTML = OFFERS.slice(0,3).map(listingCard).join('');
+
+function renderListings(){
+  const type = document.getElementById('filterType').value;
+  const loc = document.getElementById('filterLoc').value;
+  const sort = document.getElementById('filterSort').value;
+  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!loc || o.loc.includes(loc)));
+  if(sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+  if(sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  document.getElementById('allListings').innerHTML = filtered.map(listingCard).join('');
+  document.getElementById('filterCount').textContent = `${filtered.length} ${filtered.length === 1 ? 'oferta' : 'ofert'} spełnia wybrane kryteria`;
+  document.getElementById('emptyState').style.display = filtered.length ? 'none' : 'block';
+}
+['filterType','filterLoc','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
+
+function renderDetail(id){
+  const o = OFFERS.find(x => x.id === Number(id));
+  if(!o) return;
+  const [c1,c2] = o.colors;
+  const mainSvg = `<svg viewBox="0 0 700 360" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="dg${o.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><rect width="700" height="360" fill="url(#dg${o.id})"/><path d="M0,260 Q175,220 350,260 T700,260 V360 H0 Z" fill="#8FBDB8" opacity="0.7"/><rect x="250" y="110" width="200" height="130" rx="10" fill="#F5EFE3" opacity="0.9"/><rect x="290" y="150" width="30" height="30" fill="#E0954B" opacity="0.6"/><rect x="380" y="150" width="30" height="30" fill="#2B6E6B" opacity="0.5"/></svg>`;
+  document.getElementById('galleryMain').innerHTML = mainSvg;
+  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML=this.innerHTML.replace('width=\\'70\\'','width=\\'700\\'').replace('height=\\'52\\'','height=\\'360\\''); document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');">${mainSvg.replace('viewBox="0 0 700 360"','viewBox="0 0 700 360" width="70" height="52"')}</div>`).join('');
+  document.getElementById('detailTitle').textContent = o.title;
+  document.getElementById('detailLoc').textContent = o.loc;
+  document.getElementById('detailDesc').textContent = o.desc;
+  document.getElementById('detailPrice').textContent = fmt(o.price);
+  document.getElementById('detailSpecs').innerHTML = `
+    <div class="spec-item"><div class="spec-label">Powierzchnia</div>${o.area} m²</div>
+    ${o.rooms ? `<div class="spec-item"><div class="spec-label">Pokoje</div>${o.rooms}</div>` : ''}
+    <div class="spec-item"><div class="spec-label">Typ</div>${o.type}</div>
+  `;
+  const similar = OFFERS.filter(x => x.type === o.type && x.id !== o.id).slice(0,3);
+  document.getElementById('similarListings').innerHTML = (similar.length ? similar : OFFERS.filter(x=>x.id!==o.id).slice(0,3)).map(listingCard).join('');
+  window.scrollTo(0,0);
+}
+
+const routes = ['home','oferty','detail','zespol','kontakt'];
+function navigate(){
+  const hash = location.hash || '#/';
+  const parts = hash.replace('#/','').split('/').filter(Boolean);
+  let view = 'home';
+  if(parts[0] === 'oferty') view = 'oferty';
+  else if(parts[0] === 'oferta' && parts[1]) { view = 'detail'; renderDetail(parts[1]); }
+  else if(parts[0] === 'zespol') view = 'zespol';
+  else if(parts[0] === 'kontakt') view = 'kontakt';
+
+  routes.forEach(r => document.getElementById('view-' + r).classList.toggle('active', r === view));
+  document.querySelectorAll('[data-route]').forEach(a => {
+    const r = a.dataset.route;
+    const active = (r === '/' && view === 'home') || (r === '/oferty' && (view === 'oferty' || view === 'detail')) || (r === '/zespol' && view === 'zespol') || (r === '/kontakt' && view === 'kontakt');
+    a.classList.toggle('active', active);
+  });
+  if(view === 'oferty') renderListings();
+  document.getElementById('mobileMenu').classList.remove('open');
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', navigate);
+navigate();
+
+document.getElementById('hamburgerBtn').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.add('show');
+  this.reset();
+});
+</script>
 </body>
 </html>
