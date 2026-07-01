@@ -62,14 +62,17 @@
   @media(max-width:620px){ .grid3{ grid-template-columns:1fr; } }
   .listing{ border:1px solid var(--border); border-radius:18px; overflow:hidden; transition:transform 0.2s ease; cursor:pointer; }
   .listing:hover{ transform:translateY(-3px); }
-  .listing-img{ height:180px; position:relative; }
-  .listing-img svg{ width:100%; height:100%; display:block; }
-  .listing-fav{ position:absolute; top:14px; right:14px; width:32px; height:32px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .listing-img{ height:180px; position:relative; overflow:hidden; background:#111214; }
+  .listing-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
+  .listing:hover .listing-img img{ transform:scale(1.04); }
+  .listing-fav{ position:absolute; top:14px; right:14px; width:32px; height:32px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .listing-fav svg{ width:15px; height:15px; }
   .listing-info{ padding:18px; }
   .listing-price{ font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; }
   .listing-loc{ color:var(--gray); font-size:13px; margin:4px 0 10px; }
   .listing-tags{ display:flex; gap:6px; flex-wrap:wrap; }
-  .tag{ background:#F3F3F5; font-size:11px; font-weight:600; padding:4px 10px; border-radius:100px; }
+  .tag{ background:#F3F3F5; font-size:11px; font-weight:600; padding:4px 10px; border-radius:100px; display:flex; align-items:center; gap:4px; }
+  .tag svg{ width:12px; height:12px; color:var(--lime-dark); }
 
   .filter-bar{ display:flex; gap:12px; flex-wrap:wrap; background:#F7F7F8; border-radius:16px; padding:18px; margin-bottom:30px; }
   .filter-bar select{ border:1px solid var(--border); border-radius:10px; padding:10px 12px; font-size:13.5px; font-family:'Inter',sans-serif; background:#fff; flex:1; min-width:140px; }
@@ -81,12 +84,12 @@
   .back-link:hover{ color:var(--ink); }
   .detail-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:40px; }
   @media(max-width:860px){ .detail-grid{ grid-template-columns:1fr; } }
-  .gallery-main{ height:360px; border-radius:20px; overflow:hidden; margin-bottom:10px; }
-  .gallery-main svg{ width:100%; height:100%; display:block; }
+  .gallery-main{ height:360px; border-radius:20px; overflow:hidden; margin-bottom:10px; background:#111214; }
+  .gallery-main img{ width:100%; height:100%; object-fit:cover; display:block; }
   .gallery-thumbs{ display:flex; gap:8px; }
   .gallery-thumb{ width:70px; height:52px; border-radius:8px; overflow:hidden; cursor:pointer; border:2px solid transparent; opacity:0.6; transition:opacity 0.15s ease, border-color 0.15s ease; flex-shrink:0; }
   .gallery-thumb.active{ opacity:1; border-color:var(--lime-dark); }
-  .gallery-thumb svg{ width:100%; height:100%; display:block; }
+  .gallery-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
   .detail-title{ font-size:24px; margin:26px 0 6px; }
   .detail-loc{ color:var(--gray); font-size:14px; margin-bottom:18px; }
   .detail-desc{ font-size:14.5px; color:#3A3A3E; line-height:1.7; }
@@ -299,39 +302,41 @@
 </footer>
 
 <script>
+const BASE_URL = 'https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/';
+function photoUrl(folder, n){ return BASE_URL + folder + '/' + folder + '_' + n + '.jpg'; }
+
+const ICON = {
+  bed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9v9M2 12h20M22 9v9M6 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4M14 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>',
+  area: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v6H3zM15 15h6v6h-6z"/><path d="M9 3h12v12"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="#111214" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6z"/></svg>'
+};
+
 const OFFERS = [
-  { id:1, title:'Mieszkanie 3-pok.', type:'Mieszkanie', price:620000, area:61, rooms:3, loc:'Kołobrzeg, Lechitów', desc:'Słoneczne mieszkanie z balkonem, po odświeżeniu. Blisko szkoły i sklepów, dobra komunikacja z centrum.', colors:['#E8F5B8','#CFE89B'] },
-  { id:2, title:'Mieszkanie 2-pok.', type:'Mieszkanie', price:445000, area:48, rooms:2, loc:'Kołobrzeg, Podczele', desc:'Kompaktowe mieszkanie idealne dla singla lub pary. Winda, niskie opłaty administracyjne.', colors:['#F0F0F0','#D8D8DC'] },
-  { id:3, title:'Dom, Ustronie Morskie', type:'Dom', price:1120000, area:160, rooms:5, loc:'Ustronie Morskie', desc:'Dom z garażem i dużym ogrodem, 15 minut od plaży. Świetna opcja pod wynajem sezonowy.', colors:['#DDEFC0','#B8D888'] },
-  { id:4, title:'Loft w kamienicy', type:'Mieszkanie', price:890000, area:78, rooms:2, loc:'Kołobrzeg, Śródmieście', desc:'Wysokie sufity, oryginalne detale architektoniczne, po pełnej renowacji instalacji.', colors:['#F0F0F0','#C4F542'] },
-  { id:5, title:'Dom szeregowy', type:'Dom', price:780000, area:120, rooms:4, loc:'Kołobrzeg, Grzybowo', desc:'Nowy dom w zabudowie szeregowej, gotowy pod wykończenie wnętrz według własnego projektu.', colors:['#DDEFC0','#8FB82E'] },
-  { id:6, title:'Działka rekreacyjna', type:'Działka', price:210000, area:1200, rooms:null, loc:'Dźwirzyno', desc:'Działka z dostępem do lasu, 5 minut od jeziora. Możliwość zabudowy letniskowej.', colors:['#E8F5B8','#8FB82E'] },
-  { id:7, title:'Apartament z tarasem', type:'Mieszkanie', price:960000, area:82, rooms:3, loc:'Kołobrzeg, Promenada', desc:'Duży taras z widokiem na morze, miejsce parkingowe w cenie, ochrona 24h.', colors:['#F0F0F0','#D8D8DC'] },
-  { id:8, title:'Dom z pracownią', type:'Dom', price:1340000, area:190, rooms:5, loc:'Kołobrzeg, Radzikowo', desc:'Dom z dodatkowym pomieszczeniem pod biuro lub pracownię, oddzielne wejście.', colors:['#DDEFC0','#B8D888'] },
-  { id:9, title:'Działka budowlana', type:'Działka', price:340000, area:800, rooms:null, loc:'Kołobrzeg, Podczele', desc:'Uzbrojona działka z warunkami zabudowy, spokojna okolica.', colors:['#E8F5B8','#CFE89B'] }
+  { id:1, folder:'127f2ac4-95da-4d09-adae-5c28d6c661fe', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:330000, area:38, rooms:2, loc:'Kołobrzeg', desc:'Funkcjonalne, dwupokojowe mieszkanie w dobrej lokalizacji. Idealne na start lub pod inwestycję pod wynajem.' },
+  { id:2, folder:'7ad9fdd7-f5c9-43e5-81e7-74f6438e1441', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:480000, area:47, rooms:2, loc:'Kołobrzeg', desc:'Przestronne dwupokojowe mieszkanie, dobrze skomunikowane z centrum miasta.' },
+  { id:3, folder:'227425c6-c8bf-4ed3-97b8-4965d30c1547', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:359000, area:33, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowa kawalerka, świetna pod wynajem sezonowy lub jako pierwsze mieszkanie.' },
+  { id:4, folder:'07dfa70f-9ed8-4f5d-82eb-49fcc5ff3ccd', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:410000, area:52, rooms:2, loc:'Kołobrzeg', desc:'Mieszkanie dwupokojowe o dobrym rozkładzie, blisko szkoły i komunikacji miejskiej.' },
+  { id:5, folder:'125e4f44-32e7-4fae-96a2-5b873b2d1e43', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:48, rooms:2, loc:'Trzebiatów', desc:'Mieszkanie w spokojnej części Trzebiatowa, gotowe do zamieszkania.' },
+  { id:6, folder:'22f68641-9e13-4b00-8716-81f5e1e8020c', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:60, rooms:3, loc:'Trzebiatów', desc:'Trzypokojowe mieszkanie z dobrym nasłonecznieniem, blisko centrum.' },
+  { id:7, folder:'c6523d12-cd39-4b50-8fab-745f934a5d28', title:'Lokal usługowy, Trzebiatów', type:'Lokal', price:182000, area:46, rooms:1, loc:'Trzebiatów', desc:'Lokal użytkowy na parterze, dobra widoczność, idealny pod działalność usługową.' },
+  { id:8, folder:'0e10151e-07d1-48b4-8ec2-7b19abdb4cb4', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:68, rooms:3, loc:'Trzebiatów', desc:'Mieszkanie trzypokojowe o funkcjonalnym rozkładzie, spore pokoje.' },
+  { id:9, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem, dobra lokalizacja.' }
 ];
 
 const fmt = n => n.toLocaleString('pl-PL') + ' zł';
 
 function listingCard(o){
-  const [c1,c2] = o.colors;
   return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
     <div class="listing-img">
-      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
-        <defs><linearGradient id="lg${o.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>
-        <rect width="400" height="180" fill="url(#lg${o.id})"/>
-        <rect x="90" y="60" width="220" height="100" fill="#111214" opacity="0.75"/>
-        <rect x="120" y="85" width="26" height="26" fill="#C4F542" opacity="0.8"/><rect x="170" y="85" width="26" height="26" fill="#fff" opacity="0.5"/>
-        <rect x="220" y="85" width="26" height="26" fill="#C4F542" opacity="0.8"/><rect x="260" y="85" width="26" height="26" fill="#fff" opacity="0.5"/>
-      </svg>
-      <div class="listing-fav">♥</div>
+      <img src="${photoUrl(o.folder,1)}" alt="${o.title}" loading="lazy">
+      <div class="listing-fav">${ICON.heart}</div>
     </div>
     <div class="listing-info">
       <div class="listing-price">${fmt(o.price)}</div>
       <div class="listing-loc">${o.title} — ${o.loc}</div>
       <div class="listing-tags">
-        ${o.rooms ? `<span class="tag">${o.rooms} pok</span>` : ''}
-        <span class="tag">${o.area} m²</span>
+        ${o.rooms ? `<span class="tag">${ICON.bed}${o.rooms} pok</span>` : ''}
+        <span class="tag">${ICON.area}${o.area} m²</span>
       </div>
     </div>
   </div>`;
@@ -355,10 +360,8 @@ function renderListings(){
 function renderDetail(id){
   const o = OFFERS.find(x => x.id === Number(id));
   if(!o) return;
-  const [c1,c2] = o.colors;
-  const mainSvg = `<svg viewBox="0 0 700 360" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="dg${o.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><rect width="700" height="360" fill="url(#dg${o.id})"/><rect x="150" y="100" width="400" height="180" fill="#111214" opacity="0.75"/><rect x="200" y="140" width="46" height="46" fill="#C4F542" opacity="0.8"/><rect x="270" y="140" width="46" height="46" fill="#fff" opacity="0.5"/><rect x="340" y="140" width="46" height="46" fill="#C4F542" opacity="0.8"/></svg>`;
-  document.getElementById('galleryMain').innerHTML = mainSvg;
-  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML=this.innerHTML.replace('width=\\'70\\'','width=\\'700\\'').replace('height=\\'52\\'','height=\\'360\\''); document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');">${mainSvg.replace('viewBox="0 0 700 360"','viewBox="0 0 700 360" width="70" height="52"')}</div>`).join('');
+  document.getElementById('galleryMain').innerHTML = `<img src="${photoUrl(o.folder,1)}" alt="${o.title}">`;
+  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML='<img src=\'${photoUrl(o.folder,n)}\' alt=\'${o.title}\'>'; document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');"><img src="${photoUrl(o.folder,n)}" alt=""></div>`).join('');
   document.getElementById('detailTitle').textContent = o.title;
   document.getElementById('detailLoc').textContent = o.loc;
   document.getElementById('detailDesc').textContent = o.desc;
