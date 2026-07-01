@@ -59,12 +59,15 @@
   @media(max-width:620px){ .grid3{ grid-template-columns:1fr; } }
   .listing{ background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--border); cursor:pointer; transition:transform 0.2s ease; }
   .listing:hover{ transform:translateY(-3px); }
-  .listing-img{ height:180px; position:relative; }
-  .listing-img svg{ width:100%; height:100%; display:block; }
+  .listing-img{ height:180px; position:relative; overflow:hidden; background:#2B6E6B; }
+  .listing-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
+  .listing:hover .listing-img img{ transform:scale(1.04); }
   .listing-info{ padding:18px; }
   .listing-price{ font-family:'Fraunces',serif; font-size:19px; }
   .listing-loc{ color:var(--muted); font-size:13px; margin:4px 0 10px; }
-  .listing-meta{ display:flex; gap:10px; font-size:12px; color:var(--muted); }
+  .listing-meta{ display:flex; gap:14px; font-size:12px; color:var(--muted); }
+  .meta-item{ display:flex; align-items:center; gap:5px; }
+  .meta-item svg{ width:13px; height:13px; color:var(--sea); flex-shrink:0; }
 
   .filter-bar{ display:flex; gap:12px; flex-wrap:wrap; background:#fff; border:1px solid var(--border); border-radius:16px; padding:18px; margin-bottom:26px; }
   .filter-bar select{ border:1px solid var(--border); border-radius:8px; padding:10px 12px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--sand); flex:1; min-width:140px; }
@@ -76,12 +79,12 @@
   .back-link:hover{ color:var(--ink); }
   .detail-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:40px; }
   @media(max-width:860px){ .detail-grid{ grid-template-columns:1fr; } }
-  .gallery-main{ height:360px; border-radius:18px; overflow:hidden; margin-bottom:10px; }
-  .gallery-main svg{ width:100%; height:100%; display:block; }
+  .gallery-main{ height:360px; border-radius:18px; overflow:hidden; margin-bottom:10px; background:#2B6E6B; }
+  .gallery-main img{ width:100%; height:100%; object-fit:cover; display:block; }
   .gallery-thumbs{ display:flex; gap:8px; }
   .gallery-thumb{ width:70px; height:52px; border-radius:8px; overflow:hidden; cursor:pointer; border:2px solid transparent; opacity:0.6; transition:opacity 0.15s ease, border-color 0.15s ease; flex-shrink:0; }
   .gallery-thumb.active{ opacity:1; border-color:var(--sun); }
-  .gallery-thumb svg{ width:100%; height:100%; display:block; }
+  .gallery-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
   .detail-title{ font-size:24px; margin:24px 0 6px; }
   .detail-loc{ color:var(--muted); font-size:14px; margin-bottom:18px; }
   .detail-desc{ font-size:14.5px; color:#3A4A44; line-height:1.7; }
@@ -285,36 +288,40 @@
 </footer>
 
 <script>
+const BASE_URL = 'https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/';
+function photoUrl(folder, n){ return BASE_URL + folder + '/' + folder + '_' + n + '.jpg'; }
+
+const ICON = {
+  bed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9v9M2 12h20M22 9v9M6 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4M14 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>',
+  area: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v6H3zM15 15h6v6h-6z"/><path d="M9 3h12v12"/></svg>'
+};
+
 const OFFERS = [
-  { id:1, title:'Apartament nad plażą', type:'Mieszkanie', price:890000, area:52, rooms:2, loc:'Sianożęty', desc:'300 metrów od plaży, w pełni umeblowany, gotowy pod wynajem sezonowy od pierwszego dnia.', colors:['#EFE3C8','#D8C79E'] },
-  { id:2, title:'Dom z widokiem na morze', type:'Dom', price:1450000, area:180, rooms:5, loc:'Ustronie Morskie', desc:'Dom na wzniesieniu z panoramicznym widokiem, duży taras, garaż na dwa auta.', colors:['#E4EEE0','#B8CDA8'] },
-  { id:3, title:'Mieszkanie, Radzikowo', type:'Mieszkanie', price:620000, area:68, rooms:3, loc:'Kołobrzeg, Radzikowo', desc:'Nowe osiedle, blisko lasu i ścieżek rowerowych, 10 minut do centrum.', colors:['#F0E8D4','#DCCBA0'] },
-  { id:4, title:'Domek letniskowy', type:'Dom', price:540000, area:75, rooms:3, loc:'Dźwirzyno', desc:'Klimatyczny domek 5 minut od jeziora i morza, idealny na wynajem wakacyjny.', colors:['#EFE3C8','#8FBDB8'] },
-  { id:5, title:'Apartament z tarasem', type:'Mieszkanie', price:1050000, area:71, rooms:3, loc:'Kołobrzeg, Promenada', desc:'Duży taras z widokiem na port, miejsce parkingowe podziemne w cenie.', colors:['#E4EEE0','#8FBDB8'] },
-  { id:6, title:'Działka nad jeziorem', type:'Działka', price:290000, area:1100, rooms:null, loc:'Dźwirzyno', desc:'Rzadka okazja — działka z dostępem do jeziora, warunki zabudowy letniskowej.', colors:['#F0E8D4','#8A7A54'] },
-  { id:7, title:'Mieszkanie inwestycyjne', type:'Mieszkanie', price:480000, area:38, rooms:1, loc:'Kołobrzeg, Centrum', desc:'Kawalerka pod wynajem sezonowy, historyczne obłożenie ponad 85% w lipcu-sierpniu.', colors:['#EFE3C8','#D8C79E'] },
-  { id:8, title:'Dom z basenem', type:'Dom', price:2150000, area:175, rooms:5, loc:'Dźwirzyno', desc:'Dom z prywatnym basenem i sauną, dotąd wynajmowany sezonowo z bardzo dobrym wynikiem.', colors:['#E4EEE0','#3A8A85'] },
-  { id:9, title:'Działka budowlana', type:'Działka', price:380000, area:950, rooms:null, loc:'Sianożęty', desc:'Uzbrojona działka blisko plaży, idealna pod pensjonat lub dom wielorodzinny.', colors:['#F0E8D4','#DCCBA0'] }
+  { id:1, folder:'4f7091fa-f53b-4cbd-8e79-219f569f7c03', title:'Obiekt, Mielno Gąski', type:'Inwestycja', price:1100000, area:1604, rooms:null, loc:'Mielno', desc:'Rozległy obiekt inwestycyjny w Mielnie-Gąskach, blisko wydm i morza. Duży potencjał na wynajem sezonowy.' },
+  { id:2, folder:'f5983c09-200d-47ae-ba37-c11f56ba6839', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:499000, area:48, rooms:2, loc:'Kołobrzeg', desc:'Dwupokojowe mieszkanie blisko promenady, świetne pod wynajem sezonowy.' },
+  { id:3, folder:'2abbfc8f-9c1b-4182-991f-4736162c5a41', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:450000, area:38, rooms:2, loc:'Kołobrzeg', desc:'Kompaktowe mieszkanie w dobrej lokalizacji, blisko centrum i plaży.' },
+  { id:4, folder:'a5120e4f-c2ee-4ac4-a35b-4806a41134d3', title:'Działka, Niekanin', type:'Działka', price:79000, area:470, rooms:null, loc:'Kołobrzeg, Niekanin', desc:'Działka budowlana w spokojnej okolicy Niekanina, blisko Kołobrzegu.' },
+  { id:5, folder:'816a144d-02de-4259-8407-0d3ab3b02c96', title:'Dom, Wartkowo', type:'Dom', price:660000, area:200, rooms:5, loc:'Gościno', desc:'Komfortowy dom z ogrodem w spokojnej okolicy Gościna, blisko wybrzeża.' },
+  { id:6, folder:'72ef2bfe-e1f3-49a1-af69-f98eedb2fe39', title:'Dom, Pobierowo', type:'Dom', price:3100000, area:380, rooms:19, loc:'Rewal', desc:'Duży obiekt wypoczynkowy blisko plaży w Rewalu, obecnie wynajmowany sezonowo.' },
+  { id:7, folder:'de136232-a819-4eec-b0c8-e29cb2e2ecef', title:'Obiekt, Trzebiatów', type:'Inwestycja', price:1190000, area:2984, rooms:null, loc:'Trzebiatów', desc:'Rozległa nieruchomość inwestycyjna, blisko rzeki Regi, duży potencjał rozwoju.' },
+  { id:8, folder:'109bbb26-108f-47ea-a88c-3339f2b12986', title:'Obiekt, Mielno Gąski', type:'Inwestycja', price:1900000, area:220, rooms:null, loc:'Mielno', desc:'Obiekt w atrakcyjnej części Mielna, blisko wydm i plaży, potencjał na wynajem premium.' },
+  { id:9, folder:'82a5a535-354a-4b19-b2b5-387130e9eb0a', title:'Apartament, Kołobrzeg', type:'Mieszkanie', price:550000, area:34, rooms:1, loc:'Kołobrzeg', desc:'Apartament inwestycyjny blisko promenady, wysokie obłożenie w sezonie letnim.' }
 ];
 
 const fmt = n => n.toLocaleString('pl-PL') + ' zł';
 
 function listingCard(o){
-  const [c1,c2] = o.colors;
   return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
     <div class="listing-img">
-      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
-        <defs><linearGradient id="lg${o.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>
-        <rect width="400" height="180" fill="url(#lg${o.id})"/>
-        <path d="M0,130 Q100,110 200,130 T400,130 V180 H0 Z" fill="#8FBDB8" opacity="0.7"/>
-        <rect x="140" y="55" width="120" height="70" rx="6" fill="#F5EFE3" opacity="0.9"/>
-        <rect x="160" y="75" width="18" height="18" fill="#E0954B" opacity="0.6"/><rect x="220" y="75" width="18" height="18" fill="#2B6E6B" opacity="0.5"/>
-      </svg>
+      <img src="${photoUrl(o.folder,1)}" alt="${o.title}" loading="lazy">
     </div>
     <div class="listing-info">
       <div class="listing-price">${fmt(o.price)}</div>
       <div class="listing-loc">${o.title} — ${o.loc}</div>
-      <div class="listing-meta">${o.rooms ? `<span>${o.rooms} pok.</span>` : ''}<span>${o.area} m²</span></div>
+      <div class="listing-meta">
+        ${o.rooms ? `<span class="meta-item">${ICON.bed}${o.rooms} pok.</span>` : ''}
+        <span class="meta-item">${ICON.area}${o.area} m²</span>
+      </div>
     </div>
   </div>`;
 }
@@ -337,10 +344,8 @@ function renderListings(){
 function renderDetail(id){
   const o = OFFERS.find(x => x.id === Number(id));
   if(!o) return;
-  const [c1,c2] = o.colors;
-  const mainSvg = `<svg viewBox="0 0 700 360" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="dg${o.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><rect width="700" height="360" fill="url(#dg${o.id})"/><path d="M0,260 Q175,220 350,260 T700,260 V360 H0 Z" fill="#8FBDB8" opacity="0.7"/><rect x="250" y="110" width="200" height="130" rx="10" fill="#F5EFE3" opacity="0.9"/><rect x="290" y="150" width="30" height="30" fill="#E0954B" opacity="0.6"/><rect x="380" y="150" width="30" height="30" fill="#2B6E6B" opacity="0.5"/></svg>`;
-  document.getElementById('galleryMain').innerHTML = mainSvg;
-  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML=this.innerHTML.replace('width=\\'70\\'','width=\\'700\\'').replace('height=\\'52\\'','height=\\'360\\''); document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');">${mainSvg.replace('viewBox="0 0 700 360"','viewBox="0 0 700 360" width="70" height="52"')}</div>`).join('');
+  document.getElementById('galleryMain').innerHTML = `<img src="${photoUrl(o.folder,1)}" alt="${o.title}">`;
+  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML='<img src=\'${photoUrl(o.folder,n)}\' alt=\'${o.title}\'>'; document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');"><img src="${photoUrl(o.folder,n)}" alt=""></div>`).join('');
   document.getElementById('detailTitle').textContent = o.title;
   document.getElementById('detailLoc').textContent = o.loc;
   document.getElementById('detailDesc').textContent = o.desc;
