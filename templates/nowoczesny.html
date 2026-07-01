@@ -156,6 +156,25 @@
   .form-success.show{ display:block; }
 
   footer{ padding:40px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--gray); }
+
+  .about-split{ display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center; background:#F7F7F8; border:1px solid var(--border); border-radius:14px; padding:32px; }
+  @media(max-width:780px){ .about-split{ grid-template-columns:1fr; } }
+  .ab-stats{ display:grid; grid-template-columns:1fr; gap:14px; }
+  .ab-stat{ border-left:2px solid var(--lime); padding-left:14px; }
+  .ab-stat-num{ font-size:22px; font-weight:700; }
+  .ab-stat-label{ font-size:12px; color:var(--gray); margin-top:2px; }
+  .why-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media(max-width:700px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-item{ background:#F7F7F8; border:1px solid var(--border); border-radius:12px; padding:22px; }
+  .why-num{ font-size:12px; font-weight:700; color:var(--lime); margin-bottom:8px; letter-spacing:1px; }
+  .why-item h3{ font-size:16px; margin-bottom:6px; }
+  .why-item p{ font-size:13.5px; color:var(--gray); line-height:1.6; }
+  .testimonial-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:700px){ .testimonial-grid{ grid-template-columns:1fr; } }
+  .testimonial-card{ background:#F7F7F8; border:1px solid var(--border); border-radius:12px; padding:26px; }
+  .tq{ font-size:34px; color:var(--lime); line-height:1; margin-bottom:6px; font-family:serif; }
+  .testimonial-card p{ font-size:14px; line-height:1.6; margin-bottom:12px; }
+  .testimonial-card span{ font-size:12.5px; color:var(--gray); }
 </style>
 </head>
 <body>
@@ -223,7 +242,31 @@
     <div class="view-all-link" style="margin-top:30px;"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
   </div>
 
+  
   <div class="section reveal-inline">
+    <div class="about-split">
+      <div>
+        <h2 style="font-size:26px; margin-bottom:14px;">O Nexo Nieruchomości</h2>
+        <p style="color:var(--gray); font-size:14.5px; line-height:1.7; max-width:520px;">Jesteśmy zespołem, który wybrał nieruchomości, bo lubi rozwiązywać problemy ludzi, a nie sprzedawać metry kwadratowe. Działamy w Kołobrzegu i Trzebiatowie, odpowiadamy tego samego dnia i traktujemy każde zapytanie tak, jakby to była nasza własna decyzja o zakupie.</p>
+      </div>
+      <div class="ab-stats"><div class="ab-stat"><div class="ab-stat-num">2019</div><div class="ab-stat-label">rok założenia</div></div><div class="ab-stat"><div class="ab-stat-num">6</div><div class="ab-stat-label">agentów w zespole</div></div><div class="ab-stat"><div class="ab-stat-num">24h</div><div class="ab-stat-label">średni czas odpowiedzi</div></div></div>
+    </div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Dlaczego my</h2>
+    </div>
+    <div class="why-grid"><div class="why-item"><div class="why-num">01</div><h3>Odpowiedź tego samego dnia</h3><p>Żadne zapytanie nie czeka dłużej niż do końca dnia roboczego — sprawdzamy to co tydzień.</p></div><div class="why-item"><div class="why-num">02</div><h3>Zero prowizji ukrytych w cenie</h3><p>Warunki finansowe podajemy z góry, zanim podpiszesz jakikolwiek dokument.</p></div><div class="why-item"><div class="why-num">03</div><h3>Baza aktualizowana codziennie</h3><p>Oferty, które widzisz na stronie, to te samo dane, na których pracują nasi agenci — bez opóźnień.</p></div><div class="why-item"><div class="why-num">04</div><h3>Cyfrowy proces od A do Z</h3><p>Dokumenty, podpisy i komunikację prowadzimy cyfrowo — mniej papieru, mniej wizyt w biurze.</p></div></div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Co mówią klienci</h2>
+    </div>
+    <div class="testimonial-grid"><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Wysłałam zapytanie wieczorem, odpowiedź dostałam przed 9 rano następnego dnia. Tak powinno wyglądać wynajmowanie mieszkania.</p><span>&mdash; Klientka, wynajem w Kołobrzegu</span></div><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Cały proces zakupu przeszedł bez jednej niedomówionej sprawy. Wiedziałem na czym stoję na każdym etapie.</p><span>&mdash; Klient, zakup mieszkania w Trzebiatowie</span></div></div>
+  </div>
+<div class="section reveal-inline">
     <div class="section-head">
       <h2 style="font-size:26px;">Ludzie, z którymi rozmawiasz</h2>
       <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
