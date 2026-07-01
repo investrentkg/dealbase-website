@@ -151,6 +151,25 @@
   .form-success.show{ display:block; }
 
   footer{ padding:40px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); font-weight:500; background:#fff; }
+
+  .about-split{ display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:32px; }
+  @media(max-width:780px){ .about-split{ grid-template-columns:1fr; } }
+  .ab-stats{ display:grid; grid-template-columns:1fr; gap:14px; }
+  .ab-stat{ border-left:2px solid var(--blue); padding-left:14px; }
+  .ab-stat-num{ font-size:22px; font-weight:700; }
+  .ab-stat-label{ font-size:12px; color:var(--muted); margin-top:2px; }
+  .why-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media(max-width:700px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-item{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:22px; }
+  .why-num{ font-size:12px; font-weight:700; color:var(--blue); margin-bottom:8px; letter-spacing:1px; }
+  .why-item h3{ font-size:16px; margin-bottom:6px; }
+  .why-item p{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+  .testimonial-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:700px){ .testimonial-grid{ grid-template-columns:1fr; } }
+  .testimonial-card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:26px; }
+  .tq{ font-size:34px; color:var(--blue); line-height:1; margin-bottom:6px; font-family:serif; }
+  .testimonial-card p{ font-size:14px; line-height:1.6; margin-bottom:12px; }
+  .testimonial-card span{ font-size:12.5px; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -212,7 +231,31 @@
     <div class="grid3" id="homeListings"></div>
   </div>
 
+  
   <div class="section reveal-inline">
+    <div class="about-split">
+      <div>
+        <h2 style="font-size:26px; margin-bottom:14px;">Metro Nieruchomości — sieć, której możesz zaufać</h2>
+        <p style="color:var(--muted); font-size:14.5px; line-height:1.7; max-width:520px;">Działamy od 2008 roku jako sieć biur obejmująca region kołobrzeski. 12 licencjonowanych agentów pracuje na jednej, wspólnej bazie ofert i wspólnym standardzie obsługi — niezależnie od tego, z którym z nas rozmawiasz, dostajesz tę samą jakość i te samą procedurę.</p>
+      </div>
+      <div class="ab-stats"><div class="ab-stat"><div class="ab-stat-num">2008</div><div class="ab-stat-label">rok założenia</div></div><div class="ab-stat"><div class="ab-stat-num">12</div><div class="ab-stat-label">licencjonowanych agentów</div></div><div class="ab-stat"><div class="ab-stat-num">300+</div><div class="ab-stat-label">zamknięte transakcje</div></div></div>
+    </div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Dlaczego my</h2>
+    </div>
+    <div class="why-grid"><div class="why-item"><div class="why-num">01</div><h3>Licencjonowani agenci</h3><p>Każdy agent posiada aktualną licencję pośrednika i podlega weryfikacji zgodnie z przepisami branżowymi.</p></div><div class="why-item"><div class="why-num">02</div><h3>Jeden standard, cały region</h3><p>Niezależnie od tego, który agent Cię obsługuje, procedura i dokumentacja są identyczne.</p></div><div class="why-item"><div class="why-num">03</div><h3>Duży portfel ofert</h3><p>Wspólna baza całej sieci oznacza większą szansę na dopasowanie oferty do Twoich wymagań.</p></div><div class="why-item"><div class="why-num">04</div><h3>Wsparcie kierownika biura</h3><p>Każda transakcja ma nadzór kierownika biura, nie tylko pojedynczego agenta.</p></div></div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Co mówią klienci</h2>
+    </div>
+    <div class="testimonial-grid"><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Obsługiwał mnie inny agent niż na początku — i nie poczułem żadnej różnicy. Ta sama dokumentacja, ten sam standard.</p><span>&mdash; Klient, zakup mieszkania w Kołobrzegu</span></div><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Duża baza ofert pozwoliła znaleźć dokładnie to, czego szukaliśmy, bez kompromisów co do lokalizacji.</p><span>&mdash; Klienci, zakup domu w Gościnie</span></div></div>
+  </div>
+<div class="section reveal-inline">
     <div class="section-head">
       <h2 style="font-size:26px;">Ludzie, z którymi rozmawiasz</h2>
       <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
