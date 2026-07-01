@@ -132,6 +132,10 @@
   .feature-card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px; transition:transform 0.25s ease, box-shadow 0.25s ease; position:relative; }
   .feature-card:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -20px rgba(16,24,43,0.25); }
   .diff-badge{ position:absolute; top:20px; right:20px; font-size:11px; font-weight:600; color:#993C1D; background:#FAECE7; padding:4px 10px; border-radius:100px; }
+  .diff-badge.coming-soon{ color:#8A5A16; background:#FFF3E6; }
+  .feature-grid-3{ grid-template-columns:repeat(3,1fr); }
+  @media(max-width:900px){ .feature-grid-3{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:600px){ .feature-grid-3{ grid-template-columns:1fr; } }
   .feature-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); display:block; margin-bottom:16px; }
   .feature-card h3{ font-size:19px; margin-bottom:10px; }
   .feature-card p{ font-size:14.5px; color:var(--muted); }
@@ -430,10 +434,10 @@
   <section class="section reveal" id="funkcje">
     <div class="section-head">
       <span class="section-tag">Funkcje</span>
-      <h2>Cztery rzeczy, które robi się codziennie — i które tu działają od ręki</h2>
-      <p class="section-desc">Bez integracji od zewnętrznych dostawców doklejanych na siłę. Wszystko żyje w jednym systemie.</p>
+      <h2>System budowany szybciej niż konkurencja nadąża go kopiować</h2>
+      <p class="section-desc">Bez integracji od zewnętrznych dostawców doklejanych na siłę. Wszystko żyje w jednym systemie, i wszystko rozwija się na bieżąco — zobacz changelog niżej.</p>
     </div>
-    <div class="feature-grid">
+    <div class="feature-grid feature-grid-3">
       <div class="feature-card">
         <span class="diff-badge">Wyróżnik</span>
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg></div>
@@ -459,6 +463,31 @@
         <span class="feature-tag">moduł / dokumenty</span>
         <h3>Automatyczne dokumenty</h3>
         <p>Umowy, prezentacje ofertowe i karty klienta generują się z danych już wpisanych do systemu — bez przepisywania niczego po raz drugi.</p>
+      </div>
+      <div class="feature-card">
+        <span class="diff-badge coming-soon">Wkrótce</span>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <span class="feature-tag">moduł / wycena-ai</span>
+        <h3>Wycena AI z rejestrami cen</h3>
+        <p>Asystent AI już dziś pomaga oszacować wartość nieruchomości. Pracujemy nad połączeniem tego z ogólnopolskimi rejestrami cen transakcyjnych — wycena oparta o realne dane rynkowe, nie tylko intuicję agenta.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg></div>
+        <span class="feature-tag">moduł / aplikacja-mobilna</span>
+        <h3>Działa jak aplikacja na telefonie</h3>
+        <p>Pełna responsywność i instalacja na ekranie głównym telefonu (PWA) — agent zarządza ofertami i klientami bez laptopa, prosto z terenu.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <span class="feature-tag">moduł / branding-biura</span>
+        <h3>Własne logo i branding biura</h3>
+        <p>Panel biura z logo, kolorami i danymi kontaktowymi widocznymi na wydrukach, ofertach i we wszystkich materiałach generowanych z systemu.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div>
+        <span class="feature-tag">moduł / raporty</span>
+        <h3>Raporty i finanse w jednym miejscu</h3>
+        <p>Prowizje, rozliczenia agentów i integracja z fakturowaniem — bez przenoszenia danych do osobnego arkusza kalkulacyjnego.</p>
       </div>
     </div>
   </section>
