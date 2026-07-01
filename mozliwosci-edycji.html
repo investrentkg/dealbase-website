@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Możliwości edycji strony — DealBase CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1C1C1C; --cream:#F5F5F3; --teal:#0E7A5F; --coral:#E8633F; --muted:#6B6A63; --border:#E5E1D6; --card:#FFFFFF; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--cream); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.65; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:500; }
+
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:22px 32px; max-width:1000px; margin:0 auto; border-bottom:1px solid var(--border); }
+  .logo{ font-family:'Fraunces',serif; font-size:19px; font-weight:600; }
+  .back{ font-size:13.5px; font-weight:600; color:var(--teal); }
+
+  .hero{ max-width:760px; margin:0 auto; padding:56px 32px 20px; }
+  .eyebrow{ font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); font-weight:600; margin-bottom:14px; display:block; }
+  .hero h1{ font-size:clamp(28px,4vw,38px); line-height:1.2; margin-bottom:14px; }
+  .hero p{ color:var(--muted); font-size:16px; }
+
+  .content{ max-width:760px; margin:0 auto; padding:20px 32px 80px; }
+  .tier{ border:1px solid var(--border); border-radius:14px; padding:28px; margin-bottom:20px; background:var(--card); }
+  .tier-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .tier-badge{ font-size:11px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:5px 12px; border-radius:100px; }
+  .tier-badge.live{ background:#E1F5EE; color:#0F6E56; }
+  .tier-badge.planned{ background:#FFF3E6; color:#8A5A16; }
+  .tier-badge.future{ background:#F3F3F5; color:var(--muted); }
+  .tier h2{ font-size:19px; }
+  .tier ul{ list-style:none; margin-top:12px; }
+  .tier li{ display:flex; gap:10px; padding:8px 0; font-size:14.5px; color:#3A3A35; border-top:1px solid var(--border); }
+  .tier li:first-child{ border-top:none; }
+  .tier li svg{ width:16px; height:16px; color:var(--teal); flex-shrink:0; margin-top:2px; }
+  .tier-note{ font-size:13px; color:var(--muted); margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+
+  .demo-link{ display:inline-block; margin-top:6px; font-size:13.5px; font-weight:600; color:var(--teal); border-bottom:1px solid var(--teal); }
+
+  footer{ padding:36px 32px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">DealBase</div>
+  <a href="index.html" class="back">← Wróć do strony głównej</a>
+</nav>
+
+<div class="hero">
+  <span class="eyebrow">Strony internetowe</span>
+  <h1>Co dokładnie możesz zmienić na swojej stronie</h1>
+  <p>Żeby nie było niedomówień: poniżej jest jasny podział na to, co działa już teraz, co jest w realnym planie rozwoju, i co jest dalszą przyszłością. Nie obiecujemy tego, czego jeszcze nie zbudowaliśmy.</p>
+</div>
+
+<div class="content">
+
+  <div class="tier">
+    <div class="tier-head">
+      <span class="tier-badge live">Działa już teraz</span>
+      <h2>Wygląd i marka</h2>
+    </div>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Kolor główny i kolor akcentu — dowolna paleta, nie tylko gotowe presety</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Nazwa biura widoczna jako logo tekstowe</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Wybór typografii (klasyczna szeryfowa / nowoczesna)</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Wybór jednego z 6 szablonów bazowych jako punktu startowego</li>
+    </ul>
+    <div class="tier-note">Wypróbuj na żywo: <a href="konfigurator.html" class="demo-link">konfigurator kolorów i logo →</a></div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-head">
+      <span class="tier-badge planned">W aktywnym planie rozwoju</span>
+      <h2>Treść i moduły</h2>
+    </div>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Edycja tekstów strony (sekcja "O nas", opisy, dane kontaktowe) z panelu w CRM-ie</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Włączanie i wyłączanie modułów (np. bez sekcji "Zespół", bez kalkulatora)</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Liczba i układ prezentowanych ofert (pasek kilku ofert vs. pełna siatka)</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Podłączenie widgetu WhatsApp lub czatu na żywo</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Dane zespołu (zdjęcia, opisy) edytowane wprost z profili agentów w CRM-ie</li>
+    </ul>
+    <div class="tier-note">To są funkcje, które realnie budujemy jako część panelu ustawień strony — nie są jeszcze gotowe, ale to jest konkretny, zaplanowany zakres pracy, nie obietnica bez pokrycia.</div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-head">
+      <span class="tier-badge future">Dalsza przyszłość</span>
+      <h2>Pełna swoboda układu</h2>
+    </div>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Zmiana kolejności całych sekcji (np. Zespół wyżej niż Oferty)</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Dodawanie zupełnie nowych, własnych podstron (np. "Blog", "Kariera")</li>
+    </ul>
+    <div class="tier-note">To wymaga pełnego edytora/buildera stron, nie tylko panelu ustawień — realna, większa funkcja na dalszym etapie rozwoju produktu. Jeśli to jest dla Ciebie krytyczne już teraz, powiedz nam — pomoże nam to ustalić priorytety rozwoju.</div>
+  </div>
+
+</div>
+
+<footer>
+  Masz już własną stronę i szukasz integracji, nie nowej strony? <a href="integracja-strony.html" style="color:var(--teal); font-weight:600;">Zobacz jak działa integracja z istniejącą stroną →</a>
+</footer>
+
+</body>
+</html>
