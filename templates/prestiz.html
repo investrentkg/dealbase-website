@@ -36,12 +36,31 @@
   @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
 
   /* HOME */
-  .hero{ position:relative; padding:70px 48px 0; text-align:center; }
-  .eyebrow{ color:var(--gold); font-size:13px; letter-spacing:2px; text-transform:uppercase; font-weight:600; margin-bottom:18px; }
-  .hero h1{ font-size:clamp(30px,4.5vw,46px); max-width:640px; margin:0 auto 18px; line-height:1.2; }
-  .hero p{ color:var(--muted); max-width:480px; margin:0 auto 30px; font-size:16px; }
-  .hero-visual{ width:100%; max-width:1000px; height:min(460px,60vw); margin:40px auto 0; border-radius:6px; overflow:hidden; }
-  .hero-visual svg{ width:100%; height:100%; display:block; }
+  .hero{ position:relative; min-height:600px; display:flex; align-items:center; padding:90px 48px; overflow:hidden; }
+  .hero-bg{ position:absolute; inset:0; background-size:cover; background-position:center 40%; }
+  .hero-overlay{ position:absolute; inset:0; background:linear-gradient(to right, rgba(13,31,60,0.95) 0%, rgba(13,31,60,0.82) 35%, rgba(13,31,60,0.35) 65%, rgba(13,31,60,0.1) 100%), linear-gradient(to bottom, rgba(13,31,60,0.3) 0%, transparent 30%, rgba(10,21,38,0.4) 100%); }
+  .hero-inner{ position:relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center; }
+  @media(max-width:900px){ .hero-inner{ grid-template-columns:1fr; } .hero{ padding:70px 24px; min-height:auto; } }
+  .eyebrow{ color:var(--gold); font-size:13px; letter-spacing:2px; text-transform:uppercase; font-weight:600; margin-bottom:18px; display:inline-flex; align-items:center; gap:8px; background:rgba(191,154,74,0.15); border:1px solid rgba(191,154,74,0.35); padding:7px 16px; border-radius:100px; }
+  .hero h1{ font-size:clamp(30px,4.2vw,46px); max-width:560px; margin:0 0 18px; line-height:1.15; color:#fff; }
+  .hero h1 em{ font-style:normal; color:var(--gold-light); }
+  .hero p{ color:rgba(255,255,255,0.72); max-width:460px; margin:0 0 28px; font-size:16px; }
+  .hero-stats{ display:flex; gap:28px; margin-top:36px; flex-wrap:wrap; }
+  .hstat{ color:#fff; }
+  .hstat-num{ font-family:'Playfair Display',serif; font-size:22px; color:var(--gold-light); }
+  .hstat-label{ font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px; }
+
+  .search-widget{ background:rgba(10,21,38,0.72); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.15); border-radius:14px; padding:28px; }
+  .sw-tabs{ display:flex; background:rgba(0,0,0,0.3); border-radius:9px; padding:4px; margin-bottom:18px; gap:4px; }
+  .sw-tab{ flex:1; padding:10px; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; background:transparent; color:rgba(255,255,255,0.6); font-family:'Inter',sans-serif; transition:all 0.15s ease; }
+  .sw-tab.active{ background:#fff; color:var(--navy); }
+  .sw-field{ width:100%; border:none; border-radius:8px; padding:12px 14px; font-size:13.5px; font-family:'Inter',sans-serif; background:rgba(255,255,255,0.95); color:var(--navy); margin-bottom:10px; }
+  .sw-submit{ width:100%; background:var(--gold); color:var(--navy); border:none; padding:13px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; }
+
+  .breadcrumb{ font-size:12.5px; color:var(--muted); margin-bottom:20px; }
+  .breadcrumb a{ color:var(--muted); }
+  .breadcrumb a:hover{ color:var(--gold); }
+  .breadcrumb span{ margin:0 6px; }
 
   .section{ padding:80px 48px; max-width:1200px; margin:0 auto; }
   .section-head{ text-align:center; margin-bottom:50px; }
@@ -58,8 +77,12 @@
   .listing-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
   .listing:hover .listing-img img{ transform:scale(1.04); }
   .listing-badge{ position:absolute; top:14px; left:14px; background:var(--navy); color:var(--gold-light); font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:5px 11px; border-radius:3px; }
+  .listing-badge.exclusive{ background:var(--gold); color:var(--navy); }
+  .listing-badge.promo{ background:#3B7A4A; color:#fff; }
+  .listing-ref{ position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.92); color:var(--muted); font-size:10px; font-weight:600; padding:4px 9px; border-radius:3px; letter-spacing:0.3px; }
   .listing-info{ padding:24px; }
-  .listing-price{ font-family:'Playfair Display',serif; font-size:21px; margin-bottom:6px; }
+  .listing-price{ font-family:'Playfair Display',serif; font-size:21px; margin-bottom:2px; }
+  .listing-price-m2{ font-size:11.5px; color:var(--muted); margin-bottom:10px; }
   .listing-loc{ color:var(--muted); font-size:13px; margin-bottom:12px; }
   .listing-meta{ display:flex; gap:16px; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
   .meta-item{ display:flex; align-items:center; gap:5px; }
@@ -104,6 +127,14 @@
   .agent-mini-photo svg{ width:100%; height:100%; display:block; }
   .agent-mini-name{ font-size:13.5px; font-weight:600; }
   .agent-mini-role{ font-size:11.5px; color:var(--muted); }
+  .calc-card{ background:#fff; border:1px solid var(--border); border-radius:6px; padding:24px; margin-top:16px; }
+  .calc-title{ font-size:13px; font-weight:600; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .calc-title svg{ width:16px; height:16px; color:var(--gold); }
+  .calc-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:13px; }
+  .calc-row input[type=range]{ width:120px; accent-color:var(--gold); }
+  .calc-result{ border-top:1px solid var(--border); padding-top:14px; margin-top:6px; text-align:center; }
+  .calc-result-num{ font-family:'Playfair Display',serif; font-size:24px; }
+  .calc-result-label{ font-size:11.5px; color:var(--muted); margin-top:2px; }
   .similar-strip{ margin-top:60px; }
 
   /* TEAM VIEW */
@@ -163,33 +194,29 @@
 <!-- ============ HOME ============ -->
 <section class="view" id="view-home">
   <div class="hero">
-    <span class="eyebrow">Biuro nieruchomości premium</span>
-    <h1>Nieruchomości wybierane z uwagą, prowadzone z klasą</h1>
-    <p>Reprezentujemy klientów szukających czegoś więcej niż transakcji — pełnej opieki od pierwszego oglądania do podpisu aktu.</p>
-    <div class="hero-visual">
-      <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1B2E4C"/><stop offset="100%" stop-color="#0A1526"/></linearGradient>
-          <linearGradient id="goldFade" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#BF9A4A" stop-opacity="0.5"/><stop offset="100%" stop-color="#BF9A4A" stop-opacity="0"/></linearGradient>
-        </defs>
-        <rect width="1000" height="460" fill="url(#skyG)"/>
-        <circle cx="800" cy="120" r="90" fill="url(#goldFade)"/>
-        <g fill="#0D1F3C" opacity="0.9">
-          <rect x="40" y="260" width="70" height="200"/><rect x="120" y="200" width="55" height="260"/>
-          <rect x="185" y="300" width="90" height="160"/><rect x="285" y="150" width="60" height="310"/>
-          <rect x="355" y="240" width="80" height="220"/><rect x="445" y="190" width="65" height="270"/>
-          <rect x="520" y="280" width="100" height="180"/><rect x="630" y="220" width="70" height="240"/>
-          <rect x="710" y="260" width="90" height="200"/><rect x="810" y="180" width="60" height="280"/>
-          <rect x="880" y="290" width="80" height="170"/>
-        </g>
-        <g fill="#E4CD98" opacity="0.55">
-          <rect x="55" y="280" width="10" height="14"/><rect x="80" y="280" width="10" height="14"/>
-          <rect x="135" y="230" width="9" height="13"/><rect x="300" y="180" width="9" height="13"/>
-          <rect x="460" y="220" width="9" height="13"/><rect x="645" y="250" width="9" height="13"/>
-          <rect x="825" y="210" width="9" height="13"/>
-        </g>
-        <text x="60" y="420" font-family="Playfair Display, serif" font-size="26" fill="#F9F6F0" opacity="0.85">Kołobrzeg — Centrum</text>
-      </svg>
+    <div class="hero-bg" style="background-image:url('https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/8835aaaa-c02a-4acb-b7ab-d8b2f2106236/8835aaaa-c02a-4acb-b7ab-d8b2f2106236_1.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">★ Biuro nieruchomości premium</span>
+        <h1>Nieruchomości wybierane z uwagą, <em>prowadzone z klasą</em></h1>
+        <p>Reprezentujemy klientów szukających czegoś więcej niż transakcji — pełnej opieki od pierwszego oglądania do podpisu aktu.</p>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-num">180+</div><div class="hstat-label">zamkniętych transakcji</div></div>
+          <div class="hstat"><div class="hstat-num">15 lat</div><div class="hstat-label">na rynku premium</div></div>
+          <div class="hstat"><div class="hstat-num">4.9/5</div><div class="hstat-label">ocena klientów</div></div>
+        </div>
+      </div>
+      <div class="search-widget">
+        <div class="sw-tabs">
+          <button class="sw-tab active">Szukam</button>
+          <button class="sw-tab">Chcę sprzedać</button>
+        </div>
+        <select class="sw-field"><option>Typ nieruchomości</option><option>Apartament</option><option>Dom</option><option>Inwestycja</option></select>
+        <select class="sw-field"><option>Lokalizacja</option><option>Kołobrzeg</option><option>Trzebiatów</option><option>Mielno</option><option>Rewal</option></select>
+        <select class="sw-field"><option>Budżet</option><option>do 800 000 zł</option><option>do 2 000 000 zł</option><option>bez limitu</option></select>
+        <button class="sw-submit" onclick="location.hash='#/oferty'">Szukaj ofert →</button>
+      </div>
     </div>
   </div>
 
@@ -212,6 +239,7 @@
 <!-- ============ LISTINGS ============ -->
 <section class="view" id="view-oferty">
   <div class="listings-head">
+    <div class="breadcrumb"><a href="#/">Strona główna</a><span>/</span>Oferty</div>
     <div class="section-head" style="margin-bottom:0;">
       <span class="eyebrow">Portfel</span>
       <h2>Wszystkie oferty</h2>
@@ -247,6 +275,7 @@
 <!-- ============ OFFER DETAIL ============ -->
 <section class="view" id="view-detail">
   <div class="detail-wrap">
+    <div class="breadcrumb"><a href="#/">Strona główna</a><span>/</span><a href="#/oferty">Oferty</a><span>/</span><span id="breadcrumbTitle"></span></div>
     <a href="#/oferty" class="back-link">← Wróć do listy ofert</a>
     <div class="detail-grid">
       <div>
@@ -259,6 +288,7 @@
       <div>
         <div class="side-card">
           <div class="side-price" id="detailPrice"></div>
+          <div id="detailPriceM2" style="font-size:12px; color:var(--muted); margin-bottom:16px;"></div>
           <div class="side-specs" id="detailSpecs"></div>
           <a href="#/kontakt" class="btn-gold" style="display:block; text-align:center; width:100%;">Zapytaj o ofertę</a>
           <div class="agent-mini">
@@ -267,6 +297,16 @@
               <div class="agent-mini-name" id="detailAgentName">Aleksandra Wójcik</div>
               <div class="agent-mini-role">Agent prowadzący</div>
             </div>
+          </div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M6 15h4"/></svg>Kalkulator raty kredytu</div>
+          <div class="calc-row"><span>Wkład własny: <strong id="calcDownVal">20%</strong></span><input type="range" id="calcDown" min="10" max="50" value="20"></div>
+          <div class="calc-row"><span>Okres: <strong id="calcYearsVal">25 lat</strong></span><input type="range" id="calcYears" min="10" max="35" value="25"></div>
+          <div class="calc-row"><span>Oprocentowanie: <strong id="calcRateVal">7,2%</strong></span><input type="range" id="calcRate" min="50" max="100" value="72"></div>
+          <div class="calc-result">
+            <div class="calc-result-num" id="calcResult">— zł</div>
+            <div class="calc-result-label">szacunkowa rata miesięczna</div>
           </div>
         </div>
       </div>
@@ -351,27 +391,31 @@ const ICON = {
 };
 
 const OFFERS = [
-  { id:1, folder:'8835aaaa-c02a-4acb-b7ab-d8b2f2106236', title:'Dom, Grzybowo', type:'Dom', price:6500000, area:968, rooms:null, loc:'Kołobrzeg, Grzybowo', desc:'Wyjątkowa rezydencja w prestiżowej części Grzybowa, blisko plaży. Wysoki standard wykończenia, prywatny ogród i pełna infrastruktura pod działalność pensjonatową.' },
-  { id:2, folder:'72ef2bfe-e1f3-49a1-af69-f98eedb2fe39', title:'Dom, Pobierowo', type:'Dom', price:3100000, area:380, rooms:19, loc:'Rewal', desc:'Duży obiekt wypoczynkowy z 19 pomieszczeniami, obecnie wynajmowany sezonowo. Znakomita lokalizacja blisko plaży w Rewalu.' },
-  { id:3, folder:'00e0538b-e5c1-4843-954d-5de5f50d4927', title:'Obiekt inwestycyjny, Grzybowo', type:'Inwestycja', price:2290000, area:472, rooms:null, loc:'Kołobrzeg, Grzybowo', desc:'Obiekt inwestycyjny o dużym potencjale w Grzybowie, blisko strefy nadmorskiej. Idealny pod działalność komercyjną lub apartamenty na wynajem.' },
-  { id:4, folder:'109bbb26-108f-47ea-a88c-3339f2b12986', title:'Obiekt, Mielno Gąski', type:'Inwestycja', price:1900000, area:220, rooms:null, loc:'Mielno', desc:'Obiekt w atrakcyjnej części Mielna-Gąsek, blisko wydm i plaży. Duży potencjał na wynajem sezonowy premium.' },
-  { id:5, folder:'de136232-a819-4eec-b0c8-e29cb2e2ecef', title:'Obiekt, Trzebiatów', type:'Inwestycja', price:1190000, area:2984, rooms:null, loc:'Trzebiatów', desc:'Rozległa nieruchomość inwestycyjna o powierzchni blisko 3000 m², z dużym potencjałem rozwoju.' },
-  { id:6, folder:'7eccc42a-e2db-4162-b1a0-1bae2fa2ccb2', title:'Apartament, Kołobrzeg', type:'Apartament', price:879000, area:113, rooms:4, loc:'Kołobrzeg', desc:'Przestronny apartament czteropokojowy w Kołobrzegu, wysoki standard, doskonała lokalizacja blisko centrum.' },
-  { id:7, folder:'aca93f60-0b47-4f34-b71b-a5ec3af73d58', title:'Apartament, Trzebiatów', type:'Apartament', price:699000, area:300, rooms:4, loc:'Trzebiatów', desc:'Unikalny apartament o dużym metrażu, elastyczny układ pomieszczeń, możliwość adaptacji na cele komercyjne.' },
-  { id:8, folder:'816a144d-02de-4259-8407-0d3ab3b02c96', title:'Dom, Wartkowo', type:'Dom', price:660000, area:200, rooms:5, loc:'Gościno', desc:'Komfortowy dom pięciopokojowy w spokojnej okolicy Gościna, z ogrodem i garażem.' },
-  { id:9, folder:'82a5a535-354a-4b19-b2b5-387130e9eb0a', title:'Apartament, Kołobrzeg', type:'Apartament', price:550000, area:34, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowy apartament inwestycyjny w Kołobrzegu, bardzo dobra lokalizacja pod wynajem sezonowy.' }
+  { id:1, folder:'8835aaaa-c02a-4acb-b7ab-d8b2f2106236', ref:'REF-1841', badge:'exclusive', title:'Dom, Grzybowo', type:'Dom', price:6500000, area:968, rooms:null, loc:'Kołobrzeg, Grzybowo', desc:'Wyjątkowa rezydencja w prestiżowej części Grzybowa, blisko plaży. Wysoki standard wykończenia, prywatny ogród i pełna infrastruktura pod działalność pensjonatową.' },
+  { id:2, folder:'72ef2bfe-e1f3-49a1-af69-f98eedb2fe39', ref:'REF-1622', badge:null, title:'Dom, Pobierowo', type:'Dom', price:3100000, area:380, rooms:19, loc:'Rewal', desc:'Duży obiekt wypoczynkowy z 19 pomieszczeniami, obecnie wynajmowany sezonowo. Znakomita lokalizacja blisko plaży w Rewalu.' },
+  { id:3, folder:'00e0538b-e5c1-4843-954d-5de5f50d4927', ref:'REF-1705', badge:'promo', title:'Obiekt inwestycyjny, Grzybowo', type:'Inwestycja', price:2290000, area:472, rooms:null, loc:'Kołobrzeg, Grzybowo', desc:'Obiekt inwestycyjny o dużym potencjale w Grzybowie, blisko strefy nadmorskiej. Idealny pod działalność komercyjną lub apartamenty na wynajem.' },
+  { id:4, folder:'109bbb26-108f-47ea-a88c-3339f2b12986', ref:'REF-1398', badge:'exclusive', title:'Obiekt, Mielno Gąski', type:'Inwestycja', price:1900000, area:220, rooms:null, loc:'Mielno', desc:'Obiekt w atrakcyjnej części Mielna-Gąsek, blisko wydm i plaży. Duży potencjał na wynajem sezonowy premium.' },
+  { id:5, folder:'de136232-a819-4eec-b0c8-e29cb2e2ecef', ref:'REF-1287', badge:null, title:'Obiekt, Trzebiatów', type:'Inwestycja', price:1190000, area:2984, rooms:null, loc:'Trzebiatów', desc:'Rozległa nieruchomość inwestycyjna o powierzchni blisko 3000 m², z dużym potencjałem rozwoju.' },
+  { id:6, folder:'7eccc42a-e2db-4162-b1a0-1bae2fa2ccb2', ref:'REF-1156', badge:null, title:'Apartament, Kołobrzeg', type:'Apartament', price:879000, area:113, rooms:4, loc:'Kołobrzeg', desc:'Przestronny apartament czteropokojowy w Kołobrzegu, wysoki standard, doskonała lokalizacja blisko centrum.' },
+  { id:7, folder:'aca93f60-0b47-4f34-b71b-a5ec3af73d58', ref:'REF-1092', badge:'promo', title:'Apartament, Trzebiatów', type:'Apartament', price:699000, area:300, rooms:4, loc:'Trzebiatów', desc:'Unikalny apartament o dużym metrażu, elastyczny układ pomieszczeń, możliwość adaptacji na cele komercyjne.' },
+  { id:8, folder:'816a144d-02de-4259-8407-0d3ab3b02c96', ref:'REF-0987', badge:null, title:'Dom, Wartkowo', type:'Dom', price:660000, area:200, rooms:5, loc:'Gościno', desc:'Komfortowy dom pięciopokojowy w spokojnej okolicy Gościna, z ogrodem i garażem.' },
+  { id:9, folder:'82a5a535-354a-4b19-b2b5-387130e9eb0a', ref:'REF-0844', badge:null, title:'Apartament, Kołobrzeg', type:'Apartament', price:550000, area:34, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowy apartament inwestycyjny w Kołobrzegu, bardzo dobra lokalizacja pod wynajem sezonowy.' }
 ];
 
 const fmt = n => n.toLocaleString('pl-PL') + ' zł';
 
+const BADGE_LABEL = { exclusive:'Na wyłączności', promo:'W promocji' };
 function listingCard(o){
+  const pricePerM2 = Math.round(o.price / o.area).toLocaleString('pl-PL');
   return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
     <div class="listing-img">
       <img src="${photoUrl(o.folder,1)}" alt="${o.title}" loading="lazy">
-      <span class="listing-badge">${o.type}</span>
+      ${o.badge ? `<span class="listing-badge ${o.badge}">${BADGE_LABEL[o.badge]}</span>` : `<span class="listing-badge">${o.type}</span>`}
+      <span class="listing-ref">${o.ref}</span>
     </div>
     <div class="listing-info">
       <div class="listing-price">${fmt(o.price)}</div>
+      <div class="listing-price-m2">${pricePerM2} zł/m²</div>
       <div class="listing-loc">${o.title} — ${o.loc}</div>
       <div class="listing-meta">
         ${o.rooms ? `<span class="meta-item">${ICON.bed}${o.rooms} pok.</span>` : ''}
@@ -405,6 +449,8 @@ function renderDetail(id){
   document.getElementById('detailLoc').textContent = o.loc;
   document.getElementById('detailDesc').textContent = o.desc;
   document.getElementById('detailPrice').textContent = fmt(o.price);
+  document.getElementById('detailPriceM2').textContent = Math.round(o.price / o.area).toLocaleString('pl-PL') + ' zł/m²';
+  document.getElementById('breadcrumbTitle').textContent = o.title;
   document.getElementById('detailSpecs').innerHTML = `
     <div class="spec-item"><div class="spec-label">Powierzchnia</div>${o.area} m²</div>
     ${o.rooms ? `<div class="spec-item"><div class="spec-label">Pokoje</div>${o.rooms}</div>` : ''}
@@ -412,7 +458,29 @@ function renderDetail(id){
   `;
   const similar = OFFERS.filter(x => x.type === o.type && x.id !== o.id).slice(0,3);
   document.getElementById('similarListings').innerHTML = (similar.length ? similar : OFFERS.filter(x=>x.id!==o.id).slice(0,3)).map(listingCard).join('');
+  initCalculator(o.price);
   window.scrollTo(0,0);
+}
+
+function initCalculator(price){
+  const downEl = document.getElementById('calcDown');
+  const yearsEl = document.getElementById('calcYears');
+  const rateEl = document.getElementById('calcRate');
+  function update(){
+    const downPct = Number(downEl.value);
+    const years = Number(yearsEl.value);
+    const rate = Number(rateEl.value) / 10;
+    document.getElementById('calcDownVal').textContent = downPct + '%';
+    document.getElementById('calcYearsVal').textContent = years + ' lat';
+    document.getElementById('calcRateVal').textContent = rate.toFixed(1).replace('.', ',') + '%';
+    const loan = price * (1 - downPct / 100);
+    const monthlyRate = rate / 100 / 12;
+    const n = years * 12;
+    const payment = monthlyRate === 0 ? loan / n : loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -n));
+    document.getElementById('calcResult').textContent = Math.round(payment).toLocaleString('pl-PL') + ' zł';
+  }
+  downEl.oninput = update; yearsEl.oninput = update; rateEl.oninput = update;
+  update();
 }
 
 const routes = ['home','oferty','detail','zespol','kontakt'];
