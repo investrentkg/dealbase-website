@@ -35,21 +35,32 @@
   .view.active{ display:block; animation:fadeIn 0.25s ease; }
   @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
 
-  .hero{ padding:50px 48px 0; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; max-width:1300px; margin:0 auto; }
-  @media(max-width:860px){ .hero{ grid-template-columns:1fr; } }
-  .hero h1{ font-size:clamp(30px,4.5vw,50px); line-height:1.05; }
-  .hero h1 .hl{ background:var(--lime); padding:0 6px; }
-  .hero p{ color:var(--gray); margin-top:20px; max-width:420px; font-size:16px; }
+  .hero{ position:relative; min-height:580px; display:flex; align-items:center; padding:80px 48px; overflow:hidden; }
+  .hero-bg{ position:absolute; inset:0; background-size:cover; background-position:center 45%; }
+  .hero-overlay{ position:absolute; inset:0; background:linear-gradient(to right, rgba(17,18,20,0.92) 0%, rgba(17,18,20,0.75) 40%, rgba(17,18,20,0.2) 75%, rgba(17,18,20,0.02) 100%); }
+  .hero-inner{ position:relative; z-index:2; max-width:1300px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  @media(max-width:860px){ .hero-inner{ grid-template-columns:1fr; } .hero{ padding:60px 24px; min-height:auto; } }
+  .hero h1{ font-size:clamp(30px,4.5vw,50px); line-height:1.05; color:#fff; }
+  .hero h1 .hl{ background:var(--lime); color:#111214; padding:0 6px; }
+  .hero p{ color:rgba(255,255,255,0.7); margin-top:20px; max-width:420px; font-size:16px; }
   .hero-actions{ display:flex; gap:12px; margin-top:26px; }
-  .btn-outline{ border:1.5px solid var(--ink); padding:10px 20px; border-radius:100px; font-size:13.5px; font-weight:600; background:none; }
-  .hero-visual{ height:min(420px,60vw); border-radius:24px; overflow:hidden; }
-  .hero-visual svg{ width:100%; height:100%; display:block; }
+  .btn-outline{ border:1.5px solid #fff; color:#fff; padding:10px 20px; border-radius:100px; font-size:13.5px; font-weight:600; background:none; }
+  .hero-stats-strip{ display:flex; gap:24px; margin-top:34px; flex-wrap:wrap; }
+  .hstat{ color:#fff; }
+  .hstat-num{ font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:var(--lime); }
+  .hstat-label{ font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:2px; }
 
-  .stats-strip{ display:flex; max-width:1300px; margin:60px auto 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); flex-wrap:wrap; }
-  .stat{ flex:1; min-width:150px; padding:24px 48px; border-right:1px solid var(--border); }
-  .stat:last-child{ border-right:none; }
-  .stat-num{ font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; }
-  .stat-label{ font-size:12px; color:var(--gray); margin-top:2px; }
+  .search-widget{ background:rgba(17,18,20,0.7); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:26px; }
+  .sw-tabs{ display:flex; background:rgba(0,0,0,0.3); border-radius:12px; padding:4px; margin-bottom:16px; gap:4px; }
+  .sw-tab{ flex:1; padding:10px; border:none; border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; background:transparent; color:rgba(255,255,255,0.6); font-family:'Inter',sans-serif; transition:all 0.15s ease; }
+  .sw-tab.active{ background:var(--lime); color:#111214; }
+  .sw-field{ width:100%; border:none; border-radius:10px; padding:12px 14px; font-size:13.5px; font-family:'Inter',sans-serif; background:rgba(255,255,255,0.95); color:#111214; margin-bottom:10px; }
+  .sw-submit{ width:100%; background:#fff; color:#111214; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; }
+
+  .breadcrumb{ font-size:12.5px; color:var(--gray); margin-bottom:16px; }
+  .breadcrumb a{ color:var(--gray); }
+  .breadcrumb a:hover{ color:var(--ink); }
+  .breadcrumb span{ margin:0 6px; }
 
   .section{ padding:70px 48px; max-width:1300px; margin:0 auto; }
   .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; flex-wrap:wrap; gap:16px; }
@@ -67,8 +78,12 @@
   .listing:hover .listing-img img{ transform:scale(1.04); }
   .listing-fav{ position:absolute; top:14px; right:14px; width:32px; height:32px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; }
   .listing-fav svg{ width:15px; height:15px; }
+  .listing-badge{ position:absolute; top:14px; left:14px; font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:5px 11px; border-radius:100px; background:#111214; color:var(--lime); }
+  .listing-badge.exclusive{ background:var(--lime); color:#111214; }
+  .listing-badge.promo{ background:#111214; color:#fff; }
   .listing-info{ padding:18px; }
   .listing-price{ font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; }
+  .listing-price-m2{ font-size:11px; color:var(--gray); margin-top:1px; }
   .listing-loc{ color:var(--gray); font-size:13px; margin:4px 0 10px; }
   .listing-tags{ display:flex; gap:6px; flex-wrap:wrap; }
   .tag{ background:#F3F3F5; font-size:11px; font-weight:600; padding:4px 10px; border-radius:100px; display:flex; align-items:center; gap:4px; }
@@ -103,6 +118,14 @@
   .agent-mini-photo svg{ width:100%; height:100%; display:block; }
   .agent-mini-name{ font-size:13px; font-weight:600; }
   .agent-mini-role{ font-size:11px; color:var(--gray); }
+  .calc-card{ background:#F7F7F8; border-radius:18px; padding:24px; margin-top:16px; }
+  .calc-title{ font-size:13px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .calc-title svg{ width:16px; height:16px; color:var(--lime-dark); }
+  .calc-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:13px; }
+  .calc-row input[type=range]{ width:110px; accent-color:var(--lime-dark); }
+  .calc-result{ border-top:1px solid var(--border); padding-top:14px; margin-top:6px; text-align:center; }
+  .calc-result-num{ font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; }
+  .calc-result-label{ font-size:11px; color:var(--gray); margin-top:2px; }
   .similar-strip{ margin-top:56px; }
 
   .team-hero{ padding:60px 48px 0; text-align:center; max-width:640px; margin:0 auto; }
@@ -159,36 +182,33 @@
 
 <section class="view" id="view-home">
   <div class="hero">
-    <div>
-      <h1>Znajdź mieszkanie, <span class="hl">nie stres</span></h1>
-      <p>Przejrzysty proces, aktualna baza ofert i agenci, którzy odpowiadają tego samego dnia.</p>
-      <div class="hero-actions">
-        <a href="#/oferty" class="btn-lime">Zobacz oferty</a>
-        <a href="#/kontakt" class="btn-outline">Jak to działa</a>
+    <div class="hero-bg" style="background-image:url('https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/7ad9fdd7-f5c9-43e5-81e7-74f6438e1441/7ad9fdd7-f5c9-43e5-81e7-74f6438e1441_1.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div>
+        <h1>Znajdź mieszkanie, <span class="hl">nie stres</span></h1>
+        <p>Przejrzysty proces, aktualna baza ofert i agenci, którzy odpowiadają tego samego dnia.</p>
+        <div class="hero-actions">
+          <a href="#/oferty" class="btn-lime">Zobacz oferty</a>
+          <a href="#/kontakt" class="btn-outline">Jak to działa</a>
+        </div>
+        <div class="hero-stats-strip">
+          <div class="hstat"><div class="hstat-num">180+</div><div class="hstat-label">zamknięte transakcje</div></div>
+          <div class="hstat"><div class="hstat-num">4.9/5</div><div class="hstat-label">ocena klientów</div></div>
+          <div class="hstat"><div class="hstat-num">24h</div><div class="hstat-label">średni czas odpowiedzi</div></div>
+        </div>
+      </div>
+      <div class="search-widget">
+        <div class="sw-tabs">
+          <button class="sw-tab active">Szukam</button>
+          <button class="sw-tab">Zgłoś nieruchomość</button>
+        </div>
+        <select class="sw-field"><option>Typ nieruchomości</option><option>Mieszkanie</option><option>Dom</option><option>Lokal</option></select>
+        <select class="sw-field"><option>Lokalizacja</option><option>Kołobrzeg</option><option>Trzebiatów</option></select>
+        <select class="sw-field"><option>Budżet</option><option>do 300 000 zł</option><option>do 500 000 zł</option><option>bez limitu</option></select>
+        <button class="sw-submit" onclick="location.hash='#/oferty'">Szukaj ofert →</button>
       </div>
     </div>
-    <div class="hero-visual">
-      <svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid slice">
-        <defs><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EAF7C8"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs>
-        <rect width="600" height="440" fill="url(#mg1)"/>
-        <g fill="#111214" opacity="0.9">
-          <rect x="80" y="180" width="130" height="200" rx="10"/><polygon points="80,180 145,120 210,180"/>
-          <rect x="330" y="140" width="160" height="240" rx="10"/>
-        </g>
-        <g fill="#FFFFFF">
-          <rect x="105" y="220" width="24" height="24" rx="4"/><rect x="160" y="220" width="24" height="24" rx="4"/>
-          <rect x="105" y="270" width="24" height="24" rx="4"/><rect x="160" y="270" width="24" height="24" rx="4"/>
-          <rect x="355" y="175" width="24" height="24" rx="4"/><rect x="405" y="175" width="24" height="24" rx="4"/><rect x="450" y="175" width="24" height="24" rx="4"/>
-          <rect x="355" y="225" width="24" height="24" rx="4"/><rect x="405" y="225" width="24" height="24" rx="4"/><rect x="450" y="225" width="24" height="24" rx="4"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <div class="stats-strip">
-    <div class="stat"><div class="stat-num">180+</div><div class="stat-label">zamknięte transakcje</div></div>
-    <div class="stat"><div class="stat-num">4.9/5</div><div class="stat-label">ocena klientów</div></div>
-    <div class="stat"><div class="stat-num">24h</div><div class="stat-label">średni czas odpowiedzi</div></div>
   </div>
 
   <div class="section">
@@ -203,6 +223,7 @@
 
 <section class="view" id="view-oferty">
   <div class="section" style="padding-bottom:0;">
+    <div class="breadcrumb"><a href="#/">Strona główna</a><span>/</span>Oferty</div>
     <div class="section-head" style="margin-bottom:20px;">
       <h2>Wszystkie oferty</h2>
     </div>
@@ -233,6 +254,7 @@
 
 <section class="view" id="view-detail">
   <div class="detail-wrap">
+    <div class="breadcrumb"><a href="#/">Strona główna</a><span>/</span><a href="#/oferty">Oferty</a><span>/</span><span id="breadcrumbTitle"></span></div>
     <a href="#/oferty" class="back-link">← Wróć do listy ofert</a>
     <div class="detail-grid">
       <div>
@@ -245,11 +267,22 @@
       <div>
         <div class="side-card">
           <div class="side-price" id="detailPrice"></div>
+          <div id="detailPriceM2" style="font-size:12px; color:var(--gray); margin-bottom:16px;"></div>
           <div class="side-specs" id="detailSpecs"></div>
           <a href="#/kontakt" class="btn-lime" style="display:block; text-align:center; width:100%; padding:13px;">Zapytaj o ofertę</a>
           <div class="agent-mini">
             <div class="agent-mini-photo"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#C4F542"/><circle cx="22" cy="18" r="8" fill="#111214"/></svg></div>
             <div><div class="agent-mini-name" id="detailAgentName">Tomek Adamski</div><div class="agent-mini-role">Agent prowadzący</div></div>
+          </div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M6 15h4"/></svg>Kalkulator raty kredytu</div>
+          <div class="calc-row"><span>Wkład własny: <strong id="calcDownVal">20%</strong></span><input type="range" id="calcDown" min="10" max="50" value="20"></div>
+          <div class="calc-row"><span>Okres: <strong id="calcYearsVal">25 lat</strong></span><input type="range" id="calcYears" min="10" max="35" value="25"></div>
+          <div class="calc-row"><span>Oprocentowanie: <strong id="calcRateVal">7,2%</strong></span><input type="range" id="calcRate" min="50" max="100" value="72"></div>
+          <div class="calc-result">
+            <div class="calc-result-num" id="calcResult">— zł</div>
+            <div class="calc-result-label">szacunkowa rata miesięczna</div>
           </div>
         </div>
       </div>
@@ -312,27 +345,31 @@ const ICON = {
 };
 
 const OFFERS = [
-  { id:1, folder:'127f2ac4-95da-4d09-adae-5c28d6c661fe', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:330000, area:38, rooms:2, loc:'Kołobrzeg', desc:'Funkcjonalne, dwupokojowe mieszkanie w dobrej lokalizacji. Idealne na start lub pod inwestycję pod wynajem.' },
-  { id:2, folder:'7ad9fdd7-f5c9-43e5-81e7-74f6438e1441', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:480000, area:47, rooms:2, loc:'Kołobrzeg', desc:'Przestronne dwupokojowe mieszkanie, dobrze skomunikowane z centrum miasta.' },
-  { id:3, folder:'227425c6-c8bf-4ed3-97b8-4965d30c1547', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:359000, area:33, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowa kawalerka, świetna pod wynajem sezonowy lub jako pierwsze mieszkanie.' },
-  { id:4, folder:'07dfa70f-9ed8-4f5d-82eb-49fcc5ff3ccd', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:410000, area:52, rooms:2, loc:'Kołobrzeg', desc:'Mieszkanie dwupokojowe o dobrym rozkładzie, blisko szkoły i komunikacji miejskiej.' },
-  { id:5, folder:'125e4f44-32e7-4fae-96a2-5b873b2d1e43', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:48, rooms:2, loc:'Trzebiatów', desc:'Mieszkanie w spokojnej części Trzebiatowa, gotowe do zamieszkania.' },
-  { id:6, folder:'22f68641-9e13-4b00-8716-81f5e1e8020c', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:60, rooms:3, loc:'Trzebiatów', desc:'Trzypokojowe mieszkanie z dobrym nasłonecznieniem, blisko centrum.' },
-  { id:7, folder:'c6523d12-cd39-4b50-8fab-745f934a5d28', title:'Lokal usługowy, Trzebiatów', type:'Lokal', price:182000, area:46, rooms:1, loc:'Trzebiatów', desc:'Lokal użytkowy na parterze, dobra widoczność, idealny pod działalność usługową.' },
-  { id:8, folder:'0e10151e-07d1-48b4-8ec2-7b19abdb4cb4', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:68, rooms:3, loc:'Trzebiatów', desc:'Mieszkanie trzypokojowe o funkcjonalnym rozkładzie, spore pokoje.' },
-  { id:9, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem, dobra lokalizacja.' }
+  { id:1, folder:'127f2ac4-95da-4d09-adae-5c28d6c661fe', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:330000, area:38, rooms:2, loc:'Kołobrzeg', desc:'Funkcjonalne, dwupokojowe mieszkanie w dobrej lokalizacji. Idealne na start lub pod inwestycję pod wynajem.' },
+  { id:2, folder:'7ad9fdd7-f5c9-43e5-81e7-74f6438e1441', badge:'exclusive', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:480000, area:47, rooms:2, loc:'Kołobrzeg', desc:'Przestronne dwupokojowe mieszkanie, dobrze skomunikowane z centrum miasta.' },
+  { id:3, folder:'227425c6-c8bf-4ed3-97b8-4965d30c1547', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:359000, area:33, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowa kawalerka, świetna pod wynajem sezonowy lub jako pierwsze mieszkanie.' },
+  { id:4, folder:'07dfa70f-9ed8-4f5d-82eb-49fcc5ff3ccd', badge:'promo', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:410000, area:52, rooms:2, loc:'Kołobrzeg', desc:'Mieszkanie dwupokojowe o dobrym rozkładzie, blisko szkoły i komunikacji miejskiej.' },
+  { id:5, folder:'125e4f44-32e7-4fae-96a2-5b873b2d1e43', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:48, rooms:2, loc:'Trzebiatów', desc:'Mieszkanie w spokojnej części Trzebiatowa, gotowe do zamieszkania.' },
+  { id:6, folder:'22f68641-9e13-4b00-8716-81f5e1e8020c', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:60, rooms:3, loc:'Trzebiatów', desc:'Trzypokojowe mieszkanie z dobrym nasłonecznieniem, blisko centrum.' },
+  { id:7, folder:'c6523d12-cd39-4b50-8fab-745f934a5d28', badge:null, title:'Lokal usługowy, Trzebiatów', type:'Lokal', price:182000, area:46, rooms:1, loc:'Trzebiatów', desc:'Lokal użytkowy na parterze, dobra widoczność, idealny pod działalność usługową.' },
+  { id:8, folder:'0e10151e-07d1-48b4-8ec2-7b19abdb4cb4', badge:'promo', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:68, rooms:3, loc:'Trzebiatów', desc:'Mieszkanie trzypokojowe o funkcjonalnym rozkładzie, spore pokoje.' },
+  { id:9, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem, dobra lokalizacja.' }
 ];
 
 const fmt = n => n.toLocaleString('pl-PL') + ' zł';
 
+const BADGE_LABEL = { exclusive:'Na wyłączności', promo:'W promocji' };
 function listingCard(o){
+  const pricePerM2 = Math.round(o.price / o.area).toLocaleString('pl-PL');
   return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
     <div class="listing-img">
       <img src="${photoUrl(o.folder,1)}" alt="${o.title}" loading="lazy">
+      ${o.badge ? `<span class="listing-badge ${o.badge}">${BADGE_LABEL[o.badge]}</span>` : ''}
       <div class="listing-fav">${ICON.heart}</div>
     </div>
     <div class="listing-info">
       <div class="listing-price">${fmt(o.price)}</div>
+      <div class="listing-price-m2">${pricePerM2} zł/m²</div>
       <div class="listing-loc">${o.title} — ${o.loc}</div>
       <div class="listing-tags">
         ${o.rooms ? `<span class="tag">${ICON.bed}${o.rooms} pok</span>` : ''}
@@ -366,6 +403,8 @@ function renderDetail(id){
   document.getElementById('detailLoc').textContent = o.loc;
   document.getElementById('detailDesc').textContent = o.desc;
   document.getElementById('detailPrice').textContent = fmt(o.price);
+  document.getElementById('detailPriceM2').textContent = Math.round(o.price / o.area).toLocaleString('pl-PL') + ' zł/m²';
+  document.getElementById('breadcrumbTitle').textContent = o.title;
   document.getElementById('detailSpecs').innerHTML = `
     <div class="spec-item"><div class="spec-label">Powierzchnia</div>${o.area} m²</div>
     ${o.rooms ? `<div class="spec-item"><div class="spec-label">Pokoje</div>${o.rooms}</div>` : ''}
@@ -373,7 +412,29 @@ function renderDetail(id){
   `;
   const similar = OFFERS.filter(x => x.type === o.type && x.id !== o.id).slice(0,3);
   document.getElementById('similarListings').innerHTML = (similar.length ? similar : OFFERS.filter(x=>x.id!==o.id).slice(0,3)).map(listingCard).join('');
+  initCalculator(o.price);
   window.scrollTo(0,0);
+}
+
+function initCalculator(price){
+  const downEl = document.getElementById('calcDown');
+  const yearsEl = document.getElementById('calcYears');
+  const rateEl = document.getElementById('calcRate');
+  function update(){
+    const downPct = Number(downEl.value);
+    const years = Number(yearsEl.value);
+    const rate = Number(rateEl.value) / 10;
+    document.getElementById('calcDownVal').textContent = downPct + '%';
+    document.getElementById('calcYearsVal').textContent = years + ' lat';
+    document.getElementById('calcRateVal').textContent = rate.toFixed(1).replace('.', ',') + '%';
+    const loan = price * (1 - downPct / 100);
+    const monthlyRate = rate / 100 / 12;
+    const n = years * 12;
+    const payment = monthlyRate === 0 ? loan / n : loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -n));
+    document.getElementById('calcResult').textContent = Math.round(payment).toLocaleString('pl-PL') + ' zł';
+  }
+  downEl.oninput = update; yearsEl.oninput = update; rateEl.oninput = update;
+  update();
 }
 
 const routes = ['home','oferty','detail','zespol','kontakt'];
