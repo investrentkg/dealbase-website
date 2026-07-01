@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Szablon: Nadmorski — przykładowa strona biura nieruchomości</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --sand:#F5EFE3; --sea:#2B6E6B; --sun:#E0954B; --ink:#20302C; --muted:#6B7570; --border:#E3DACB; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ font-family:'Inter',sans-serif; color:var(--ink); background:var(--sand); line-height:1.6; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:500; }
+
+  .demo-tag{ position:fixed; top:14px; left:14px; z-index:99; background:var(--sea); color:#fff; font-size:11px; font-weight:600; padding:6px 12px; border-radius:100px; letter-spacing:0.5px; }
+
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 48px; }
+  .logo{ font-family:'Fraunces',serif; font-size:21px; font-weight:600; }
+  .nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; }
+  @media(max-width:760px){ .nav-links{ display:none; } }
+  .btn-sea{ background:var(--sea); color:#fff; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:600; }
+
+  .hero{ padding:50px 48px 0; max-width:1300px; margin:0 auto; }
+  .hero-ph{ height:460px; border-radius:22px; background:linear-gradient(160deg,#8FBDB8,#2B6E6B); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; text-transform:uppercase; position:relative; overflow:hidden; }
+  .hero-caption{ position:absolute; bottom:32px; left:32px; color:#fff; max-width:440px; }
+  .hero-caption .eyebrow{ font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.85; margin-bottom:8px; display:block; }
+  .hero-caption h1{ font-size:32px; line-height:1.2; }
+
+  .quick-search{ max-width:1300px; margin:-34px auto 0; padding:0 48px; position:relative; z-index:5; }
+  .search-box{ background:#fff; border-radius:16px; padding:22px 26px; box-shadow:0 20px 40px -20px rgba(32,48,44,0.25); display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .search-box select, .search-box input{ border:1px solid var(--border); border-radius:8px; padding:11px 14px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--sand); flex:1; min-width:140px; }
+  .search-box button{ background:var(--sun); color:#fff; border:none; padding:11px 26px; border-radius:8px; font-size:13.5px; font-weight:600; cursor:pointer; }
+
+  .section{ padding:80px 48px; max-width:1300px; margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:44px; }
+  .section-head .eyebrow{ color:var(--sea); font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; display:block; }
+  .section-head h2{ font-size:30px; }
+
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media(max-width:860px){ .grid{ grid-template-columns:1fr; } }
+  .listing{ background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--border); }
+  .listing-img{ height:200px; background:linear-gradient(135deg,#E7DCC4,#D8C79E); display:flex; align-items:center; justify-content:center; color:#8A7A54; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  .listing-info{ padding:20px; }
+  .listing-price{ font-family:'Fraunces',serif; font-size:21px; }
+  .listing-loc{ color:var(--muted); font-size:13.5px; margin:4px 0 12px; }
+  .listing-meta{ display:flex; gap:12px; font-size:12.5px; color:var(--muted); }
+
+  .regions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .region-pill{ background:#fff; border:1px solid var(--border); border-radius:100px; padding:10px 20px; font-size:13.5px; font-weight:600; }
+
+  footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
+</style>
+</head>
+<body>
+<span class="demo-tag">Szablon DealBase — Nadmorski</span>
+
+<nav>
+  <div class="logo">Wybrzeże Nieruchomości</div>
+  <div class="nav-links">
+    <a href="#">Oferty</a>
+    <a href="#">Lokalizacje</a>
+    <a href="#">Inwestycje</a>
+    <a href="#">Kontakt</a>
+  </div>
+  <a href="#" class="btn-sea">Umów prezentację</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-ph">
+    <div class="hero-caption">
+      <span class="eyebrow">Kołobrzeg i okolice</span>
+      <h1>Życie bliżej morza zaczyna się od dobrego adresu</h1>
+    </div>
+  </div>
+</section>
+
+<div class="quick-search">
+  <div class="search-box">
+    <select><option>Typ nieruchomości</option><option>Mieszkanie</option><option>Dom</option></select>
+    <select><option>Lokalizacja</option><option>Kołobrzeg</option><option>Ustronie Morskie</option><option>Sianożęty</option></select>
+    <input type="text" placeholder="Budżet do (zł)">
+    <button>Szukaj</button>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-head">
+    <span class="eyebrow">Wybrane oferty</span>
+    <h2>Nieruchomości blisko wybrzeża</h2>
+  </div>
+  <div class="grid">
+    <div class="listing">
+      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-info">
+        <div class="listing-price">890 000 zł</div>
+        <div class="listing-loc">Apartament, Sianożęty — 300 m od plaży</div>
+        <div class="listing-meta"><span>2 pokoje</span><span>52 m²</span></div>
+      </div>
+    </div>
+    <div class="listing">
+      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-info">
+        <div class="listing-price">1 450 000 zł</div>
+        <div class="listing-loc">Dom, Ustronie Morskie</div>
+        <div class="listing-meta"><span>Dom</span><span>180 m²</span></div>
+      </div>
+    </div>
+    <div class="listing">
+      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-info">
+        <div class="listing-price">620 000 zł</div>
+        <div class="listing-loc">Mieszkanie, Kołobrzeg-Radzikowo</div>
+        <div class="listing-meta"><span>3 pokoje</span><span>68 m²</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <span class="eyebrow">Obszar działania</span>
+    <h2>Znamy każdą z tych lokalizacji od podszewki</h2>
+  </div>
+  <div class="regions">
+    <span class="region-pill">Kołobrzeg</span>
+    <span class="region-pill">Ustronie Morskie</span>
+    <span class="region-pill">Sianożęty</span>
+    <span class="region-pill">Dźwirzyno</span>
+    <span class="region-pill">Podczele</span>
+  </div>
+</section>
+
+<footer>
+  Wybrzeże Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Zdjęcia i dane zastępcze.
+</footer>
+</body>
+</html>
