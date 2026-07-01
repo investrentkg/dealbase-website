@@ -199,6 +199,28 @@
 
   .pricing-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
   @media(max-width:700px){ .pricing-grid{ grid-template-columns:1fr; } }
+  .pricing-grid-3{ grid-template-columns:1fr 1fr 1fr; }
+  @media(max-width:900px){ .pricing-grid-3{ grid-template-columns:1fr; } }
+
+  .calc-section{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px 32px; margin-top:28px; }
+  .calc-header{ display:flex; align-items:center; gap:10px; font-size:15px; font-weight:600; margin-bottom:24px; }
+  .calc-header svg{ width:19px; height:19px; color:var(--teal); }
+  .calc-body{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; }
+  @media(max-width:780px){ .calc-body{ grid-template-columns:1fr; } }
+  .calc-plan-toggle{ display:flex; background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:4px; gap:4px; margin-bottom:22px; }
+  .calc-plan-btn{ flex:1; border:none; background:transparent; padding:10px; border-radius:7px; font-size:13px; font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; color:var(--muted); transition:all 0.15s ease; }
+  .calc-plan-btn.active{ background:var(--ink); color:var(--cream); }
+  .calc-slider-row label{ font-size:13.5px; color:var(--muted); display:block; margin-bottom:10px; }
+  .calc-slider-row label strong{ color:var(--ink); }
+  .calc-slider-row input[type=range]{ width:100%; accent-color:var(--teal); }
+  .calc-output-main{ text-align:center; background:var(--ink); border-radius:12px; padding:26px; margin-bottom:16px; }
+  .calc-total{ font-family:'Fraunces',serif; font-size:36px; color:var(--cream); }
+  .calc-total-label{ font-size:12px; color:#A9B4C4; margin-top:4px; }
+  .calc-compare{ font-size:13px; }
+  .compare-row{ display:flex; justify-content:space-between; padding:9px 0; border-top:1px solid var(--border); color:var(--muted); }
+  .compare-row:first-child{ border-top:none; }
+  .compare-row strong{ color:var(--ink); }
+  .calc-note{ font-size:12.5px; color:var(--muted); margin-top:20px; text-align:center; }
   .price-card{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:36px; transition:box-shadow 0.25s ease; }
   .price-card.featured{ border:2px solid var(--ink); position:relative; box-shadow:0 20px 44px -24px rgba(16,24,43,0.3); }
   .featured-badge{ position:absolute; top:-13px; left:36px; background:var(--ink); color:var(--cream); font-size:12px; font-weight:600; padding:5px 14px; border-radius:100px; }
@@ -658,13 +680,14 @@
   <section class="section reveal" id="cennik">
     <div class="section-head">
       <span class="section-tag">Cennik</span>
-      <h2>Prosty wybór — bez ukrytych progów</h2>
-      <p class="section-desc">Płacisz za biuro, nie za każdego agenta osobno.</p>
+      <h2>Płacisz za agenta, nie za biuro</h2>
+      <p class="section-desc">Biuro jednoosobowe i zespół 15-agentowy płacą proporcjonalnie do skali — bez sztywnej opłaty, która niesprawiedliwie obciąża małe biura.</p>
     </div>
-    <div class="pricing-grid">
+
+    <div class="pricing-grid pricing-grid-3">
       <div class="price-card">
         <div class="plan-name">Basic</div>
-        <div class="plan-price">299 zł<span> netto / mies.</span></div>
+        <div class="plan-price">79 zł<span> netto / agenta / mies.</span></div>
         <p class="plan-desc">Pełny CRM bez funkcji AI — dla biur, które chcą zacząć od podstaw.</p>
         <ul class="plan-features">
           <li><span class="check">✓</span> Baza klientów i ofert</li>
@@ -677,7 +700,7 @@
       <div class="price-card featured">
         <span class="featured-badge">Najczęściej wybierany</span>
         <div class="plan-name">Extended</div>
-        <div class="plan-price">599 zł<span> netto / mies.</span></div>
+        <div class="plan-price">149 zł<span> netto / agenta / mies.</span></div>
         <p class="plan-desc">Wszystko z planu Basic plus pełny zestaw funkcji AI.</p>
         <ul class="plan-features">
           <li><span class="check">✓</span> Wszystko z planu Basic</li>
@@ -687,7 +710,52 @@
         </ul>
         <a href="#kontakt" class="plan-cta">Umów demo</a>
       </div>
+      <div class="price-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">od 119 zł<span> netto / agenta / mies.</span></div>
+        <p class="plan-desc">Dla zespołów 15+ agentów — rabat wolumenowy plus funkcje zarządcze.</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Wszystko z planu Extended</li>
+          <li><span class="check">✓</span> Panel SuperAdmin dla wielu biur</li>
+          <li><span class="check">✓</span> Dostęp do API</li>
+          <li><span class="check">✓</span> Dedykowane wsparcie i SLA</li>
+        </ul>
+        <a href="#kontakt" class="plan-cta">Skontaktuj się</a>
+      </div>
     </div>
+
+    <div class="calc-section">
+      <div class="calc-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M6 15h4M12 15h4"/></svg>
+        Sprawdź, ile zapłaci Twoje biuro
+      </div>
+      <div class="calc-body">
+        <div class="calc-controls">
+          <div class="calc-plan-toggle" id="calcPlanToggle">
+            <button class="calc-plan-btn" data-plan="79">Basic</button>
+            <button class="calc-plan-btn active" data-plan="149">Extended</button>
+            <button class="calc-plan-btn" data-plan="119">Enterprise</button>
+          </div>
+          <div class="calc-slider-row">
+            <label for="calcAgents">Liczba agentów: <strong id="calcAgentsVal">5</strong></label>
+            <input type="range" id="calcAgents" min="1" max="30" value="5">
+          </div>
+        </div>
+        <div class="calc-output">
+          <div class="calc-output-main">
+            <div class="calc-total" id="calcTotal">745 zł</div>
+            <div class="calc-total-label">netto / miesiąc, dla wybranej liczby agentów</div>
+          </div>
+          <div class="calc-compare">
+            <div class="compare-row"><span>Biuro jednoosobowe</span><strong id="calcCompare1">149 zł/mies.</strong></div>
+            <div class="compare-row"><span>Zespół 5 agentów</span><strong id="calcCompare5">745 zł/mies.</strong></div>
+            <div class="compare-row"><span>Zespół 15 agentów</span><strong id="calcCompare15">2 235 zł/mies.</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="calc-note">Każdy płaci proporcjonalnie do liczby agentów — bez stałej opłaty za samo posiadanie konta biura.</div>
+    </div>
+
     <div class="pricing-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
       Migrację danych z obecnego systemu wliczamy w cenę wdrożenia, niezależnie od planu.
@@ -882,6 +950,39 @@
       var body = encodeURIComponent('Od: ' + name + '\n\n' + msg);
       window.location.href = 'mailto:zarzad@investrent.com.pl?subject=' + subject + '&body=' + body;
     });
+  }
+
+  var calcAgentsInput = document.getElementById('calcAgents');
+  var calcAgentsVal = document.getElementById('calcAgentsVal');
+  var calcTotal = document.getElementById('calcTotal');
+  var calcPlanBtns = document.querySelectorAll('.calc-plan-btn');
+  var currentPricePerAgent = 149;
+
+  function fmtZl(n){ return n.toLocaleString('pl-PL') + ' zł'; }
+
+  function updateCalc(){
+    var agents = Number(calcAgentsInput.value);
+    calcAgentsVal.textContent = agents;
+    calcTotal.textContent = fmtZl(agents * currentPricePerAgent) + '/mies.';
+    document.getElementById('calcCompare1').textContent = fmtZl(1 * currentPricePerAgent) + '/mies.';
+    document.getElementById('calcCompare5').textContent = fmtZl(5 * currentPricePerAgent) + '/mies.';
+    document.getElementById('calcCompare15').textContent = fmtZl(15 * currentPricePerAgent) + '/mies.';
+  }
+
+  if(calcAgentsInput){
+    calcAgentsInput.addEventListener('input', updateCalc);
+    calcPlanBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        calcPlanBtns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentPricePerAgent = Number(btn.dataset.plan);
+        if(btn.dataset.plan === '119' && Number(calcAgentsInput.value) < 15){
+          calcAgentsInput.value = 15;
+        }
+        updateCalc();
+      });
+    });
+    updateCalc();
   }
 </script>
 
