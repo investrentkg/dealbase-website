@@ -272,6 +272,34 @@
   .cw-send{ width:100%; background:var(--ink); color:var(--cream); border:none; border-radius:9px; padding:11px; font-size:13.5px; font-weight:600; cursor:pointer; transition:background 0.2s ease; }
   .cw-send:hover{ background:var(--coral); }
   @media(max-width:480px){ .cw{ bottom:16px; right:16px; } .cw-panel{ right:-4px; } }
+
+  /* WEBSITE TEMPLATES */
+  .tpl-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media(max-width:900px){ .tpl-grid{ grid-template-columns:1fr; } }
+  .tpl-card{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:var(--card); transition:transform 0.25s ease, box-shadow 0.25s ease; }
+  .tpl-card:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -20px rgba(16,24,43,0.25); }
+  .tpl-chrome{ background:#EDEAE0; padding:9px 12px; display:flex; gap:6px; border-bottom:1px solid var(--border); }
+  .tpl-chrome span{ width:8px; height:8px; border-radius:50%; background:#D6D2C4; }
+  .tpl-frame{ position:relative; height:210px; overflow:hidden; background:#F1EEE4; }
+  .tpl-frame iframe{ width:1300px; height:950px; border:none; transform:scale(0.215); transform-origin:top left; pointer-events:none; }
+  .tpl-body{ padding:20px 22px 22px; }
+  .tpl-name{ font-size:17px; font-weight:600; font-family:'Fraunces',serif; margin-bottom:4px; }
+  .tpl-desc{ font-size:13.5px; color:var(--muted); margin-bottom:14px; }
+  .tpl-link{ font-size:13.5px; font-weight:600; color:var(--teal); display:inline-flex; align-items:center; gap:5px; }
+  .tpl-link svg{ width:13px; height:13px; }
+
+  .tpl-note{ display:flex; gap:16px; align-items:flex-start; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px 24px; margin-top:24px; }
+  .tpl-note svg{ width:20px; height:20px; color:var(--teal); flex-shrink:0; margin-top:2px; }
+  .tpl-note p{ font-size:14px; color:var(--muted); margin:0; }
+  .tpl-note strong{ color:var(--ink); }
+
+  .tpl-pricing{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; }
+  @media(max-width:900px){ .tpl-pricing{ grid-template-columns:1fr; } }
+  .tpl-price-card{ border:1px solid var(--border); border-radius:14px; padding:22px; background:var(--card); }
+  .tpl-price-card h4{ font-family:'Fraunces',serif; font-weight:500; font-size:16px; margin-bottom:8px; }
+  .tpl-price-num{ font-family:'Fraunces',serif; font-size:24px; margin-bottom:8px; }
+  .tpl-price-card p{ font-size:13px; color:var(--muted); }
+  .pending-tag{ display:inline-block; font-size:10.5px; font-weight:600; color:#8A5A16; background:#FFF3E6; padding:3px 9px; border-radius:100px; margin-bottom:10px; }
 </style>
 </head>
 <body>
@@ -298,7 +326,7 @@
       <div class="nav-links">
         <a href="#funkcje">Funkcje</a>
         <a href="#w-akcji">Zobacz w akcji</a>
-        <a href="#porownanie">Porównanie</a>
+        <a href="#strony">Strony internetowe</a>
         <a href="#cennik">Cennik</a>
         <a href="#aktualizacje">Aktualizacje</a>
       </div>
@@ -310,7 +338,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="#funkcje">Funkcje</a>
       <a href="#w-akcji">Zobacz w akcji</a>
-      <a href="#porownanie">Porównanie</a>
+      <a href="#strony">Strony internetowe</a>
       <a href="#cennik">Cennik</a>
       <a href="#aktualizacje">Aktualizacje</a>
     </div>
@@ -461,6 +489,74 @@
           <div class="mock-row"><span class="mock-tag">DOCX</span>Umowa pośrednictwa — Kowalski<span class="mock-pill">gotowe</span></div>
           <div class="mock-row"><span class="mock-tag">PDF</span>Prezentacja — Osiedle Kolumba<span class="mock-pill coral">w toku</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="strony">
+    <div class="section-head">
+      <span class="section-tag">Strony internetowe</span>
+      <h2>DealBase to nie tylko CRM — to też strona, na której te oferty się sprzedają</h2>
+      <p class="section-desc">Wybierz szablon, podaj logo i zdjęcia — resztę (aktualne oferty, ceny, dostępność) system aktualizuje sam, bez ręcznego wklejania czegokolwiek.</p>
+    </div>
+    <div class="tpl-grid">
+      <div class="tpl-card">
+        <div class="tpl-chrome"><span></span><span></span><span></span></div>
+        <div class="tpl-frame"><iframe src="templates/prestiz.html" loading="lazy" title="Podgląd szablonu Prestiż"></iframe></div>
+        <div class="tpl-body">
+          <div class="tpl-name">Prestiż</div>
+          <div class="tpl-desc">Granat i złoto, serif w nagłówkach — dla biur stawiających na klasę i nieruchomości premium.</div>
+          <a href="templates/prestiz.html" target="_blank" class="tpl-link">Zobacz na żywo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-chrome"><span></span><span></span><span></span></div>
+        <div class="tpl-frame"><iframe src="templates/nowoczesny.html" loading="lazy" title="Podgląd szablonu Nowoczesny"></iframe></div>
+        <div class="tpl-body">
+          <div class="tpl-name">Nowoczesny</div>
+          <div class="tpl-desc">Jasny, minimalistyczny, z akcentem limonki — dla młodszej marki i klientów cyfrowych od pierwszego kontaktu.</div>
+          <a href="templates/nowoczesny.html" target="_blank" class="tpl-link">Zobacz na żywo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-chrome"><span></span><span></span><span></span></div>
+        <div class="tpl-frame"><iframe src="templates/nadmorski.html" loading="lazy" title="Podgląd szablonu Nadmorski"></iframe></div>
+        <div class="tpl-body">
+          <div class="tpl-name">Nadmorski</div>
+          <div class="tpl-desc">Ciepłe piaskowe tony i wyszukiwarka ofert w hero — dla biur pracujących w regionach turystycznych i nadmorskich.</div>
+          <a href="templates/nadmorski.html" target="_blank" class="tpl-link">Zobacz na żywo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tpl-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      <p><strong>Pełna edycja bez znajomości kodu.</strong> Logo, kolory, zdjęcia hero i kolejność sekcji zmienia się z panelu ustawień biura w DealBase — dokładnie tak, jak dziś zmieniasz logo i dane w samym CRM-ie. Oferty na stronie aktualizują się automatycznie wraz z bazą ofert.</p>
+    </div>
+
+    <div class="tpl-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+      <p><strong>Masz już własną stronę?</strong> Nie trzeba jej wymieniać. Udostępniamy widget/API, który wyciąga aktualne oferty z DealBase i wyświetla je na Twojej istniejącej witrynie — wklejany jednym fragmentem kodu przez tego, kto obecnie prowadzi Twoją stronę. Wymóg techniczny: strona musi umożliwiać wklejenie własnego kodu HTML/JS (spełnia to większość systemów, w tym WordPress).</p>
+    </div>
+
+    <div class="tpl-pricing">
+      <div class="tpl-price-card">
+        <span class="pending-tag">Propozycja — do potwierdzenia</span>
+        <h4>Wdrożenie strony na szablonie</h4>
+        <div class="tpl-price-num">od 1 500 zł netto</div>
+        <p>Jednorazowo: branding, treści, uruchomienie pod domeną Klienta.</p>
+      </div>
+      <div class="tpl-price-card">
+        <span class="pending-tag">Propozycja — do potwierdzenia</span>
+        <h4>Utrzymanie i hosting</h4>
+        <div class="tpl-price-num">+99 zł netto / mies.</div>
+        <p>Hosting, aktualizacje bezpieczeństwa, synchronizacja z bazą ofert.</p>
+      </div>
+      <div class="tpl-price-card">
+        <span class="pending-tag">Propozycja — do potwierdzenia</span>
+        <h4>Integracja z istniejącą stroną</h4>
+        <div class="tpl-price-num">+49 zł netto / mies.</div>
+        <p>Widget ofert wklejany na już działającą witrynę Klienta.</p>
       </div>
     </div>
   </section>
