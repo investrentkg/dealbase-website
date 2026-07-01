@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Konfigurator strony — DealBase CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10182B; --cream:#FAF8F3; --teal:#1D9E75; --coral:#E8633F; --muted:#6B6A63; --border:#E5E1D6; --card:#FFFFFF;
+    --tpl-primary:#0D1F3C; --tpl-accent:#BF9A4A; --tpl-bg:#F9F6F0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--cream); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.5; }
+  a{ color:inherit; text-decoration:none; }
+
+  .page{ display:grid; grid-template-columns:340px 1fr; min-height:100vh; }
+  @media(max-width:900px){ .page{ grid-template-columns:1fr; } }
+
+  .panel{ background:var(--card); border-right:1px solid var(--border); padding:32px 28px; overflow-y:auto; }
+  .panel-top a{ font-size:13px; font-weight:600; color:var(--teal); }
+  .panel h1{ font-family:'Fraunces',serif; font-weight:500; font-size:22px; margin:18px 0 6px; }
+  .panel-desc{ font-size:13.5px; color:var(--muted); margin-bottom:28px; }
+
+  .field-group{ margin-bottom:26px; }
+  .field-label{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); margin-bottom:10px; display:block; }
+
+  .tpl-choices{ display:flex; flex-direction:column; gap:8px; }
+  .tpl-choice{ display:flex; align-items:center; gap:10px; padding:11px 14px; border:1px solid var(--border); border-radius:10px; cursor:pointer; font-size:13.5px; font-weight:600; transition:border-color 0.15s ease, background 0.15s ease; }
+  .tpl-choice:hover{ border-color:var(--ink); }
+  .tpl-choice.active{ border-color:var(--ink); background:var(--cream); }
+  .tpl-swatch{ width:16px; height:16px; border-radius:4px; flex-shrink:0; }
+
+  .color-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .color-row label{ font-size:13.5px; flex:1; }
+  .color-row input[type="color"]{ width:38px; height:38px; border:1px solid var(--border); border-radius:8px; padding:2px; cursor:pointer; background:none; }
+  .color-row .hex{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); width:64px; }
+
+  .preset-row{ display:flex; gap:8px; margin-top:4px; flex-wrap:wrap; }
+  .preset-dot{ width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:border-color 0.15s ease; }
+  .preset-dot:hover{ border-color:var(--ink); }
+
+  .text-input{ width:100%; border:1px solid var(--border); border-radius:9px; padding:11px 13px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--cream); }
+  .text-input:focus{ outline:none; border-color:var(--teal); }
+
+  .font-choices{ display:flex; flex-direction:column; gap:8px; }
+  .font-choice{ padding:11px 14px; border:1px solid var(--border); border-radius:10px; cursor:pointer; font-size:14px; transition:border-color 0.15s ease, background 0.15s ease; }
+  .font-choice.active{ border-color:var(--ink); background:var(--cream); }
+
+  .reset-btn{ width:100%; margin-top:8px; background:transparent; border:1px solid var(--border); border-radius:9px; padding:11px; font-size:13px; font-weight:600; color:var(--muted); cursor:pointer; }
+  .reset-btn:hover{ border-color:var(--coral); color:var(--coral); }
+
+  .cta-note{ background:var(--teal-light,#E1F5EE); border:1px solid #BFE3D5; border-radius:10px; padding:14px 16px; font-size:12.5px; color:#0F6E56; margin-top:24px; }
+
+  /* PREVIEW PANE */
+  .preview-wrap{ background:#EBE5D8; padding:24px; overflow-y:auto; }
+  .preview-frame{
+    background:var(--tpl-bg); border-radius:14px; overflow:hidden; box-shadow:0 30px 70px -40px rgba(16,24,43,0.35);
+    max-width:1000px; margin:0 auto; font-family:'Inter',sans-serif; color:var(--tpl-primary); transition:background 0.2s ease;
+  }
+  .p-nav{ display:flex; justify-content:space-between; align-items:center; padding:20px 32px; }
+  .p-logo{ font-family:var(--tpl-font, 'Fraunces',serif); font-weight:600; font-size:19px; color:var(--tpl-primary); transition:color 0.2s ease; }
+  .p-nav-links{ display:flex; gap:24px; font-size:13px; color:var(--tpl-primary); opacity:0.75; }
+  .p-btn{ background:var(--tpl-primary); color:var(--tpl-bg); padding:9px 18px; border-radius:6px; font-size:12.5px; font-weight:600; transition:background 0.2s ease; }
+
+  .p-hero{ padding:50px 32px 60px; text-align:center; }
+  .p-hero h2{ font-family:var(--tpl-font, 'Fraunces',serif); font-weight:600; font-size:30px; color:var(--tpl-primary); max-width:480px; margin:0 auto 14px; transition:color 0.2s ease; }
+  .p-hero p{ font-size:14px; opacity:0.65; max-width:380px; margin:0 auto 22px; }
+  .p-hero-cta{ display:inline-block; background:var(--tpl-accent); color:#fff; padding:12px 26px; border-radius:7px; font-size:13.5px; font-weight:600; transition:background 0.2s ease; }
+
+  .p-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:0 32px 40px; }
+  @media(max-width:700px){ .p-cards{ grid-template-columns:1fr; } }
+  .p-card{ border:1px solid rgba(0,0,0,0.08); border-radius:12px; overflow:hidden; background:#fff; }
+  .p-card-img{ height:110px; background:var(--tpl-accent); opacity:0.7; transition:background 0.2s ease; }
+  .p-card-body{ padding:16px; }
+  .p-card-price{ font-family:var(--tpl-font,'Fraunces',serif); font-weight:600; font-size:17px; color:var(--tpl-primary); transition:color 0.2s ease; }
+  .p-card-loc{ font-size:12px; opacity:0.6; margin-top:4px; }
+
+  .p-band{ background:var(--tpl-primary); color:var(--tpl-bg); text-align:center; padding:40px 32px; transition:background 0.2s ease; }
+  .p-band h3{ font-family:var(--tpl-font,'Fraunces',serif); font-weight:600; font-size:20px; margin-bottom:8px; }
+  .p-band p{ font-size:13px; opacity:0.7; max-width:420px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="panel">
+    <div class="panel-top"><a href="index.html">← Wróć do strony głównej</a></div>
+    <h1>Konfigurator strony</h1>
+    <p class="panel-desc">Zmień kolory, logo i typografię — podgląd po prawej aktualizuje się na żywo. Tak wygląda dostosowywanie strony w Twoim panelu DealBase.</p>
+
+    <div class="field-group">
+      <span class="field-label">Baza szablonu</span>
+      <div class="tpl-choices" id="tplChoices">
+        <div class="tpl-choice active" data-primary="#0D1F3C" data-accent="#BF9A4A" data-bg="#F9F6F0" data-font="'Fraunces',serif">
+          <span class="tpl-swatch" style="background:#0D1F3C;"></span> Prestiż
+        </div>
+        <div class="tpl-choice" data-primary="#111214" data-accent="#8FB82E" data-bg="#FFFFFF" data-font="'Space Grotesk','Inter',sans-serif">
+          <span class="tpl-swatch" style="background:#111214;"></span> Nowoczesny
+        </div>
+        <div class="tpl-choice" data-primary="#20302C" data-accent="#E0954B" data-bg="#F5EFE3" data-font="'Fraunces',serif">
+          <span class="tpl-swatch" style="background:#2B6E6B;"></span> Nadmorski
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">Nazwa biura (logo)</span>
+      <input type="text" class="text-input" id="logoText" value="Aurum Nieruchomości" maxlength="28">
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">Kolor główny</span>
+      <div class="color-row">
+        <input type="color" id="primaryColor" value="#0D1F3C">
+        <span class="hex" id="primaryHex">#0D1F3C</span>
+      </div>
+      <div class="preset-row" id="primaryPresets">
+        <div class="preset-dot" style="background:#0D1F3C;" data-color="#0D1F3C"></div>
+        <div class="preset-dot" style="background:#111214;" data-color="#111214"></div>
+        <div class="preset-dot" style="background:#20302C;" data-color="#20302C"></div>
+        <div class="preset-dot" style="background:#3B2F5E;" data-color="#3B2F5E"></div>
+        <div class="preset-dot" style="background:#1E3A5F;" data-color="#1E3A5F"></div>
+        <div class="preset-dot" style="background:#5C1F1F;" data-color="#5C1F1F"></div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">Kolor akcentu</span>
+      <div class="color-row">
+        <input type="color" id="accentColor" value="#BF9A4A">
+        <span class="hex" id="accentHex">#BF9A4A</span>
+      </div>
+      <div class="preset-row" id="accentPresets">
+        <div class="preset-dot" style="background:#BF9A4A;" data-color="#BF9A4A"></div>
+        <div class="preset-dot" style="background:#8FB82E;" data-color="#8FB82E"></div>
+        <div class="preset-dot" style="background:#E0954B;" data-color="#E0954B"></div>
+        <div class="preset-dot" style="background:#1D9E75;" data-color="#1D9E75"></div>
+        <div class="preset-dot" style="background:#E8633F;" data-color="#E8633F"></div>
+        <div class="preset-dot" style="background:#C4526E;" data-color="#C4526E"></div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">Typografia</span>
+      <div class="font-choices" id="fontChoices">
+        <div class="font-choice active" data-font="'Fraunces',serif" style="font-family:'Fraunces',serif;">Fraunces — klasyczna</div>
+        <div class="font-choice" data-font="'Space Grotesk','Inter',sans-serif" style="font-family:'Space Grotesk',sans-serif;">Space Grotesk — nowoczesna</div>
+      </div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Przywróć ustawienia domyślne</button>
+
+    <div class="cta-note">To pokazuje mechanikę — w realnym panelu DealBase te same ustawienia zapisują się i publikują na Twojej stronie jednym kliknięciem.</div>
+  </div>
+
+  <div class="preview-wrap">
+    <div class="preview-frame" id="previewFrame">
+      <div class="p-nav">
+        <div class="p-logo" id="pLogo">Aurum Nieruchomości</div>
+        <div class="p-nav-links"><span>Oferty</span><span>O nas</span><span>Kontakt</span></div>
+        <div class="p-btn">Umów spotkanie</div>
+      </div>
+      <div class="p-hero">
+        <h2>Nieruchomości wybierane z uwagą, prowadzone z klasą</h2>
+        <p>Tak będzie wyglądał nagłówek Twojej strony z wybraną kolorystyką i logo.</p>
+        <a href="#" class="p-hero-cta">Zobacz oferty</a>
+      </div>
+      <div class="p-cards">
+        <div class="p-card"><div class="p-card-img"></div><div class="p-card-body"><div class="p-card-price">1 250 000 zł</div><div class="p-card-loc">Apartament, Centrum</div></div></div>
+        <div class="p-card"><div class="p-card-img"></div><div class="p-card-body"><div class="p-card-price">780 000 zł</div><div class="p-card-loc">Mieszkanie, Nadmorska</div></div></div>
+        <div class="p-card"><div class="p-card-img"></div><div class="p-card-body"><div class="p-card-price">2 890 000 zł</div><div class="p-card-loc">Dom, Radzikowo</div></div></div>
+      </div>
+      <div class="p-band">
+        <h3>Twoje wyróżnienie w kilku słowach</h3>
+        <p>Ta sekcja też dziedziczy Twoje kolory — cała strona zmienia się razem, nie sekcja po sekcji.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const primaryInput = document.getElementById('primaryColor');
+  const accentInput = document.getElementById('accentColor');
+  const primaryHex = document.getElementById('primaryHex');
+  const accentHex = document.getElementById('accentHex');
+  const logoInput = document.getElementById('logoText');
+  const pLogo = document.getElementById('pLogo');
+  const previewFrame = document.getElementById('previewFrame');
+
+  function setPrimary(hex){
+    primaryInput.value = hex; primaryHex.textContent = hex.toUpperCase();
+    root.style.setProperty('--tpl-primary', hex);
+  }
+  function setAccent(hex){
+    accentInput.value = hex; accentHex.textContent = hex.toUpperCase();
+    root.style.setProperty('--tpl-accent', hex);
+  }
+  function setBg(hex){ root.style.setProperty('--tpl-bg', hex); }
+  function setFont(font){
+    root.style.setProperty('--tpl-font', font);
+    document.querySelectorAll('.font-choice').forEach(f => f.classList.toggle('active', f.dataset.font === font));
+  }
+
+  primaryInput.addEventListener('input', e => setPrimary(e.target.value));
+  accentInput.addEventListener('input', e => setAccent(e.target.value));
+  logoInput.addEventListener('input', e => { pLogo.textContent = e.target.value || 'Twoje Biuro'; });
+
+  document.querySelectorAll('#primaryPresets .preset-dot').forEach(d => {
+    d.addEventListener('click', () => setPrimary(d.dataset.color));
+  });
+  document.querySelectorAll('#accentPresets .preset-dot').forEach(d => {
+    d.addEventListener('click', () => setAccent(d.dataset.color));
+  });
+  document.querySelectorAll('.font-choice').forEach(f => {
+    f.addEventListener('click', () => setFont(f.dataset.font));
+  });
+
+  document.querySelectorAll('.tpl-choice').forEach(choice => {
+    choice.addEventListener('click', () => {
+      document.querySelectorAll('.tpl-choice').forEach(c => c.classList.remove('active'));
+      choice.classList.add('active');
+      setPrimary(choice.dataset.primary);
+      setAccent(choice.dataset.accent);
+      setBg(choice.dataset.bg);
+      setFont(choice.dataset.font);
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    document.querySelectorAll('.tpl-choice').forEach((c,i) => c.classList.toggle('active', i===0));
+    logoInput.value = 'Aurum Nieruchomości';
+    pLogo.textContent = 'Aurum Nieruchomości';
+    setPrimary('#0D1F3C'); setAccent('#BF9A4A'); setBg('#F9F6F0'); setFont("'Fraunces',serif");
+  });
+</script>
+
+</body>
+</html>
