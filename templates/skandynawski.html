@@ -149,6 +149,25 @@
   .form-success.show{ display:block; }
 
   footer{ padding:44px 56px; text-align:center; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
+
+  .about-split{ display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:32px; }
+  @media(max-width:780px){ .about-split{ grid-template-columns:1fr; } }
+  .ab-stats{ display:grid; grid-template-columns:1fr; gap:14px; }
+  .ab-stat{ border-left:2px solid var(--sage); padding-left:14px; }
+  .ab-stat-num{ font-size:22px; font-weight:700; }
+  .ab-stat-label{ font-size:12px; color:var(--muted); margin-top:2px; }
+  .why-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media(max-width:700px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-item{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px; }
+  .why-num{ font-size:12px; font-weight:700; color:var(--sage); margin-bottom:8px; letter-spacing:1px; }
+  .why-item h3{ font-size:16px; margin-bottom:6px; }
+  .why-item p{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+  .testimonial-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:700px){ .testimonial-grid{ grid-template-columns:1fr; } }
+  .testimonial-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px; }
+  .tq{ font-size:34px; color:var(--sage); line-height:1; margin-bottom:6px; font-family:serif; }
+  .testimonial-card p{ font-size:14px; line-height:1.6; margin-bottom:12px; }
+  .testimonial-card span{ font-size:12.5px; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -209,7 +228,31 @@
     <div class="view-all-link"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
   </div>
 
+  
   <div class="section reveal-inline">
+    <div class="about-split">
+      <div>
+        <h2 style="font-size:26px; margin-bottom:14px;">Kim jest Linden Nieruchomości</h2>
+        <p style="color:var(--muted); font-size:14.5px; line-height:1.7; max-width:520px;">Jesteśmy małym, świadomie ograniczonym zespołem — bo uważamy, że mniej klientów na agenta oznacza więcej uwagi dla każdego z nich. Działamy od 2017 roku w Kołobrzegu, bez rozgłosu, głównie z polecenia — a to nam w pełni wystarcza.</p>
+      </div>
+      <div class="ab-stats"><div class="ab-stat"><div class="ab-stat-num">2017</div><div class="ab-stat-label">rok założenia</div></div><div class="ab-stat"><div class="ab-stat-num">3</div><div class="ab-stat-label">agentów, żadnego więcej z założenia</div></div><div class="ab-stat"><div class="ab-stat-num">9 lat</div><div class="ab-stat-label">na rynku</div></div></div>
+    </div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Dlaczego my</h2>
+    </div>
+    <div class="why-grid"><div class="why-item"><div class="why-num">01</div><h3>Mały zespół, pełna uwaga</h3><p>Nie skalujemy liczby klientów na agenta — to jest nasza świadoma granica, nie ograniczenie zasobów.</p></div><div class="why-item"><div class="why-num">02</div><h3>Prosty, jasny proces</h3><p>Bez żargonu, bez drobnego druku — wyjaśniamy każdy krok tak, jak wyjaśnialibyśmy go rodzinie.</p></div><div class="why-item"><div class="why-num">03</div><h3>Selekcja, nie ilość</h3><p>Wolimy mieć 30 dobrze sprawdzonych ofert niż 300 przypadkowych.</p></div><div class="why-item"><div class="why-num">04</div><h3>Polecenia, nie reklama</h3><p>Większość naszych klientów trafia do nas z polecenia — to jest dla nas ważniejszy wskaźnik niż ruch na stronie.</p></div></div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Co mówią klienci</h2>
+    </div>
+    <div class="testimonial-grid"><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Żadnego naciskania, żadnych sztucznych terminów. Po prostu jasna rozmowa i rzeczowe odpowiedzi na każde pytanie.</p><span>&mdash; Klientka, zakup mieszkania w Kołobrzegu</span></div><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Poleciła mi ich sąsiadka. Rozumiem teraz czemu — to jest zupełnie inny poziom uwagi niż w większych biurach.</p><span>&mdash; Klient, sprzedaż mieszkania</span></div></div>
+  </div>
+<div class="section reveal-inline">
     <div class="section-head">
       <h2 style="font-size:26px;">Ludzie, z którymi rozmawiasz</h2>
       <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
