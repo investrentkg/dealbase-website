@@ -222,6 +222,34 @@
     <div class="grid3" id="homeListings"></div>
     <div class="view-all-link" style="margin-top:30px;"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
   </div>
+
+  <div class="section reveal-inline">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Ludzie, z którymi rozmawiasz</h2>
+      <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
+    </div>
+    <div class="team" style="margin-bottom:20px;">
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#C4F542"/><circle cx="40" cy="32" r="14" fill="#111214"/></svg></div><div class="agent-name">Tomek Adamski</div><div class="agent-role">Założyciel</div><div class="agent-bio">10 lat doświadczenia w obrocie nieruchomościami.</div></div><div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#8FB82E"/><circle cx="40" cy="32" r="14" fill="#111214"/></svg></div><div class="agent-name">Natalia Górska</div><div class="agent-role">Agentka</div><div class="agent-bio">Specjalizacja: wynajem długoterminowy.</div></div><div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#111214"/><circle cx="40" cy="32" r="14" fill="#C4F542"/></svg></div><div class="agent-name">Piotr Zieliński</div><div class="agent-role">Agent</div><div class="agent-bio">Domy i działki poza miastem.</div></div>
+    </div>
+    <div class="view-all-link"><a href="#/zespol">Zobacz cały zespół →</a></div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Oblicz swoją ratę kredytu</h2>
+      <p style="margin-top:8px;">Wpisz orientacyjną cenę nieruchomości i sprawdź szacunkową ratę — bez zobowiązań.</p>
+    </div>
+    <div class="calc-card" style="max-width:480px;">
+      <div class="calc-row"><span>Cena nieruchomości</span><input type="number" id="homeCalcAmount" value="650000" step="10000" style="width:130px; border:1px solid var(--border); border-radius:6px; padding:6px 8px; font-family:inherit; font-size:13px;"></div>
+      <div class="calc-row"><span>Wkład własny: <strong id="homeCalcDownVal">20%</strong></span><input type="range" id="homeCalcDown" min="10" max="50" value="20"></div>
+      <div class="calc-row"><span>Okres: <strong id="homeCalcYearsVal">25 lat</strong></span><input type="range" id="homeCalcYears" min="10" max="35" value="25"></div>
+      <div class="calc-row"><span>Oprocentowanie: <strong id="homeCalcRateVal">7,2%</strong></span><input type="range" id="homeCalcRate" min="50" max="100" value="72"></div>
+      <div class="calc-result">
+        <div class="calc-result-num" id="homeCalcResult">— zł</div>
+        <div class="calc-result-label">szacunkowa rata miesięczna</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="view" id="view-oferty">
@@ -462,6 +490,32 @@ function navigate(){
 }
 window.addEventListener('hashchange', navigate);
 navigate();
+
+  function initHomeCalculator(){
+    var amountEl = document.getElementById('homeCalcAmount');
+    var downEl = document.getElementById('homeCalcDown');
+    var yearsEl = document.getElementById('homeCalcYears');
+    var rateEl = document.getElementById('homeCalcRate');
+    if(!amountEl) return;
+    function update(){
+      var price = Number(amountEl.value) || 0;
+      var downPct = Number(downEl.value);
+      var years = Number(yearsEl.value);
+      var rate = Number(rateEl.value) / 10;
+      document.getElementById('homeCalcDownVal').textContent = downPct + '%';
+      document.getElementById('homeCalcYearsVal').textContent = years + ' lat';
+      document.getElementById('homeCalcRateVal').textContent = rate.toFixed(1).replace('.', ',') + '%';
+      var loan = price * (1 - downPct / 100);
+      var monthlyRate = rate / 100 / 12;
+      var n = years * 12;
+      var payment = monthlyRate === 0 ? loan / n : loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -n));
+      document.getElementById('homeCalcResult').textContent = Math.round(payment).toLocaleString('pl-PL') + ' zł';
+    }
+    amountEl.oninput = update; downEl.oninput = update; yearsEl.oninput = update; rateEl.oninput = update;
+    update();
+  }
+  initHomeCalculator();
+
 
 document.getElementById('hamburgerBtn').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
