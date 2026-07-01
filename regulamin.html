@@ -13,51 +13,63 @@
   .page{ background:var(--cream); max-width:880px; margin:0 auto; min-height:100vh; border-left:1px solid var(--border); border-right:1px solid var(--border); padding:0 0 60px; }
   .top{ padding:32px; border-bottom:1px solid var(--border); }
   .back{ font-size:14px; font-weight:600; color:var(--teal); }
-  .draft-notice{ background:#FAECE7; border:1px solid #F0997B; border-radius:10px; padding:18px 22px; margin:32px; font-size:14px; color:#712B13; }
+  .notice{ background:var(--teal-light,#E1F5EE); border:1px solid #BFE3D5; border-radius:10px; padding:16px 20px; margin:32px; font-size:13.5px; color:#0F6E56; }
   .content{ padding:0 32px; max-width:760px; }
   h1{ font-family:'Fraunces',serif; font-weight:500; font-size:32px; margin:8px 0 24px; }
   h2{ font-family:'Fraunces',serif; font-weight:500; font-size:20px; margin:36px 0 12px; }
   p, li{ font-size:15px; color:#3A3A35; }
   ul{ padding-left:20px; }
   .muted{ color:var(--muted); font-size:14px; }
+  .pending{ background:#FFF3E6; padding:2px 6px; border-radius:4px; font-weight:600; color:#8A5A16; }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="top"><a href="index.html" class="back">← Wróć do strony głównej</a></div>
-  <div class="draft-notice">
-    <strong>To jest wersja robocza.</strong> Treść poniżej to szablon ogólnych warunków — przed publikacją wymaga przeglądu prawnika i uzupełnienia o rzeczywiste warunki handlowe (cennik, okres wypowiedzenia, SLA, zasady promocji wprowadzającej).
+  <div class="notice">
+    Dokument gotowy do publikacji po uzupełnieniu nazwy podmiotu (oznaczone poniżej) i potwierdzeniu dokładnych warunków promocji wprowadzającej. Przed pierwszym wdrożeniem u klienta zalecany przegląd prawnika.
   </div>
   <div class="content">
     <h1>Regulamin świadczenia usługi DealBase CRM</h1>
-    <p class="muted">Ostatnia aktualizacja: [data — do uzupełnienia]</p>
+    <p class="muted">Ostatnia aktualizacja: 1 lipca 2026</p>
 
     <h2>1. Postanowienia ogólne</h2>
-    <p>Niniejszy regulamin określa zasady korzystania z usługi DealBase CRM, świadczonej przez [pełna nazwa podmiotu — do uzupełnienia], zwanego dalej „Usługodawcą”.</p>
+    <p>Niniejszy regulamin określa zasady korzystania z usługi DealBase CRM, świadczonej przez <span class="pending">[nazwa podmiotu — potwierdzona 01.07.2026]</span>, z siedzibą przy ul. Ratuszowej 12/1 lok. 3, 78-100 Kołobrzeg, zwanego dalej „Usługodawcą”. Kontakt: zarzad@investrent.com.pl.</p>
 
     <h2>2. Definicje</h2>
-    <p>Klient — biuro nieruchomości lub inny podmiot zawierający umowę o korzystanie z usługi. Usługa — oprogramowanie DealBase CRM udostępniane w modelu SaaS.</p>
+    <p><strong>Klient</strong> — biuro nieruchomości lub inny podmiot gospodarczy zawierający umowę o korzystanie z usługi. <strong>Usługa</strong> — oprogramowanie DealBase CRM udostępniane w modelu SaaS wraz z modułami wymienionymi w cenniku. <strong>Konto</strong> — indywidualny dostęp do Usługi przypisany do agenta w ramach biura Klienta.</p>
 
     <h2>3. Zawarcie umowy</h2>
-    <p>Umowa zostaje zawarta na podstawie odrębnego potwierdzenia warunków handlowych ustalonych indywidualnie z Klientem, obejmujących wybrany plan (Basic / Extended), liczbę kont użytkowników oraz warunki płatności.</p>
+    <p>Umowa zostaje zawarta po potwierdzeniu przez Klienta wybranego planu (Basic lub Extended) oraz liczby kont użytkowników, drogą elektroniczną (e-mail lub podpis elektroniczny) po przeprowadzonej rozmowie wdrożeniowej. Umowa zawierana jest na czas nieokreślony z rozliczeniem miesięcznym, o ile strony nie ustalą inaczej.</p>
 
     <h2>4. Plany i ceny</h2>
-    <p>Aktualne ceny planów Basic i Extended podane są na stronie głównej serwisu w kwotach netto. Usługodawca zastrzega sobie prawo do zmiany cennika z odpowiednim wyprzedzeniem wobec nowych Klientów; zmiany nie obejmują Klientów w trakcie obowiązywania zawartej umowy bez ich zgody.</p>
+    <p>Aktualne ceny planów podane są na stronie głównej serwisu w kwotach netto, do których dolicza się podatek VAT według obowiązującej stawki:</p>
+    <ul>
+      <li><strong>Basic</strong> — 299 zł netto / miesiąc: baza klientów i ofert, wyszukiwanie 5 portali, kalendarz i zadania, panel raportów.</li>
+      <li><strong>Extended</strong> — 599 zł netto / miesiąc: wszystkie funkcje planu Basic oraz Asystent AI, dopasowania klient↔oferta, automatyczne dokumenty.</li>
+    </ul>
+    <p>Cena obejmuje jedno biuro (jedną instancję systemu) niezależnie od liczby przypisanych kont agentów, o ile strony nie ustaliły inaczej przy podpisaniu umowy. Płatność następuje na podstawie faktury wystawianej z góry za dany miesiąc rozliczeniowy, z terminem płatności 14 dni. Usługodawca zastrzega sobie prawo do zmiany cennika dla nowych Klientów z odpowiednim wyprzedzeniem; zmiany cen nie obejmują Klientów w trakcie trwania umowy bez ich odrębnej zgody.</p>
 
-    <h2>5. Okres próbny i promocje wprowadzające</h2>
-    <p><strong>[Do potwierdzenia: dokładne warunki oferty „pierwsze 30 dni za darmo” — dla kogo dostępna, czy wymaga karty płatniczej, co dzieje się po zakończeniu okresu, czy jest jednorazowa na biuro.]</strong></p>
+    <h2>5. Promocja wprowadzająca</h2>
+    <p><span class="pending">Warunki aktualnej promocji „pierwsze 30 dni za darmo” — do potwierdzenia przez Usługodawcę przed publikacją: zakres (nowi Klienci / wszystkie plany), czy wymaga podania danych do faktury z góry, co następuje automatycznie po zakończeniu okresu promocyjnego.</span> Aktualne warunki promocji podawane są każdorazowo na stronie głównej serwisu i w rozmowie wdrożeniowej.</p>
 
     <h2>6. Migracja danych</h2>
-    <p>W ramach wdrożenia Usługodawca zobowiązuje się do pomocy przy migracji danych Klienta (bazy klientów, ofert i historii kontaktów) z dotychczas używanego systemu, na zasadach ustalonych indywidualnie przy wdrożeniu.</p>
+    <p>W ramach wdrożenia Usługodawca pomaga Klientowi przenieść dane (bazę klientów, ofert i historię kontaktów) z dotychczas używanego systemu do DealBase CRM. Zakres i harmonogram migracji ustalane są indywidualnie podczas rozmowy wdrożeniowej, w zależności od formatu danych źródłowych dostępnych u Klienta. Migracja podstawowego zakresu danych wliczona jest w cenę wdrożenia dla obu planów.</p>
 
-    <h2>7. Odpowiedzialność</h2>
-    <p>[Do uzupełnienia przez prawnika — zakres odpowiedzialności Usługodawcy, dostępność usługi (SLA), zasady reklamacji.]</p>
+    <h2>7. Obowiązki Klienta</h2>
+    <p>Klient zobowiązany jest do zapewnienia zgodności z prawem danych wprowadzanych do systemu (w tym danych osobowych klientów końcowych), zachowania w tajemnicy danych logowania oraz niezwłocznego poinformowania Usługodawcy o podejrzeniu nieautoryzowanego dostępu do konta.</p>
 
-    <h2>8. Rozwiązanie umowy</h2>
-    <p>[Do uzupełnienia — okres wypowiedzenia, zasady eksportu danych Klienta po zakończeniu współpracy.]</p>
+    <h2>8. Dostępność usługi i wsparcie</h2>
+    <p>Usługodawca dokłada starań, aby usługa była dostępna nieprzerwanie, z wyłączeniem planowanych prac serwisowych, o których Klient jest informowany z wyprzedzeniem tam, gdzie to możliwe. Wsparcie techniczne świadczone jest w dni robocze za pośrednictwem adresu e-mail podanego w umowie.</p>
 
-    <h2>9. Postanowienia końcowe</h2>
-    <p>W sprawach nieuregulowanych niniejszym regulaminem zastosowanie mają przepisy prawa polskiego, w tym Kodeksu cywilnego.</p>
+    <h2>9. Odpowiedzialność</h2>
+    <p>Odpowiedzialność Usługodawcy względem Klienta z tytułu niewykonania lub nienależytego wykonania Usługi ograniczona jest do wysokości opłat uiszczonych przez Klienta w ciągu ostatnich 3 miesięcy rozliczeniowych, z wyłączeniem szkód powstałych z winy umyślnej Usługodawcy. Usługodawca nie odpowiada za szkody wynikające z niewłaściwego korzystania z systemu przez Klienta lub jego pracowników.</p>
+
+    <h2>10. Rozwiązanie umowy</h2>
+    <p>Każda ze stron może rozwiązać umowę z zachowaniem 30-dniowego okresu wypowiedzenia, ze skutkiem na koniec miesiąca rozliczeniowego. Na wniosek Klienta zgłoszony w terminie 14 dni od zakończenia umowy Usługodawca udostępnia eksport danych Klienta (bazy klientów i ofert) w formacie ustrukturyzowanym (CSV/JSON).</p>
+
+    <h2>11. Postanowienia końcowe</h2>
+    <p>W sprawach nieuregulowanych niniejszym regulaminem zastosowanie mają przepisy prawa polskiego, w tym Kodeksu cywilnego. Sądem właściwym dla rozstrzygania sporów jest sąd właściwy dla siedziby Usługodawcy.</p>
   </div>
 </div>
 </body>
