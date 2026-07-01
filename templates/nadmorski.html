@@ -7,7 +7,7 @@
 <title>Szablon: Nadmorski — przykładowa strona biura nieruchomości</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{ --sand:#F5EFE3; --sea:#2B6E6B; --sun:#E0954B; --ink:#20302C; --muted:#6B7570; --border:#E3DACB; }
+  :root{ --sand:#F5EFE3; --sea:#2B6E6B; --sea-dark:#1B4F4D; --sun:#E0954B; --ink:#20302C; --muted:#6B7570; --border:#E3DACB; }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{ font-family:'Inter',sans-serif; color:var(--ink); background:var(--sand); line-height:1.6; }
   a{ color:inherit; text-decoration:none; }
@@ -22,9 +22,10 @@
   .btn-sea{ background:var(--sea); color:#fff; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:600; }
 
   .hero{ padding:50px 48px 0; max-width:1300px; margin:0 auto; }
-  .hero-ph{ height:460px; border-radius:22px; background:linear-gradient(160deg,#8FBDB8,#2B6E6B); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; text-transform:uppercase; position:relative; overflow:hidden; }
-  .hero-caption{ position:absolute; bottom:32px; left:32px; color:#fff; max-width:440px; }
-  .hero-caption .eyebrow{ font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.85; margin-bottom:8px; display:block; }
+  .hero-visual{ height:480px; border-radius:22px; position:relative; overflow:hidden; }
+  .hero-visual svg{ width:100%; height:100%; display:block; }
+  .hero-caption{ position:absolute; bottom:32px; left:32px; color:#fff; max-width:440px; z-index:2; }
+  .hero-caption .eyebrow{ font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.9; margin-bottom:8px; display:block; }
   .hero-caption h1{ font-size:32px; line-height:1.2; }
 
   .quick-search{ max-width:1300px; margin:-34px auto 0; padding:0 48px; position:relative; z-index:5; }
@@ -40,14 +41,26 @@
   .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
   @media(max-width:860px){ .grid{ grid-template-columns:1fr; } }
   .listing{ background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--border); }
-  .listing-img{ height:200px; background:linear-gradient(135deg,#E7DCC4,#D8C79E); display:flex; align-items:center; justify-content:center; color:#8A7A54; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  .listing-img{ height:210px; position:relative; }
+  .listing-img svg{ width:100%; height:100%; display:block; }
   .listing-info{ padding:20px; }
   .listing-price{ font-family:'Fraunces',serif; font-size:21px; }
   .listing-loc{ color:var(--muted); font-size:13.5px; margin:4px 0 12px; }
   .listing-meta{ display:flex; gap:12px; font-size:12.5px; color:var(--muted); }
 
-  .regions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .map-section{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  @media(max-width:860px){ .map-section{ grid-template-columns:1fr; } }
+  .map-visual{ height:360px; border-radius:20px; overflow:hidden; }
+  .map-visual svg{ width:100%; height:100%; display:block; }
+  .regions{ display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; }
   .region-pill{ background:#fff; border:1px solid var(--border); border-radius:100px; padding:10px 20px; font-size:13.5px; font-weight:600; }
+
+  .testimonial-card{ background:#fff; border-radius:20px; padding:48px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:center; border:1px solid var(--border); }
+  @media(max-width:700px){ .testimonial-card{ grid-template-columns:1fr; } }
+  .testimonial-avatar{ width:64px; height:64px; border-radius:50%; overflow:hidden; }
+  .testimonial-avatar svg{ width:100%; height:100%; display:block; }
+  .testimonial-card p{ font-family:'Fraunces',serif; font-size:20px; color:var(--ink); }
+  .testimonial-card span{ color:var(--muted); font-size:13px; display:block; margin-top:10px; }
 
   footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
 </style>
@@ -67,7 +80,24 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-ph">
+  <div class="hero-visual">
+    <svg viewBox="0 0 1300 480" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="skyC" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E8D9B8"/>
+          <stop offset="60%" stop-color="#8FBDB8"/>
+          <stop offset="100%" stop-color="#2B6E6B"/>
+        </linearGradient>
+      </defs>
+      <rect width="1300" height="480" fill="url(#skyC)"/>
+      <circle cx="1080" cy="120" r="70" fill="#F5EFE3" opacity="0.8"/>
+      <path d="M0,300 Q325,260 650,300 T1300,300 V480 H0 Z" fill="#1B4F4D" opacity="0.9"/>
+      <path d="M0,340 Q325,300 650,340 T1300,340 V480 H0 Z" fill="#2B6E6B"/>
+      <path d="M0,380 Q325,350 650,380 T1300,380 V480 H0 Z" fill="#3A8A85" opacity="0.8"/>
+      <rect x="180" y="220" width="30" height="80" fill="#20302C" opacity="0.5"/>
+      <rect x="900" y="240" width="24" height="60" fill="#20302C" opacity="0.4"/>
+      <rect x="0" y="0" width="1300" height="480" fill="#000" opacity="0.15"/>
+    </svg>
     <div class="hero-caption">
       <span class="eyebrow">Kołobrzeg i okolice</span>
       <h1>Życie bliżej morza zaczyna się od dobrego adresu</h1>
@@ -91,7 +121,15 @@
   </div>
   <div class="grid">
     <div class="listing">
-      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-img">
+        <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EFE3C8"/><stop offset="100%" stop-color="#D8C79E"/></linearGradient></defs>
+          <rect width="400" height="210" fill="url(#c1)"/>
+          <path d="M0,150 Q100,130 200,150 T400,150 V210 H0 Z" fill="#8FBDB8"/>
+          <rect x="140" y="70" width="120" height="80" rx="6" fill="#F5EFE3"/>
+          <rect x="160" y="90" width="20" height="20" fill="#E0954B" opacity="0.6"/><rect x="220" y="90" width="20" height="20" fill="#2B6E6B" opacity="0.5"/>
+        </svg>
+      </div>
       <div class="listing-info">
         <div class="listing-price">890 000 zł</div>
         <div class="listing-loc">Apartament, Sianożęty — 300 m od plaży</div>
@@ -99,7 +137,15 @@
       </div>
     </div>
     <div class="listing">
-      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-img">
+        <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E4EEE0"/><stop offset="100%" stop-color="#B8CDA8"/></linearGradient></defs>
+          <rect width="400" height="210" fill="url(#c2)"/>
+          <rect x="100" y="80" width="200" height="100" fill="#3A8A85" opacity="0.85"/>
+          <polygon points="100,80 200,30 300,80" fill="#1B4F4D"/>
+          <rect x="180" y="120" width="40" height="60" fill="#F5EFE3"/>
+        </svg>
+      </div>
       <div class="listing-info">
         <div class="listing-price">1 450 000 zł</div>
         <div class="listing-loc">Dom, Ustronie Morskie</div>
@@ -107,7 +153,15 @@
       </div>
     </div>
     <div class="listing">
-      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-img">
+        <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="c3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F0E8D4"/><stop offset="100%" stop-color="#DCCBA0"/></linearGradient></defs>
+          <rect width="400" height="210" fill="url(#c3)"/>
+          <rect x="70" y="90" width="260" height="90" fill="#E0954B" opacity="0.3"/>
+          <rect x="120" y="60" width="60" height="120" fill="#8A7A54"/>
+          <rect x="220" y="90" width="60" height="90" fill="#6B5F3E"/>
+        </svg>
+      </div>
       <div class="listing-info">
         <div class="listing-price">620 000 zł</div>
         <div class="listing-loc">Mieszkanie, Kołobrzeg-Radzikowo</div>
@@ -118,21 +172,44 @@
 </section>
 
 <section class="section" style="padding-top:0;">
-  <div class="section-head">
-    <span class="eyebrow">Obszar działania</span>
-    <h2>Znamy każdą z tych lokalizacji od podszewki</h2>
+  <div class="map-section">
+    <div>
+      <span class="eyebrow" style="color:var(--sea); font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:10px;">Obszar działania</span>
+      <h2>Znamy każdą z tych lokalizacji od podszewki</h2>
+      <div class="regions">
+        <span class="region-pill">Kołobrzeg</span>
+        <span class="region-pill">Ustronie Morskie</span>
+        <span class="region-pill">Sianożęty</span>
+        <span class="region-pill">Dźwirzyno</span>
+        <span class="region-pill">Podczele</span>
+      </div>
+    </div>
+    <div class="map-visual">
+      <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice">
+        <rect width="600" height="360" fill="#EFE9DC"/>
+        <path d="M0,60 Q150,20 300,60 T600,60 V0 H0 Z" fill="#8FBDB8"/>
+        <circle cx="180" cy="140" r="8" fill="#E0954B"/>
+        <circle cx="300" cy="200" r="8" fill="#2B6E6B"/>
+        <circle cx="420" cy="150" r="8" fill="#E0954B"/>
+        <circle cx="250" cy="260" r="8" fill="#2B6E6B"/>
+        <path d="M180,140 L300,200 L420,150 M300,200 L250,260" stroke="#8A7A54" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+      </svg>
+    </div>
   </div>
-  <div class="regions">
-    <span class="region-pill">Kołobrzeg</span>
-    <span class="region-pill">Ustronie Morskie</span>
-    <span class="region-pill">Sianożęty</span>
-    <span class="region-pill">Dźwirzyno</span>
-    <span class="region-pill">Podczele</span>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="testimonial-card">
+    <div class="testimonial-avatar"><svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#2B6E6B"/><circle cx="32" cy="26" r="12" fill="#F5EFE3"/></svg></div>
+    <div>
+      <p>Kupiliśmy apartament bez wychodzenia z domu — wszystko pokazane na wideo, dokumenty przygotowane zawczasu.</p>
+      <span>— Klienci z Warszawy, apartament wakacyjny w Sianożętach</span>
+    </div>
   </div>
 </section>
 
 <footer>
-  Wybrzeże Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Zdjęcia i dane zastępcze.
+  Wybrzeże Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Grafiki ilustracyjne, do zastąpienia własnymi zdjęciami.
 </footer>
 </body>
 </html>
