@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Szablon: Nowoczesny — przykładowa strona biura nieruchomości</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#111214; --lime:#C4F542; --gray:#6B6E76; --border:#E9E9EB; --bg:#FFFFFF; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ font-family:'Inter',sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.01em; }
+
+  .demo-tag{ position:fixed; top:14px; left:14px; z-index:99; background:var(--ink); color:#fff; font-size:11px; font-weight:600; padding:6px 12px; border-radius:100px; letter-spacing:0.5px; }
+
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:24px 48px; }
+  .logo{ font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; }
+  .nav-links{ display:flex; gap:30px; font-size:14px; font-weight:500; }
+  @media(max-width:760px){ .nav-links{ display:none; } }
+  .btn-lime{ background:var(--ink); color:var(--lime); padding:11px 22px; border-radius:100px; font-size:13.5px; font-weight:600; }
+
+  .hero{ padding:60px 48px 0; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; max-width:1300px; margin:0 auto; }
+  @media(max-width:860px){ .hero{ grid-template-columns:1fr; } }
+  .hero h1{ font-size:clamp(32px,4.5vw,52px); line-height:1.05; }
+  .hero h1 .hl{ background:var(--lime); padding:0 6px; }
+  .hero p{ color:var(--gray); margin-top:20px; max-width:420px; font-size:16px; }
+  .hero-actions{ display:flex; gap:12px; margin-top:28px; }
+  .btn-outline{ border:1.5px solid var(--ink); padding:11px 22px; border-radius:100px; font-size:13.5px; font-weight:600; }
+  .hero-ph{ height:420px; background:linear-gradient(135deg,#EDEDF0,#DADCE0); border-radius:20px; display:flex; align-items:center; justify-content:center; color:#9A9CA3; font-size:13px; letter-spacing:0.5px; text-transform:uppercase; }
+
+  .stats-strip{ display:flex; gap:0; max-width:1300px; margin:70px auto 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .stat{ flex:1; padding:26px 48px; border-right:1px solid var(--border); }
+  .stat:last-child{ border-right:none; }
+  .stat-num{ font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; }
+  .stat-label{ font-size:12.5px; color:var(--gray); margin-top:2px; }
+
+  .section{ padding:80px 48px; max-width:1300px; margin:0 auto; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px; }
+  .section-head h2{ font-size:30px; }
+  .section-head p{ color:var(--gray); font-size:14.5px; max-width:340px; }
+
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media(max-width:860px){ .grid{ grid-template-columns:1fr; } }
+  .listing{ border:1px solid var(--border); border-radius:18px; overflow:hidden; transition:transform 0.2s ease; }
+  .listing:hover{ transform:translateY(-3px); }
+  .listing-img{ height:190px; background:linear-gradient(135deg,#EAF7C8,#CFE89B); display:flex; align-items:center; justify-content:center; color:#5B6B2E; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  .listing-info{ padding:20px; }
+  .listing-price{ font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; }
+  .listing-loc{ color:var(--gray); font-size:13.5px; margin:4px 0 12px; }
+  .listing-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{ background:#F3F3F5; font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:100px; }
+
+  footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--gray); }
+</style>
+</head>
+<body>
+<span class="demo-tag">Szablon DealBase — Nowoczesny</span>
+
+<nav>
+  <div class="logo">Nexo Nieruchomości</div>
+  <div class="nav-links">
+    <a href="#">Oferty</a>
+    <a href="#">Jak działamy</a>
+    <a href="#">Zespół</a>
+    <a href="#">Kontakt</a>
+  </div>
+  <a href="#" class="btn-lime">Zgłoś nieruchomość</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>Znajdź mieszkanie, <span class="hl">nie stres</span></h1>
+    <p>Przejrzysty proces, aktualna baza ofert i agenci, którzy odpowiadają tego samego dnia.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-lime">Zobacz oferty</a>
+      <a href="#" class="btn-outline">Jak to działa</a>
+    </div>
+  </div>
+  <div class="hero-ph">Zdjęcie / grafika hero — do podmiany</div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat"><div class="stat-num">180+</div><div class="stat-label">zamknięte transakcje</div></div>
+  <div class="stat"><div class="stat-num">4.9/5</div><div class="stat-label">ocena klientów</div></div>
+  <div class="stat"><div class="stat-num">24h</div><div class="stat-label">średni czas odpowiedzi</div></div>
+</div>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Aktualne oferty</h2>
+    <p>Baza aktualizowana codziennie, prosto z naszego systemu ofertowego.</p>
+  </div>
+  <div class="grid">
+    <div class="listing">
+      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-info">
+        <div class="listing-price">620 000 zł</div>
+        <div class="listing-loc">Mieszkanie, Lechitów</div>
+        <div class="listing-tags"><span class="tag">3 pok</span><span class="tag">61 m²</span><span class="tag">Balkon</span></div>
+      </div>
+    </div>
+    <div class="listing">
+      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-info">
+        <div class="listing-price">445 000 zł</div>
+        <div class="listing-loc">Mieszkanie, Podczele</div>
+        <div class="listing-tags"><span class="tag">2 pok</span><span class="tag">48 m²</span><span class="tag">Winda</span></div>
+      </div>
+    </div>
+    <div class="listing">
+      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-info">
+        <div class="listing-price">1 120 000 zł</div>
+        <div class="listing-loc">Dom, Ustronie Morskie</div>
+        <div class="listing-tags"><span class="tag">Dom</span><span class="tag">160 m²</span><span class="tag">Garaż</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Nexo Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Zdjęcia i dane zastępcze.
+</footer>
+</body>
+</html>
