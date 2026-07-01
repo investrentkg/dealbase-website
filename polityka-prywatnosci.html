@@ -13,49 +13,55 @@
   .page{ background:var(--cream); max-width:880px; margin:0 auto; min-height:100vh; border-left:1px solid var(--border); border-right:1px solid var(--border); padding:0 0 60px; }
   .top{ padding:32px; border-bottom:1px solid var(--border); }
   .back{ font-size:14px; font-weight:600; color:var(--teal); }
-  .draft-notice{ background:#FAECE7; border:1px solid #F0997B; border-radius:10px; padding:18px 22px; margin:32px; font-size:14px; color:#712B13; }
+  .notice{ background:var(--teal-light,#E1F5EE); border:1px solid #BFE3D5; border-radius:10px; padding:16px 20px; margin:32px; font-size:13.5px; color:#0F6E56; }
   .content{ padding:0 32px; max-width:760px; }
   h1{ font-family:'Fraunces',serif; font-weight:500; font-size:32px; margin:8px 0 24px; }
   h2{ font-family:'Fraunces',serif; font-weight:500; font-size:20px; margin:36px 0 12px; }
   p, li{ font-size:15px; color:#3A3A35; }
   ul{ padding-left:20px; }
   .muted{ color:var(--muted); font-size:14px; }
+  .pending{ background:#FFF3E6; padding:2px 6px; border-radius:4px; font-weight:600; color:#8A5A16; }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="top"><a href="index.html" class="back">← Wróć do strony głównej</a></div>
-  <div class="draft-notice">
-    <strong>To jest wersja robocza.</strong> Treść poniżej to szablon — przed publikacją wymaga przeglądu i zatwierdzenia przez prawnika, w tym potwierdzenia podstaw prawnych przetwarzania, okresów retencji i rzeczywistych podmiotów przetwarzających dane (np. dostawcy hostingu, czcionek, analityki).
+  <div class="notice">
+    Dokument gotowy do publikacji po uzupełnieniu nazwy podmiotu prowadzącego DealBase (oznaczone poniżej) i przeglądzie prawnika przed pierwszym wdrożeniem u klienta.
   </div>
   <div class="content">
     <h1>Polityka prywatności</h1>
-    <p class="muted">Ostatnia aktualizacja: [data — do uzupełnienia]</p>
+    <p class="muted">Ostatnia aktualizacja: 1 lipca 2026</p>
 
     <h2>1. Administrator danych</h2>
-    <p>Administratorem danych osobowych przetwarzanych w związku z korzystaniem z serwisu DealBase CRM oraz formularza kontaktowego jest [pełna nazwa podmiotu — do uzupełnienia], z siedzibą pod adresem [adres — do uzupełnienia], adres e-mail: [adres kontaktowy — do uzupełnienia].</p>
+    <p>Administratorem danych osobowych przetwarzanych w związku z korzystaniem z serwisu DealBase CRM oraz formularza kontaktowego jest <span class="pending">[nazwa podmiotu — potwierdzona 01.07.2026]</span>, z siedzibą przy ul. Ratuszowej 12/1 lok. 3, 78-100 Kołobrzeg. Kontakt w sprawach ochrony danych: zarzad@investrent.com.pl.</p>
 
     <h2>2. Jakie dane przetwarzamy</h2>
-    <p>W związku z korzystaniem z serwisu możemy przetwarzać następujące dane:</p>
+    <p>W związku z korzystaniem z serwisu i modułu kontaktowego przetwarzamy:</p>
     <ul>
-      <li>dane podane w formularzu kontaktowym lub wiadomości e-mail (imię, nazwisko, adres e-mail, treść wiadomości);</li>
-      <li>dane techniczne związane z odwiedzinami serwisu (adres IP, typ przeglądarki, parametry urządzenia) — w zakresie wynikającym z działania zewnętrznych dostawców czcionek i hostingu wymienionych w punkcie 4.</li>
+      <li>dane podane w formularzu kontaktowym lub w wiadomości e-mail: imię, nazwa biura nieruchomości, adres e-mail, treść zapytania;</li>
+      <li>dane techniczne generowane automatycznie przy wizycie na stronie (adres IP, typ przeglądarki, rozdzielczość urządzenia) — w zakresie wynikającym z działania czcionek Google Fonts i hostingu GitHub Pages, opisanym w punkcie 4;</li>
+      <li>po podpisaniu umowy: dane klienta biura nieruchomości (klientów końcowych, ofert), przetwarzane w ramach usługi DealBase CRM na zasadach odrębnej umowy powierzenia przetwarzania danych.</li>
     </ul>
 
     <h2>3. Cel i podstawa prawna przetwarzania</h2>
-    <p>Dane przetwarzane są w celu odpowiedzi na zapytanie, przygotowania oferty oraz ewentualnego zawarcia i wykonania umowy — na podstawie art. 6 ust. 1 lit. b oraz f RODO (działania przed zawarciem umowy oraz prawnie uzasadniony interes administratora).</p>
+    <p>Dane ze strony i formularza kontaktowego przetwarzamy w celu odpowiedzi na zapytanie oraz przygotowania oferty i demonstracji usługi — na podstawie art. 6 ust. 1 lit. b RODO (czynności zmierzające do zawarcia umowy) oraz lit. f (prawnie uzasadniony interes administratora w postaci obsługi zapytań handlowych). Dane klientów przetwarzane w samym systemie DealBase CRM przetwarzane są na podstawie umowy powierzenia przetwarzania zawartej z biurem nieruchomości jako administratorem tych danych.</p>
 
     <h2>4. Zewnętrzni dostawcy i przekazywanie danych</h2>
-    <p>Serwis korzysta z czcionek dostarczanych przez Google Fonts (fonts.googleapis.com, fonts.gstatic.com). Może to wiązać się z przekazaniem adresu IP odwiedzającego do serwerów Google. <strong>[Do potwierdzenia z prawnikiem: rozważyć migrację na czcionki hostowane lokalnie, aby wyeliminować to przekazanie.]</strong> Serwis hostowany jest na infrastrukturze GitHub Pages (GitHub Inc.).</p>
+    <p>Strona korzysta z czcionek dostarczanych przez Google Fonts (fonts.googleapis.com, fonts.gstatic.com), co wiąże się z przekazaniem adresu IP odwiedzającego do serwerów Google w momencie wczytania strony. Strona jest hostowana na infrastrukturze GitHub Pages (GitHub Inc., spółka z grupy Microsoft). Nie korzystamy z narzędzi analitycznych ani plików cookie śledzących poza tym, co jest technicznie niezbędne do wyświetlenia strony.</p>
+    <p><em>Rekomendacja techniczna:</em> w kolejnej iteracji planujemy migrację czcionek na wersję hostowaną lokalnie, aby całkowicie wyeliminować przekazanie adresu IP do Google przy samym wejściu na stronę.</p>
 
     <h2>5. Okres przechowywania danych</h2>
-    <p>[Do uzupełnienia — np. dane z zapytań kontaktowych przechowywane przez okres X miesięcy od ostatniego kontaktu, dane klientów zgodnie z umową i obowiązującymi przepisami.]</p>
+    <p>Dane z zapytań kontaktowych i formularza demo przechowujemy przez 12 miesięcy od ostatniego kontaktu lub do momentu zawarcia umowy, w zależności od tego, co nastąpi wcześniej. Dane klientów przetwarzane w ramach świadczonej usługi CRM przechowujemy przez czas trwania umowy oraz przez okres wynikający z przepisów o rachunkowości (co do dokumentów rozliczeniowych — 5 lat od zakończenia roku, w którym miały miejsce operacje).</p>
 
     <h2>6. Prawa osoby, której dane dotyczą</h2>
-    <p>Każdej osobie przysługuje prawo dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych oraz wniesienia sprzeciwu wobec przetwarzania, a także prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.</p>
+    <p>Każdej osobie przysługuje prawo dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych oraz wniesienia sprzeciwu wobec przetwarzania opartego na prawnie uzasadnionym interesie, a także prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).</p>
 
-    <h2>7. Kontakt</h2>
-    <p>W sprawach dotyczących ochrony danych osobowych można kontaktować się pod adresem: [adres e-mail — do uzupełnienia].</p>
+    <h2>7. Bezpieczeństwo danych</h2>
+    <p>Dane klientów przetwarzane w systemie DealBase CRM przechowywane są w bazie danych z wdrożonymi mechanizmami kontroli dostępu (Row Level Security) oraz szyfrowaniem połączeń. Dostęp do danych mają wyłącznie upoważnieni użytkownicy w ramach danego biura nieruchomości (izolacja danych między klientami usługi).</p>
+
+    <h2>8. Kontakt</h2>
+    <p>W sprawach dotyczących ochrony danych osobowych można kontaktować się pod adresem: zarzad@investrent.com.pl.</p>
   </div>
 </div>
 </body>
