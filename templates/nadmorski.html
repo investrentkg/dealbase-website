@@ -150,6 +150,25 @@
   .form-success.show{ display:block; }
 
   footer{ padding:40px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
+
+  .about-split{ display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center; background:#fff; border:1px solid var(--border); border-radius:14px; padding:32px; }
+  @media(max-width:780px){ .about-split{ grid-template-columns:1fr; } }
+  .ab-stats{ display:grid; grid-template-columns:1fr; gap:14px; }
+  .ab-stat{ border-left:2px solid var(--sun); padding-left:14px; }
+  .ab-stat-num{ font-size:22px; font-weight:700; }
+  .ab-stat-label{ font-size:12px; color:var(--muted); margin-top:2px; }
+  .why-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media(max-width:700px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-item{ background:#fff; border:1px solid var(--border); border-radius:12px; padding:22px; }
+  .why-num{ font-size:12px; font-weight:700; color:var(--sun); margin-bottom:8px; letter-spacing:1px; }
+  .why-item h3{ font-size:16px; margin-bottom:6px; }
+  .why-item p{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+  .testimonial-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:700px){ .testimonial-grid{ grid-template-columns:1fr; } }
+  .testimonial-card{ background:#fff; border:1px solid var(--border); border-radius:12px; padding:26px; }
+  .tq{ font-size:34px; color:var(--sun); line-height:1; margin-bottom:6px; font-family:serif; }
+  .testimonial-card p{ font-size:14px; line-height:1.6; margin-bottom:12px; }
+  .testimonial-card span{ font-size:12.5px; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -209,7 +228,31 @@
     <div class="view-all-link"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
   </div>
 
+  
   <div class="section reveal-inline">
+    <div class="about-split">
+      <div>
+        <h2 style="font-size:26px; margin-bottom:14px;">Wybrzeże Nieruchomości — znamy to wybrzeże od podszewki</h2>
+        <p style="color:var(--muted); font-size:14.5px; line-height:1.7; max-width:520px;">Od 12 lat pracujemy wyłącznie w pasie nadmorskim — Kołobrzeg, Ustronie Morskie, Sianożęty, Mielno, Dźwirzyno. Znamy różnicę między działką 300 metrów od plaży a 800 metrów, wiemy które budynki mają problem z dostępem do wody w sezonie, i które lokalizacje trzymają wartość, a które są tylko sezonową modą.</p>
+      </div>
+      <div class="ab-stats"><div class="ab-stat"><div class="ab-stat-num">12 lat</div><div class="ab-stat-label">wyłącznie na wybrzeżu</div></div><div class="ab-stat"><div class="ab-stat-num">220+</div><div class="ab-stat-label">ofert w regionie</div></div><div class="ab-stat"><div class="ab-stat-num">5</div><div class="ab-stat-label">obsługiwanych miejscowości</div></div></div>
+    </div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Dlaczego my</h2>
+    </div>
+    <div class="why-grid"><div class="why-item"><div class="why-num">01</div><h3>Znajomość regionu, nie ogólników</h3><p>Każdy agent mieszka i pracuje w regionie, który obsługuje — nie uczy się go z mapy.</p></div><div class="why-item"><div class="why-num">02</div><h3>Specjalizacja w wynajmie sezonowym</h3><p>Pomagamy oszacować realny potencjał wynajmu wakacyjnego przed zakupem, nie po.</p></div><div class="why-item"><div class="why-num">03</div><h3>Obsługa klientów zdalnych</h3><p>Większość naszych klientów kupuje z innych miast — prezentacje wideo i pełna dokumentacja zdalna to standard.</p></div><div class="why-item"><div class="why-num">04</div><h3>Sieć lokalnych kontaktów</h3><p>Zarządcy, ekipy remontowe, notariusze znający specyfikę nieruchomości wypoczynkowych — mamy sprawdzonych ludzi na miejscu.</p></div></div>
+  </div>
+
+  <div class="section reveal-inline" style="padding-top:0;">
+    <div class="section-head">
+      <h2 style="font-size:26px;">Co mówią klienci</h2>
+    </div>
+    <div class="testimonial-grid"><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Kupiliśmy apartament w Sianożętach bez jednej wizyty na miejscu przed podpisaniem — wszystko pokazane na wideo, uczciwie i bez naciągania.</p><span>&mdash; Klienci z Warszawy, apartament wakacyjny</span></div><div class="testimonial-card"><div class="tq">&ldquo;</div><p>Dzięki dobrej znajomości lokalnego rynku sprzedaliśmy dom w Dźwirzynie szybciej niż wynajmowaliśmy go poprzedniego lata.</p><span>&mdash; Klient, sprzedaż domu w Dźwirzynie</span></div></div>
+  </div>
+<div class="section reveal-inline">
     <div class="section-head">
       <h2 style="font-size:26px;">Ludzie, z którymi rozmawiasz</h2>
       <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
