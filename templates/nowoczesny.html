@@ -7,7 +7,7 @@
 <title>Szablon: Nowoczesny — przykładowa strona biura nieruchomości</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#111214; --lime:#C4F542; --gray:#6B6E76; --border:#E9E9EB; --bg:#FFFFFF; }
+  :root{ --ink:#111214; --lime:#C4F542; --lime-dark:#8FB82E; --gray:#6B6E76; --border:#E9E9EB; --bg:#FFFFFF; }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{ font-family:'Inter',sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; }
   a{ color:inherit; text-decoration:none; }
@@ -21,14 +21,15 @@
   @media(max-width:760px){ .nav-links{ display:none; } }
   .btn-lime{ background:var(--ink); color:var(--lime); padding:11px 22px; border-radius:100px; font-size:13.5px; font-weight:600; }
 
-  .hero{ padding:60px 48px 0; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; max-width:1300px; margin:0 auto; }
+  .hero{ padding:50px 48px 0; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; max-width:1300px; margin:0 auto; }
   @media(max-width:860px){ .hero{ grid-template-columns:1fr; } }
   .hero h1{ font-size:clamp(32px,4.5vw,52px); line-height:1.05; }
   .hero h1 .hl{ background:var(--lime); padding:0 6px; }
   .hero p{ color:var(--gray); margin-top:20px; max-width:420px; font-size:16px; }
   .hero-actions{ display:flex; gap:12px; margin-top:28px; }
   .btn-outline{ border:1.5px solid var(--ink); padding:11px 22px; border-radius:100px; font-size:13.5px; font-weight:600; }
-  .hero-ph{ height:420px; background:linear-gradient(135deg,#EDEDF0,#DADCE0); border-radius:20px; display:flex; align-items:center; justify-content:center; color:#9A9CA3; font-size:13px; letter-spacing:0.5px; text-transform:uppercase; }
+  .hero-visual{ height:440px; border-radius:24px; overflow:hidden; position:relative; }
+  .hero-visual svg{ width:100%; height:100%; display:block; }
 
   .stats-strip{ display:flex; gap:0; max-width:1300px; margin:70px auto 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
   .stat{ flex:1; padding:26px 48px; border-right:1px solid var(--border); }
@@ -45,12 +46,30 @@
   @media(max-width:860px){ .grid{ grid-template-columns:1fr; } }
   .listing{ border:1px solid var(--border); border-radius:18px; overflow:hidden; transition:transform 0.2s ease; }
   .listing:hover{ transform:translateY(-3px); }
-  .listing-img{ height:190px; background:linear-gradient(135deg,#EAF7C8,#CFE89B); display:flex; align-items:center; justify-content:center; color:#5B6B2E; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  .listing-img{ height:200px; position:relative; }
+  .listing-img svg{ width:100%; height:100%; display:block; }
+  .listing-fav{ position:absolute; top:14px; right:14px; width:32px; height:32px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; }
   .listing-info{ padding:20px; }
   .listing-price{ font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; }
   .listing-loc{ color:var(--gray); font-size:13.5px; margin:4px 0 12px; }
   .listing-tags{ display:flex; gap:6px; flex-wrap:wrap; }
   .tag{ background:#F3F3F5; font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:100px; }
+
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
+  @media(max-width:860px){ .split{ grid-template-columns:1fr; } }
+  .split-visual{ height:340px; border-radius:20px; overflow:hidden; }
+  .split-visual svg{ width:100%; height:100%; display:block; }
+  .team-strip{ display:flex; gap:-10px; margin-top:20px; }
+  .team-avatar{ width:44px; height:44px; border-radius:50%; border:2px solid #fff; margin-left:-10px; overflow:hidden; }
+  .team-avatar:first-child{ margin-left:0; }
+  .team-avatar svg{ width:100%; height:100%; display:block; }
+
+  .testimonial-strip{ background:var(--ink); border-radius:24px; padding:56px; display:grid; grid-template-columns:auto 1fr; gap:30px; align-items:center; }
+  @media(max-width:700px){ .testimonial-strip{ grid-template-columns:1fr; } }
+  .testimonial-avatar{ width:64px; height:64px; border-radius:50%; overflow:hidden; }
+  .testimonial-avatar svg{ width:100%; height:100%; display:block; }
+  .testimonial-strip p{ color:#fff; font-size:19px; line-height:1.5; font-family:'Space Grotesk',sans-serif; font-weight:500; }
+  .testimonial-strip span{ color:var(--lime); font-size:13px; display:block; margin-top:10px; }
 
   footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--gray); }
 </style>
@@ -78,7 +97,26 @@
       <a href="#" class="btn-outline">Jak to działa</a>
     </div>
   </div>
-  <div class="hero-ph">Zdjęcie / grafika hero — do podmiany</div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EAF7C8"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs>
+      <rect width="600" height="440" fill="url(#mg1)"/>
+      <g fill="#111214" opacity="0.9">
+        <rect x="80" y="180" width="130" height="200" rx="10"/>
+        <polygon points="80,180 145,120 210,180" />
+        <rect x="330" y="140" width="160" height="240" rx="10"/>
+      </g>
+      <g fill="#FFFFFF">
+        <rect x="105" y="220" width="24" height="24" rx="4"/><rect x="160" y="220" width="24" height="24" rx="4"/>
+        <rect x="105" y="270" width="24" height="24" rx="4"/><rect x="160" y="270" width="24" height="24" rx="4"/>
+        <rect x="105" y="320" width="24" height="24" rx="4"/><rect x="160" y="320" width="24" height="24" rx="4"/>
+        <rect x="355" y="175" width="24" height="24" rx="4"/><rect x="405" y="175" width="24" height="24" rx="4"/><rect x="450" y="175" width="24" height="24" rx="4"/>
+        <rect x="355" y="225" width="24" height="24" rx="4"/><rect x="405" y="225" width="24" height="24" rx="4"/><rect x="450" y="225" width="24" height="24" rx="4"/>
+        <rect x="355" y="275" width="24" height="24" rx="4"/><rect x="405" y="275" width="24" height="24" rx="4"/><rect x="450" y="275" width="24" height="24" rx="4"/>
+      </g>
+      <rect x="0" y="380" width="600" height="60" fill="#111214" opacity="0.08"/>
+    </svg>
+  </div>
 </section>
 
 <div class="stats-strip">
@@ -94,7 +132,16 @@
   </div>
   <div class="grid">
     <div class="listing">
-      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-img">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="l1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#E8F5B8"/><stop offset="100%" stop-color="#CFE89B"/></linearGradient></defs>
+          <rect width="400" height="200" fill="url(#l1)"/>
+          <rect x="70" y="70" width="120" height="110" fill="#5B6B2E" opacity="0.85"/>
+          <polygon points="70,70 130,30 190,70" fill="#3F4A1F"/>
+          <rect x="230" y="90" width="100" height="90" fill="#5B6B2E" opacity="0.65"/>
+        </svg>
+        <div class="listing-fav">♥</div>
+      </div>
       <div class="listing-info">
         <div class="listing-price">620 000 zł</div>
         <div class="listing-loc">Mieszkanie, Lechitów</div>
@@ -102,7 +149,17 @@
       </div>
     </div>
     <div class="listing">
-      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-img">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="l2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F0F0F0"/><stop offset="100%" stop-color="#D8D8DC"/></linearGradient></defs>
+          <rect width="400" height="200" fill="url(#l2)"/>
+          <rect x="50" y="60" width="300" height="120" fill="#8A8C92"/>
+          <rect x="80" y="90" width="30" height="30" fill="#C4F542"/><rect x="130" y="90" width="30" height="30" fill="#F0F0F0"/>
+          <rect x="180" y="90" width="30" height="30" fill="#C4F542"/><rect x="230" y="90" width="30" height="30" fill="#F0F0F0"/>
+          <rect x="280" y="90" width="30" height="30" fill="#C4F542"/>
+        </svg>
+        <div class="listing-fav">♥</div>
+      </div>
       <div class="listing-info">
         <div class="listing-price">445 000 zł</div>
         <div class="listing-loc">Mieszkanie, Podczele</div>
@@ -110,7 +167,16 @@
       </div>
     </div>
     <div class="listing">
-      <div class="listing-img">Zdjęcie oferty</div>
+      <div class="listing-img">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="l3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DDEFC0"/><stop offset="100%" stop-color="#B8D888"/></linearGradient></defs>
+          <rect width="400" height="200" fill="url(#l3)"/>
+          <rect x="90" y="80" width="220" height="100" fill="#3F4A1F"/>
+          <polygon points="90,80 200,30 310,80" fill="#2C3316"/>
+          <rect x="180" y="120" width="40" height="60" fill="#8FB82E"/>
+        </svg>
+        <div class="listing-fav">♥</div>
+      </div>
       <div class="listing-info">
         <div class="listing-price">1 120 000 zł</div>
         <div class="listing-loc">Dom, Ustronie Morskie</div>
@@ -120,8 +186,42 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="split">
+    <div class="split-visual">
+      <svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="sv" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#2A2C30"/></linearGradient></defs>
+        <rect width="600" height="340" fill="url(#sv)"/>
+        <circle cx="150" cy="120" r="60" fill="#C4F542" opacity="0.9"/>
+        <circle cx="450" cy="220" r="90" fill="#8FB82E" opacity="0.4"/>
+        <rect x="250" y="150" width="140" height="140" rx="16" fill="#F0F0F0" opacity="0.9"/>
+      </svg>
+    </div>
+    <div>
+      <h2>Zespół, który odpowiada tego samego dnia</h2>
+      <p style="color:var(--gray); margin-top:16px; max-width:400px;">6 agentów, jedna baza ofert, zero przekazywania klienta między osobami bez kontekstu.</p>
+      <div class="team-strip">
+        <div class="team-avatar"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#C4F542"/><circle cx="22" cy="18" r="8" fill="#111214"/></svg></div>
+        <div class="team-avatar"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#8FB82E"/><circle cx="22" cy="18" r="8" fill="#111214"/></svg></div>
+        <div class="team-avatar"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#111214"/><circle cx="22" cy="18" r="8" fill="#C4F542"/></svg></div>
+        <div class="team-avatar"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#D8D8DC"/><circle cx="22" cy="18" r="8" fill="#111214"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="testimonial-strip">
+    <div class="testimonial-avatar"><svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#C4F542"/><circle cx="32" cy="26" r="12" fill="#111214"/></svg></div>
+    <div>
+      <p>Wysłałam zapytanie o 21:00, odpowiedź dostałam przed 9 rano. Zero czekania w niepewności.</p>
+      <span>— Klientka, wynajem mieszkania</span>
+    </div>
+  </div>
+</section>
+
 <footer>
-  Nexo Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Zdjęcia i dane zastępcze.
+  Nexo Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Grafiki ilustracyjne, do zastąpienia własnymi zdjęciami.
 </footer>
 </body>
 </html>
