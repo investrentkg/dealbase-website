@@ -9,247 +9,442 @@
 <style>
   :root{ --navy:#0D1F3C; --navy2:#16294A; --gold:#BF9A4A; --gold-light:#E4CD98; --cream:#F9F6F0; --muted:#6E6A5F; --border:#E4DFD1; }
   *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; }
   body{ font-family:'Inter',sans-serif; color:var(--navy); background:var(--cream); line-height:1.6; }
-  a{ color:inherit; text-decoration:none; }
+  a{ color:inherit; text-decoration:none; cursor:pointer; }
   h1,h2,h3{ font-family:'Playfair Display',serif; font-weight:600; }
+  button{ font-family:'Inter',sans-serif; cursor:pointer; }
 
   .demo-tag{ position:fixed; top:14px; left:14px; z-index:99; background:var(--navy); color:var(--cream); font-size:11px; font-weight:600; padding:6px 12px; border-radius:100px; letter-spacing:0.5px; }
 
-  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 48px; }
-  .logo{ font-family:'Playfair Display',serif; font-size:22px; font-weight:600; letter-spacing:0.5px; }
-  .nav-links{ display:flex; gap:36px; font-size:14px; letter-spacing:0.3px; }
-  .nav-links a{ border-bottom:1px solid transparent; padding-bottom:4px; }
-  .nav-links a:hover{ border-color:var(--gold); }
-  @media(max-width:760px){ .nav-links{ display:none; } }
-  .btn-gold{ display:inline-block; background:var(--gold); color:var(--navy); padding:14px 32px; font-size:14px; font-weight:600; letter-spacing:0.5px; }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:22px 48px; position:sticky; top:0; background:rgba(249,246,240,0.92); backdrop-filter:blur(8px); z-index:50; border-bottom:1px solid var(--border); }
+  .logo{ font-family:'Playfair Display',serif; font-size:21px; font-weight:600; letter-spacing:0.5px; }
+  .nav-links{ display:flex; gap:32px; font-size:14px; letter-spacing:0.3px; }
+  .nav-links a{ border-bottom:1px solid transparent; padding-bottom:4px; transition:border-color 0.15s ease, color 0.15s ease; }
+  .nav-links a:hover, .nav-links a.active{ border-color:var(--gold); }
+  @media(max-width:820px){ .nav-links{ display:none; } }
+  .btn-gold{ display:inline-block; background:var(--gold); color:var(--navy); padding:11px 24px; font-size:13.5px; font-weight:600; letter-spacing:0.5px; border:none; border-radius:2px; }
+  .hamburger{ display:none; width:36px; height:36px; border:1px solid var(--border); border-radius:6px; align-items:center; justify-content:center; background:none; }
+  @media(max-width:820px){ .hamburger{ display:flex; } }
+  .mobile-menu{ display:none; flex-direction:column; padding:8px 48px 18px; background:var(--cream); border-bottom:1px solid var(--border); }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{ padding:12px 0; border-bottom:1px solid var(--border); font-size:14.5px; }
+  .mobile-menu a:last-child{ border-bottom:none; }
 
+  .view{ display:none; }
+  .view.active{ display:block; animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
+
+  /* HOME */
   .hero{ position:relative; padding:70px 48px 0; text-align:center; }
   .eyebrow{ color:var(--gold); font-size:13px; letter-spacing:2px; text-transform:uppercase; font-weight:600; margin-bottom:18px; }
-  .hero h1{ font-size:46px; max-width:640px; margin:0 auto 18px; line-height:1.2; }
+  .hero h1{ font-size:clamp(30px,4.5vw,46px); max-width:640px; margin:0 auto 18px; line-height:1.2; }
   .hero p{ color:var(--muted); max-width:480px; margin:0 auto 30px; font-size:16px; }
-
-  .hero-visual{ width:100%; max-width:1000px; height:460px; margin:40px auto 0; border-radius:6px; overflow:hidden; position:relative; }
+  .hero-visual{ width:100%; max-width:1000px; height:min(460px,60vw); margin:40px auto 0; border-radius:6px; overflow:hidden; }
   .hero-visual svg{ width:100%; height:100%; display:block; }
 
-  .section{ padding:90px 48px; max-width:1200px; margin:0 auto; }
-  .section-head{ text-align:center; margin-bottom:56px; }
+  .section{ padding:80px 48px; max-width:1200px; margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:50px; }
   .section-head .eyebrow{ margin-bottom:10px; }
-  .section-head h2{ font-size:32px; }
+  .section-head h2{ font-size:30px; }
   .section-head p{ color:var(--muted); max-width:520px; margin:14px auto 0; }
 
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); border:1px solid var(--border); }
-  @media(max-width:800px){ .grid{ grid-template-columns:1fr; } }
-  .listing{ background:var(--cream); }
-  .listing-img{ height:230px; position:relative; overflow:hidden; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); border:1px solid var(--border); }
+  @media(max-width:900px){ .grid3{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:640px){ .grid3{ grid-template-columns:1fr; } }
+  .listing{ background:var(--cream); cursor:pointer; transition:background 0.15s ease; }
+  .listing:hover{ background:#FFFDF8; }
+  .listing-img{ height:210px; position:relative; overflow:hidden; }
   .listing-img svg{ width:100%; height:100%; display:block; }
-  .listing-badge{ position:absolute; top:16px; left:16px; background:var(--navy); color:var(--gold-light); font-size:10.5px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:5px 12px; border-radius:3px; }
-  .listing-info{ padding:26px; }
-  .listing-price{ font-family:'Playfair Display',serif; font-size:23px; margin-bottom:6px; }
-  .listing-loc{ color:var(--muted); font-size:13.5px; margin-bottom:14px; }
-  .listing-meta{ display:flex; gap:16px; font-size:12.5px; color:var(--muted); border-top:1px solid var(--border); padding-top:14px; }
+  .listing-badge{ position:absolute; top:14px; left:14px; background:var(--navy); color:var(--gold-light); font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:5px 11px; border-radius:3px; }
+  .listing-info{ padding:24px; }
+  .listing-price{ font-family:'Playfair Display',serif; font-size:21px; margin-bottom:6px; }
+  .listing-loc{ color:var(--muted); font-size:13px; margin-bottom:12px; }
+  .listing-meta{ display:flex; gap:14px; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .view-all-link{ text-align:center; margin-top:40px; }
+  .view-all-link a{ font-size:13.5px; font-weight:600; color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:3px; }
 
-  .about{ background:var(--navy); color:var(--cream); padding:100px 48px; text-align:center; position:relative; overflow:hidden; }
-  .about::before{ content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
-  .about .eyebrow{ color:var(--gold); }
-  .about h2{ font-size:32px; max-width:680px; margin:14px auto 20px; }
-  .about p{ color:rgba(249,246,240,0.65); max-width:560px; margin:0 auto; }
+  .about-band{ background:var(--navy); color:var(--cream); padding:90px 48px; text-align:center; }
+  .about-band .eyebrow{ color:var(--gold); }
+  .about-band h2{ font-size:28px; max-width:640px; margin:14px auto 20px; }
+  .about-band p{ color:rgba(249,246,240,0.65); max-width:520px; margin:0 auto; }
 
+  /* LISTINGS VIEW */
+  .listings-head{ padding:40px 48px 0; max-width:1200px; margin:0 auto; }
+  .filter-bar{ display:flex; gap:12px; flex-wrap:wrap; background:#fff; border:1px solid var(--border); border-radius:6px; padding:18px; margin:24px 0 36px; }
+  .filter-bar select, .filter-bar input{ border:1px solid var(--border); border-radius:4px; padding:10px 12px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--cream); flex:1; min-width:140px; }
+  .filter-count{ font-size:13px; color:var(--muted); margin-bottom:20px; }
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--muted); font-size:14px; }
+
+  /* OFFER DETAIL */
+  .detail-wrap{ max-width:1100px; margin:0 auto; padding:40px 48px 90px; }
+  .back-link{ font-size:13px; font-weight:600; color:var(--muted); margin-bottom:24px; display:inline-block; }
+  .back-link:hover{ color:var(--navy); }
+  .detail-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:44px; }
+  @media(max-width:860px){ .detail-grid{ grid-template-columns:1fr; } }
+  .gallery-main{ height:380px; border-radius:6px; overflow:hidden; margin-bottom:10px; }
+  .gallery-main svg{ width:100%; height:100%; display:block; }
+  .gallery-thumbs{ display:flex; gap:8px; }
+  .gallery-thumb{ width:70px; height:52px; border-radius:4px; overflow:hidden; cursor:pointer; border:2px solid transparent; opacity:0.6; transition:opacity 0.15s ease, border-color 0.15s ease; flex-shrink:0; }
+  .gallery-thumb.active{ opacity:1; border-color:var(--gold); }
+  .gallery-thumb svg{ width:100%; height:100%; display:block; }
+  .detail-title{ font-size:26px; margin:28px 0 8px; }
+  .detail-loc{ color:var(--muted); font-size:14px; margin-bottom:20px; }
+  .detail-desc{ font-size:14.5px; color:#4A473F; line-height:1.7; }
+  .side-card{ background:#fff; border:1px solid var(--border); border-radius:6px; padding:28px; }
+  .side-price{ font-family:'Playfair Display',serif; font-size:28px; margin-bottom:18px; }
+  .side-specs{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
+  .spec-item{ font-size:13px; }
+  .spec-label{ color:var(--muted); font-size:11.5px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
+  .agent-mini{ display:flex; gap:12px; align-items:center; border-top:1px solid var(--border); padding-top:20px; margin-top:20px; }
+  .agent-mini-photo{ width:48px; height:48px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+  .agent-mini-photo svg{ width:100%; height:100%; display:block; }
+  .agent-mini-name{ font-size:13.5px; font-weight:600; }
+  .agent-mini-role{ font-size:11.5px; color:var(--muted); }
+  .similar-strip{ margin-top:60px; }
+
+  /* TEAM VIEW */
+  .team-hero{ padding:60px 48px 0; text-align:center; max-width:700px; margin:0 auto; }
   .team{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; }
-  @media(max-width:800px){ .team{ grid-template-columns:1fr; } }
+  @media(max-width:820px){ .team{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:600px){ .team{ grid-template-columns:1fr; } }
   .agent-card{ text-align:center; }
   .agent-photo{ width:120px; height:120px; margin:0 auto 18px; border-radius:50%; overflow:hidden; border:2px solid var(--gold-light); }
   .agent-photo svg{ width:100%; height:100%; display:block; }
   .agent-name{ font-family:'Playfair Display',serif; font-size:18px; margin-bottom:4px; }
-  .agent-role{ color:var(--gold); font-size:12.5px; letter-spacing:1px; text-transform:uppercase; font-weight:600; margin-bottom:10px; }
+  .agent-role{ color:var(--gold); font-size:12px; letter-spacing:1px; text-transform:uppercase; font-weight:600; margin-bottom:10px; }
   .agent-bio{ color:var(--muted); font-size:13.5px; max-width:260px; margin:0 auto; }
 
-  .testimonial{ background:var(--cream); border:1px solid var(--border); border-radius:4px; padding:56px; text-align:center; max-width:760px; margin:0 auto; position:relative; }
-  .testimonial-mark{ font-family:'Playfair Display',serif; font-size:64px; color:var(--gold-light); line-height:1; margin-bottom:10px; }
-  .testimonial-text{ font-family:'Playfair Display',serif; font-size:21px; line-height:1.5; color:var(--navy); margin-bottom:22px; }
-  .testimonial-author{ font-size:13.5px; color:var(--muted); font-weight:600; }
+  /* CONTACT VIEW */
+  .contact-wrap{ max-width:1000px; margin:0 auto; padding:60px 48px 100px; display:grid; grid-template-columns:1fr 1fr; gap:56px; }
+  @media(max-width:820px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .contact-info h2{ font-size:26px; margin-bottom:16px; }
+  .contact-info p{ color:var(--muted); font-size:14.5px; margin-bottom:28px; }
+  .contact-detail{ display:flex; gap:12px; margin-bottom:16px; font-size:14px; }
+  .contact-detail strong{ display:block; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
+  .contact-form{ background:#fff; border:1px solid var(--border); border-radius:6px; padding:32px; }
+  .form-row{ margin-bottom:16px; }
+  .form-row label{ display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; }
+  .form-row input, .form-row textarea{ width:100%; border:1px solid var(--border); border-radius:4px; padding:12px; font-size:14px; font-family:'Inter',sans-serif; background:var(--cream); }
+  .form-row textarea{ resize:vertical; min-height:100px; }
+  .form-submit{ width:100%; margin-top:6px; }
+  .form-success{ display:none; background:#EAF3E5; border:1px solid #B9D6A8; color:#3B5A2C; padding:14px 16px; border-radius:6px; font-size:13.5px; margin-top:14px; }
+  .form-success.show{ display:block; }
 
-  footer{ padding:50px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
+  footer{ padding:44px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); }
 </style>
 </head>
 <body>
-<span class="demo-tag">Szablon DealBase — Prestiż</span>
+<span class="demo-tag">Szablon DealBase — Prestiż (w pełni funkcjonalny)</span>
 
 <nav>
   <div class="logo">Aurum Nieruchomości</div>
-  <div class="nav-links">
-    <a href="#">Oferty</a>
-    <a href="#">O nas</a>
-    <a href="#">Zespół</a>
-    <a href="#">Kontakt</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#/" data-route="/">Start</a>
+    <a href="#/oferty" data-route="/oferty">Oferty</a>
+    <a href="#/zespol" data-route="/zespol">Zespół</a>
+    <a href="#/kontakt" data-route="/kontakt">Kontakt</a>
   </div>
-  <a href="#" class="btn-gold" style="padding:10px 22px;">Umów spotkanie</a>
+  <a href="#/kontakt" class="btn-gold" id="navCta">Umów spotkanie</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D1F3C" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#/" data-route="/">Start</a>
+  <a href="#/oferty" data-route="/oferty">Oferty</a>
+  <a href="#/zespol" data-route="/zespol">Zespół</a>
+  <a href="#/kontakt" data-route="/kontakt">Kontakt</a>
+</div>
 
-<section class="hero">
-  <span class="eyebrow">Biuro nieruchomości premium</span>
-  <h1>Nieruchomości wybierane z uwagą, prowadzone z klasą</h1>
-  <p>Reprezentujemy klientów szukających czegoś więcej niż transakcji — pełnej opieki od pierwszego oglądania do podpisu aktu.</p>
+<!-- ============ HOME ============ -->
+<section class="view" id="view-home">
+  <div class="hero">
+    <span class="eyebrow">Biuro nieruchomości premium</span>
+    <h1>Nieruchomości wybierane z uwagą, prowadzone z klasą</h1>
+    <p>Reprezentujemy klientów szukających czegoś więcej niż transakcji — pełnej opieki od pierwszego oglądania do podpisu aktu.</p>
+    <div class="hero-visual">
+      <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1B2E4C"/><stop offset="100%" stop-color="#0A1526"/></linearGradient>
+          <linearGradient id="goldFade" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#BF9A4A" stop-opacity="0.5"/><stop offset="100%" stop-color="#BF9A4A" stop-opacity="0"/></linearGradient>
+        </defs>
+        <rect width="1000" height="460" fill="url(#skyG)"/>
+        <circle cx="800" cy="120" r="90" fill="url(#goldFade)"/>
+        <g fill="#0D1F3C" opacity="0.9">
+          <rect x="40" y="260" width="70" height="200"/><rect x="120" y="200" width="55" height="260"/>
+          <rect x="185" y="300" width="90" height="160"/><rect x="285" y="150" width="60" height="310"/>
+          <rect x="355" y="240" width="80" height="220"/><rect x="445" y="190" width="65" height="270"/>
+          <rect x="520" y="280" width="100" height="180"/><rect x="630" y="220" width="70" height="240"/>
+          <rect x="710" y="260" width="90" height="200"/><rect x="810" y="180" width="60" height="280"/>
+          <rect x="880" y="290" width="80" height="170"/>
+        </g>
+        <g fill="#E4CD98" opacity="0.55">
+          <rect x="55" y="280" width="10" height="14"/><rect x="80" y="280" width="10" height="14"/>
+          <rect x="135" y="230" width="9" height="13"/><rect x="300" y="180" width="9" height="13"/>
+          <rect x="460" y="220" width="9" height="13"/><rect x="645" y="250" width="9" height="13"/>
+          <rect x="825" y="210" width="9" height="13"/>
+        </g>
+        <text x="60" y="420" font-family="Playfair Display, serif" font-size="26" fill="#F9F6F0" opacity="0.85">Kołobrzeg — Centrum</text>
+      </svg>
+    </div>
+  </div>
 
-  <div class="hero-visual">
-    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1B2E4C"/>
-          <stop offset="100%" stop-color="#0A1526"/>
-        </linearGradient>
-        <linearGradient id="goldFade" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#BF9A4A" stop-opacity="0.5"/>
-          <stop offset="100%" stop-color="#BF9A4A" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <rect width="1000" height="460" fill="url(#skyG)"/>
-      <circle cx="800" cy="120" r="90" fill="url(#goldFade)"/>
-      <!-- skyline silhouette -->
-      <g fill="#0D1F3C" opacity="0.9">
-        <rect x="40" y="260" width="70" height="200"/>
-        <rect x="120" y="200" width="55" height="260"/>
-        <rect x="185" y="300" width="90" height="160"/>
-        <rect x="285" y="150" width="60" height="310"/>
-        <rect x="355" y="240" width="80" height="220"/>
-        <rect x="445" y="190" width="65" height="270"/>
-        <rect x="520" y="280" width="100" height="180"/>
-        <rect x="630" y="220" width="70" height="240"/>
-        <rect x="710" y="260" width="90" height="200"/>
-        <rect x="810" y="180" width="60" height="280"/>
-        <rect x="880" y="290" width="80" height="170"/>
-      </g>
-      <!-- windows -->
-      <g fill="#E4CD98" opacity="0.55">
-        <rect x="55" y="280" width="10" height="14"/><rect x="80" y="280" width="10" height="14"/>
-        <rect x="55" y="320" width="10" height="14"/><rect x="80" y="320" width="10" height="14"/>
-        <rect x="135" y="230" width="9" height="13"/><rect x="155" y="230" width="9" height="13"/>
-        <rect x="135" y="270" width="9" height="13"/><rect x="155" y="270" width="9" height="13"/>
-        <rect x="300" y="180" width="9" height="13"/><rect x="320" y="180" width="9" height="13"/>
-        <rect x="300" y="220" width="9" height="13"/><rect x="320" y="220" width="9" height="13"/>
-        <rect x="460" y="220" width="9" height="13"/><rect x="480" y="220" width="9" height="13"/>
-        <rect x="645" y="250" width="9" height="13"/><rect x="665" y="250" width="9" height="13"/>
-        <rect x="825" y="210" width="9" height="13"/><rect x="845" y="210" width="9" height="13"/>
-      </g>
-      <text x="60" y="420" font-family="Playfair Display, serif" font-size="26" fill="#F9F6F0" opacity="0.85">Kołobrzeg — Centrum</text>
-    </svg>
+  <div class="section">
+    <div class="section-head">
+      <span class="eyebrow">Wybrane oferty</span>
+      <h2>Nieruchomości w portfelu</h2>
+    </div>
+    <div class="grid3" id="homeListings"></div>
+    <div class="view-all-link"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
+  </div>
+
+  <div class="about-band">
+    <span class="eyebrow">Nasze podejście</span>
+    <h2>Każda transakcja prowadzona osobiście, od pierwszej rozmowy do finału</h2>
+    <p>Nie sprzedajemy skali — sprzedajemy uwagę. Każdy klient ma jednego, dedykowanego agenta przez cały proces.</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="section-head">
-    <span class="eyebrow">Wybrane oferty</span>
-    <h2>Nieruchomości w portfelu</h2>
+<!-- ============ LISTINGS ============ -->
+<section class="view" id="view-oferty">
+  <div class="listings-head">
+    <div class="section-head" style="margin-bottom:0;">
+      <span class="eyebrow">Portfel</span>
+      <h2>Wszystkie oferty</h2>
+    </div>
+    <div class="filter-bar">
+      <select id="filterType">
+        <option value="">Typ nieruchomości</option>
+        <option value="Apartament">Apartament</option>
+        <option value="Dom">Dom</option>
+        <option value="Mieszkanie">Mieszkanie</option>
+        <option value="Działka">Działka</option>
+      </select>
+      <select id="filterPrice">
+        <option value="">Budżet</option>
+        <option value="800000">do 800 000 zł</option>
+        <option value="1500000">do 1 500 000 zł</option>
+        <option value="99999999">bez limitu</option>
+      </select>
+      <select id="filterSort">
+        <option value="default">Sortowanie: domyślne</option>
+        <option value="price-asc">Cena: od najniższej</option>
+        <option value="price-desc">Cena: od najwyższej</option>
+      </select>
+    </div>
+    <div class="filter-count" id="filterCount"></div>
   </div>
-  <div class="grid">
-    <div class="listing">
-      <div class="listing-img">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
-          <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2A3F5E"/><stop offset="100%" stop-color="#0D1F3C"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g1)"/>
-          <polygon points="100,180 100,90 200,40 300,90 300,180" fill="#16294A"/>
-          <polygon points="200,40 300,90 200,110 100,90" fill="#1E3455"/>
-          <rect x="150" y="130" width="30" height="50" fill="#BF9A4A" opacity="0.6"/>
-          <rect x="220" y="120" width="20" height="20" fill="#E4CD98" opacity="0.5"/>
-        </svg>
-        <span class="listing-badge">Apartament</span>
+  <div class="section" style="padding-top:0;">
+    <div class="grid3" id="allListings"></div>
+    <div id="emptyState" class="empty-state" style="display:none;">Brak ofert spełniających wybrane kryteria. Zmień filtry, żeby zobaczyć więcej wyników.</div>
+  </div>
+</section>
+
+<!-- ============ OFFER DETAIL ============ -->
+<section class="view" id="view-detail">
+  <div class="detail-wrap">
+    <a href="#/oferty" class="back-link">← Wróć do listy ofert</a>
+    <div class="detail-grid">
+      <div>
+        <div class="gallery-main" id="galleryMain"></div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+        <h1 class="detail-title" id="detailTitle"></h1>
+        <div class="detail-loc" id="detailLoc"></div>
+        <p class="detail-desc" id="detailDesc"></p>
       </div>
-      <div class="listing-info">
-        <div class="listing-price">1 250 000 zł</div>
-        <div class="listing-loc">Apartament, Centrum</div>
-        <div class="listing-meta"><span>3 pokoje</span><span>92 m²</span><span>Piętro 4</span></div>
-      </div>
-    </div>
-    <div class="listing">
-      <div class="listing-img">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
-          <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3A2F1E"/><stop offset="100%" stop-color="#1B160D"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g2)"/>
-          <polygon points="80,190 80,110 200,60 200,190" fill="#4A3A22"/>
-          <polygon points="200,190 200,60 320,110 320,190" fill="#3A2E1B"/>
-          <polygon points="80,110 200,60 320,110 200,80" fill="#5C4A2C"/>
-          <rect x="120" y="140" width="24" height="40" fill="#BF9A4A" opacity="0.5"/>
-          <rect x="240" y="140" width="24" height="40" fill="#BF9A4A" opacity="0.5"/>
-        </svg>
-        <span class="listing-badge">Dom</span>
-      </div>
-      <div class="listing-info">
-        <div class="listing-price">2 890 000 zł</div>
-        <div class="listing-loc">Dom, Radzikowo</div>
-        <div class="listing-meta"><span>Dom</span><span>210 m²</span><span>Działka 800 m²</span></div>
+      <div>
+        <div class="side-card">
+          <div class="side-price" id="detailPrice"></div>
+          <div class="side-specs" id="detailSpecs"></div>
+          <a href="#/kontakt" class="btn-gold" style="display:block; text-align:center; width:100%;">Zapytaj o ofertę</a>
+          <div class="agent-mini">
+            <div class="agent-mini-photo"><svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#0D1F3C"/><circle cx="24" cy="19" r="9" fill="#BF9A4A" opacity="0.7"/><path d="M8 44 Q24 28 40 44 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+            <div>
+              <div class="agent-mini-name" id="detailAgentName">Aleksandra Wójcik</div>
+              <div class="agent-mini-role">Agent prowadzący</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="listing">
-      <div class="listing-img">
-        <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
-          <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1E3A3F"/><stop offset="100%" stop-color="#0D1F22"/></linearGradient></defs>
-          <rect width="400" height="230" fill="url(#g3)"/>
-          <rect x="60" y="70" width="280" height="120" fill="#1B3236"/>
-          <rect x="90" y="95" width="40" height="40" fill="#BF9A4A" opacity="0.55"/>
-          <rect x="150" y="95" width="40" height="40" fill="#E4CD98" opacity="0.35"/>
-          <rect x="210" y="95" width="40" height="40" fill="#BF9A4A" opacity="0.55"/>
-          <rect x="270" y="95" width="40" height="40" fill="#E4CD98" opacity="0.35"/>
-          <rect x="60" y="190" width="280" height="6" fill="#0A1517"/>
-        </svg>
-        <span class="listing-badge">Mieszkanie</span>
+    <div class="similar-strip">
+      <div class="section-head" style="text-align:left; margin-bottom:26px;">
+        <h2 style="font-size:22px;">Podobne oferty</h2>
       </div>
-      <div class="listing-info">
-        <div class="listing-price">780 000 zł</div>
-        <div class="listing-loc">Mieszkanie, Nadmorska</div>
-        <div class="listing-meta"><span>2 pokoje</span><span>54 m²</span><span>Piętro 2</span></div>
-      </div>
+      <div class="grid3" id="similarListings"></div>
     </div>
   </div>
 </section>
 
-<section class="about">
-  <span class="eyebrow">Nasze podejście</span>
-  <h2>Każda transakcja prowadzona osobiście, od pierwszej rozmowy do finału</h2>
-  <p>Nie sprzedajemy skali — sprzedajemy uwagę. Każdy klient ma jednego, dedykowanego agenta przez cały proces.</p>
-</section>
-
-<section class="section">
-  <div class="section-head">
+<!-- ============ TEAM ============ -->
+<section class="view" id="view-zespol">
+  <div class="team-hero">
     <span class="eyebrow">Zespół</span>
-    <h2>Ludzie, z którymi rozmawiasz</h2>
+    <h1 style="font-size:32px; margin-bottom:16px;">Ludzie, z którymi rozmawiasz</h1>
+    <p style="color:var(--muted); font-size:15px;">Każdy klient ma jednego, dedykowanego agenta — nie zespół anonimowych kontaktów.</p>
   </div>
-  <div class="team">
-    <div class="agent-card">
-      <div class="agent-photo">
-        <svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg>
+  <div class="section">
+    <div class="team">
+      <div class="agent-card">
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+        <div class="agent-name">Aleksandra Wójcik</div>
+        <div class="agent-role">Współwłaścicielka</div>
+        <div class="agent-bio">15 lat na rynku nieruchomości premium. Specjalizuje się w transakcjach powyżej 1 mln zł.</div>
       </div>
-      <div class="agent-name">Aleksandra Wójcik</div>
-      <div class="agent-role">Współwłaścicielka</div>
-      <div class="agent-bio">15 lat na rynku nieruchomości premium.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-photo">
-        <svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#16294A"/><circle cx="60" cy="48" r="24" fill="#E4CD98" opacity="0.6"/><path d="M20 110 Q60 70 100 110 Z" fill="#E4CD98" opacity="0.6"/></svg>
+      <div class="agent-card">
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#16294A"/><circle cx="60" cy="48" r="24" fill="#E4CD98" opacity="0.6"/><path d="M20 110 Q60 70 100 110 Z" fill="#E4CD98" opacity="0.6"/></svg></div>
+        <div class="agent-name">Michał Sokołowski</div>
+        <div class="agent-role">Starszy agent</div>
+        <div class="agent-bio">Specjalizacja: apartamenty inwestycyjne i nieruchomości komercyjne w centrum.</div>
       </div>
-      <div class="agent-name">Michał Sokołowski</div>
-      <div class="agent-role">Starszy agent</div>
-      <div class="agent-bio">Specjalizacja: apartamenty inwestycyjne.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-photo">
-        <svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg>
+      <div class="agent-card">
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+        <div class="agent-name">Julia Kamińska</div>
+        <div class="agent-role">Agentka</div>
+        <div class="agent-bio">Prowadzi klientów zagranicznych, mówi po angielsku i niemiecku.</div>
       </div>
-      <div class="agent-name">Julia Kamińska</div>
-      <div class="agent-role">Agentka</div>
-      <div class="agent-bio">Prowadzi klientów zagranicznych.</div>
     </div>
   </div>
 </section>
 
-<section class="section" style="padding-top:0;">
-  <div class="testimonial">
-    <div class="testimonial-mark">"</div>
-    <p class="testimonial-text">Od pierwszej rozmowy wiedziałam, że mój dom trafi w dobre ręce. Zero pośpiechu, same konkrety.</p>
-    <div class="testimonial-author">— Klientka, transakcja zamknięta w 6 tygodni</div>
+<!-- ============ CONTACT ============ -->
+<section class="view" id="view-kontakt">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <span class="eyebrow">Kontakt</span>
+      <h2>Napisz do nas, odpowiadamy tego samego dnia</h2>
+      <p>Wypełnij formularz albo skontaktuj się bezpośrednio — dane biura poniżej.</p>
+      <div class="contact-detail"><div><strong>Adres</strong>ul. Portowa 4, 78-100 Kołobrzeg</div></div>
+      <div class="contact-detail"><div><strong>Telefon</strong>+48 94 000 00 00</div></div>
+      <div class="contact-detail"><div><strong>E-mail</strong>kontakt@aurum-nieruchomosci.pl</div></div>
+      <div class="contact-detail"><div><strong>Godziny</strong>Pon–Pt 9:00–17:00</div></div>
+    </div>
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="form-row"><label>Imię i nazwisko</label><input type="text" required></div>
+        <div class="form-row"><label>E-mail</label><input type="email" required></div>
+        <div class="form-row"><label>Wiadomość</label><textarea required placeholder="W czym możemy pomóc?"></textarea></div>
+        <button type="submit" class="btn-gold form-submit">Wyślij wiadomość</button>
+        <div class="form-success" id="formSuccess">Dziękujemy! To demonstracja — w realnym wdrożeniu wiadomość trafiłaby prosto do Twojego CRM-a.</div>
+      </form>
+    </div>
   </div>
 </section>
 
 <footer>
   Aurum Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase. Grafiki ilustracyjne, do zastąpienia własnymi zdjęciami.
 </footer>
+
+<script>
+const OFFERS = [
+  { id:1, title:'Apartament w Centrum', type:'Apartament', price:1250000, area:92, rooms:3, floor:4, loc:'Kołobrzeg, Centrum', desc:'Elegancki apartament w reprezentacyjnej części Kołobrzegu, po generalnym remoncie. Duże okna, wysokie sufity, balkon z widokiem na park. Idealny jako mieszkanie własne lub inwestycja pod wynajem premium.', colors:['#2A3F5E','#16294A'] },
+  { id:2, title:'Dom jednorodzinny, Radzikowo', type:'Dom', price:2890000, area:210, rooms:5, floor:null, loc:'Kołobrzeg, Radzikowo', desc:'Przestronny dom na działce 800 m², zbudowany z dbałością o detale. Garaż na dwa samochody, ogród z tarasem, w pełni podpiwniczony. Spokojna, prestiżowa okolica.', colors:['#4A3A22','#1B160D'] },
+  { id:3, title:'Mieszkanie, ul. Nadmorska', type:'Mieszkanie', price:780000, area:54, rooms:2, floor:2, loc:'Kołobrzeg, Nadmorska', desc:'Kompaktowe, funkcjonalne mieszkanie 300 metrów od promenady. Świetna lokalizacja pod wynajem sezonowy — historyczne obłożenie ponad 80% w sezonie letnim.', colors:['#1B3236','#0D1F22'] },
+  { id:4, title:'Penthouse z widokiem na morze', type:'Apartament', price:3450000, area:145, rooms:4, floor:6, loc:'Kołobrzeg, Promenada', desc:'Ekskluzywny penthouse na najwyższym piętrze, taras 40 m² z panoramicznym widokiem na morze. Dwa miejsca parkingowe w garażu podziemnym.', colors:['#16294A','#0A1526'] },
+  { id:5, title:'Dom w zabudowie bliźniaczej', type:'Dom', price:1150000, area:140, rooms:4, floor:null, loc:'Ustronie Morskie', desc:'Nowy dom w cichej, zielonej okolicy, 10 minut od plaży. Wysoki standard wykończenia, gotowy do wprowadzenia.', colors:['#3A2E1B','#1B160D'] },
+  { id:6, title:'Kawalerka inwestycyjna', type:'Mieszkanie', price:420000, area:32, rooms:1, floor:3, loc:'Kołobrzeg, Śródmieście', desc:'Niewielkie, ale bardzo dobrze zlokalizowane mieszkanie. Zwrot z wynajmu na poziomie ok. 6% rocznie przy obecnych cenach.', colors:['#2A3F5E','#0D1F22'] },
+  { id:7, title:'Działka budowlana, Podczele', type:'Działka', price:390000, area:950, rooms:null, floor:null, loc:'Kołobrzeg, Podczele', desc:'Uzbrojona działka budowlana z warunkami zabudowy, blisko lasu. Idealna pod dom jednorodzinny lub bliźniak.', colors:['#4A3A22','#2C2113'] },
+  { id:8, title:'Apartament z ogrodem zimowym', type:'Apartament', price:1680000, area:110, rooms:3, floor:1, loc:'Kołobrzeg, Centrum', desc:'Unikalny apartament z prywatnym ogrodem zimowym, rzadkość na rynku wtórnym. Po remoncie, gotowy do zamieszkania.', colors:['#16294A','#1E3455'] },
+  { id:9, title:'Dom z basenem, Dźwirzyno', type:'Dom', price:2150000, area:175, rooms:5, floor:null, loc:'Dźwirzyno', desc:'Dom wypoczynkowy z prywatnym basenem i sauną, wynajmowany dotąd sezonowo z bardzo dobrym wynikiem finansowym.', colors:['#1B3236','#3A8A85'] }
+];
+
+const fmt = n => n.toLocaleString('pl-PL') + ' zł';
+
+function listingCard(o){
+  const [c1,c2] = o.colors;
+  return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
+    <div class="listing-img">
+      <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="lg${o.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>
+        <rect width="400" height="210" fill="url(#lg${o.id})"/>
+        <polygon points="110,180 110,95 210,45 310,95 310,180" fill="${c2}" opacity="0.7"/>
+        <rect x="160" y="130" width="24" height="50" fill="#BF9A4A" opacity="0.55"/>
+        <rect x="220" y="120" width="20" height="20" fill="#E4CD98" opacity="0.45"/>
+      </svg>
+      <span class="listing-badge">${o.type}</span>
+    </div>
+    <div class="listing-info">
+      <div class="listing-price">${fmt(o.price)}</div>
+      <div class="listing-loc">${o.title} — ${o.loc}</div>
+      <div class="listing-meta">
+        ${o.rooms ? `<span>${o.rooms} pok.</span>` : ''}
+        <span>${o.area} m²</span>
+        ${o.floor ? `<span>Piętro ${o.floor}</span>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('homeListings').innerHTML = OFFERS.slice(0,3).map(listingCard).join('');
+
+function renderListings(){
+  const type = document.getElementById('filterType').value;
+  const maxPrice = document.getElementById('filterPrice').value;
+  const sort = document.getElementById('filterSort').value;
+  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!maxPrice || o.price <= Number(maxPrice)));
+  if(sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+  if(sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  document.getElementById('allListings').innerHTML = filtered.map(listingCard).join('');
+  document.getElementById('filterCount').textContent = `${filtered.length} ${filtered.length === 1 ? 'oferta' : 'ofert'} spełnia wybrane kryteria`;
+  document.getElementById('emptyState').style.display = filtered.length ? 'none' : 'block';
+}
+['filterType','filterPrice','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
+
+function renderDetail(id){
+  const o = OFFERS.find(x => x.id === Number(id));
+  if(!o) return;
+  const [c1,c2] = o.colors;
+  const mainSvg = `<svg viewBox="0 0 700 380" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="dg${o.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><rect width="700" height="380" fill="url(#dg${o.id})"/><polygon points="180,320 180,170 350,80 520,170 520,320" fill="${c2}" opacity="0.7"/><rect x="260" y="230" width="40" height="90" fill="#BF9A4A" opacity="0.55"/><rect x="380" y="210" width="36" height="36" fill="#E4CD98" opacity="0.45"/></svg>`;
+  document.getElementById('galleryMain').innerHTML = mainSvg;
+  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML=this.innerHTML.replace('width=\\'70\\'','width=\\'700\\'').replace('height=\\'52\\'','height=\\'380\\''); document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');">${mainSvg.replace('viewBox="0 0 700 380"','viewBox="0 0 700 380" width="70" height="52"')}</div>`).join('');
+  document.getElementById('detailTitle').textContent = o.title;
+  document.getElementById('detailLoc').textContent = o.loc;
+  document.getElementById('detailDesc').textContent = o.desc;
+  document.getElementById('detailPrice').textContent = fmt(o.price);
+  document.getElementById('detailSpecs').innerHTML = `
+    <div class="spec-item"><div class="spec-label">Powierzchnia</div>${o.area} m²</div>
+    ${o.rooms ? `<div class="spec-item"><div class="spec-label">Pokoje</div>${o.rooms}</div>` : ''}
+    ${o.floor ? `<div class="spec-item"><div class="spec-label">Piętro</div>${o.floor}</div>` : ''}
+    <div class="spec-item"><div class="spec-label">Typ</div>${o.type}</div>
+  `;
+  const similar = OFFERS.filter(x => x.type === o.type && x.id !== o.id).slice(0,3);
+  document.getElementById('similarListings').innerHTML = (similar.length ? similar : OFFERS.filter(x=>x.id!==o.id).slice(0,3)).map(listingCard).join('');
+  window.scrollTo(0,0);
+}
+
+const routes = ['home','oferty','detail','zespol','kontakt'];
+function navigate(){
+  const hash = location.hash || '#/';
+  const parts = hash.replace('#/','').split('/').filter(Boolean);
+  let view = 'home';
+  if(parts[0] === 'oferty') view = 'oferty';
+  else if(parts[0] === 'oferta' && parts[1]) { view = 'detail'; renderDetail(parts[1]); }
+  else if(parts[0] === 'zespol') view = 'zespol';
+  else if(parts[0] === 'kontakt') view = 'kontakt';
+
+  routes.forEach(r => document.getElementById('view-' + r).classList.toggle('active', r === view));
+  document.querySelectorAll('[data-route]').forEach(a => {
+    const r = a.dataset.route;
+    const active = (r === '/' && view === 'home') || (r === '/oferty' && (view === 'oferty' || view === 'detail')) || (r === '/zespol' && view === 'zespol') || (r === '/kontakt' && view === 'kontakt');
+    a.classList.toggle('active', active);
+  });
+  if(view === 'oferty') renderListings();
+  document.getElementById('mobileMenu').classList.remove('open');
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', navigate);
+navigate();
+
+document.getElementById('hamburgerBtn').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.add('show');
+  this.reset();
+});
+</script>
 </body>
 </html>
