@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Szablon: Korporacyjny — przykładowa strona biura nieruchomości</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --blue:#1A4FA0; --blue-dark:#0F3572; --navy:#0B2245; --gray:#F4F6F9; --border:#DDE3EC; --muted:#5B6B85; --card:#FFFFFF; --red:#D9455F; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; color:var(--navy); background:var(--gray); line-height:1.6; }
+  a{ color:inherit; text-decoration:none; cursor:pointer; }
+  h1,h2,h3{ font-weight:800; letter-spacing:-0.01em; }
+  button{ font-family:'Inter',sans-serif; cursor:pointer; }
+
+  .demo-tag{ position:fixed; top:14px; left:14px; z-index:99; background:var(--navy); color:#fff; font-size:11px; font-weight:600; padding:6px 12px; border-radius:100px; letter-spacing:0.5px; }
+
+  .top-bar{ background:var(--navy); color:#fff; text-align:center; font-size:12.5px; padding:8px; }
+  nav{ padding:0; position:sticky; top:0; background:#fff; z-index:50; border-bottom:1px solid var(--border); box-shadow:0 1px 0 rgba(11,34,69,0.03); }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; max-width:1280px; margin:0 auto; padding:18px 48px; }
+  .logo{ font-size:19px; font-weight:800; display:flex; align-items:center; gap:8px; }
+  .logo-mark{ width:28px; height:28px; background:var(--blue); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px; font-weight:800; }
+  .nav-links{ display:flex; gap:26px; font-size:14px; font-weight:600; }
+  .nav-links a{ padding-bottom:4px; border-bottom:2px solid transparent; }
+  .nav-links a:hover, .nav-links a.active{ border-color:var(--blue); color:var(--blue); }
+  @media(max-width:820px){ .nav-links{ display:none; } }
+  .btn-blue{ background:var(--blue); color:#fff; padding:11px 22px; border-radius:6px; font-size:13.5px; font-weight:700; border:none; }
+  .hamburger{ display:none; width:36px; height:36px; border:1px solid var(--border); border-radius:6px; align-items:center; justify-content:center; background:none; }
+  @media(max-width:820px){ .hamburger{ display:flex; } }
+  .mobile-menu{ display:none; flex-direction:column; padding:8px 48px 18px; background:#fff; border-bottom:1px solid var(--border); }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{ padding:12px 0; border-bottom:1px solid var(--border); font-size:14.5px; font-weight:600; }
+  .mobile-menu a:last-child{ border-bottom:none; }
+
+  .view{ display:none; }
+  .view.active{ display:block; animation:fadeIn 0.25s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
+
+  .hero{ position:relative; min-height:520px; display:flex; align-items:center; padding:60px 48px; overflow:hidden; background:var(--navy); }
+  .hero-bg{ position:absolute; inset:0; background-size:cover; background-position:center 40%; opacity:0.35; }
+  .hero-overlay{ position:absolute; inset:0; background:linear-gradient(120deg, rgba(11,34,69,0.97) 0%, rgba(11,34,69,0.85) 45%, rgba(26,79,160,0.55) 100%); }
+  .hero-inner{ position:relative; z-index:2; max-width:1280px; margin:0 auto; width:100%; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
+  @media(max-width:900px){ .hero-inner{ grid-template-columns:1fr; } .hero{ padding:50px 24px; min-height:auto; } }
+  .hero-badge{ display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); color:#fff; font-size:12.5px; font-weight:700; padding:7px 16px; border-radius:100px; margin-bottom:18px; }
+  .hero h1{ font-size:clamp(28px,3.8vw,42px); color:#fff; line-height:1.2; max-width:560px; }
+  .hero p{ color:rgba(255,255,255,0.7); margin-top:16px; max-width:460px; font-size:15px; }
+  .hero-stats-row{ display:flex; gap:0; margin-top:30px; border-top:1px solid rgba(255,255,255,0.15); padding-top:20px; }
+  .hstat{ color:#fff; padding-right:28px; margin-right:28px; border-right:1px solid rgba(255,255,255,0.15); }
+  .hstat:last-child{ border-right:none; }
+  .hstat-num{ font-size:22px; font-weight:800; }
+  .hstat-label{ font-size:11px; color:rgba(255,255,255,0.6); margin-top:2px; }
+
+  .search-widget{ background:#fff; border-radius:10px; padding:26px; box-shadow:0 20px 50px -20px rgba(0,0,0,0.4); }
+  .sw-title{ font-size:14px; font-weight:800; margin-bottom:16px; color:var(--navy); }
+  .sw-field{ width:100%; border:1px solid var(--border); border-radius:6px; padding:12px 14px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--gray); margin-bottom:10px; }
+  .sw-submit{ width:100%; background:var(--blue); color:#fff; border:none; padding:13px; border-radius:6px; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; }
+
+  .breadcrumb{ font-size:12.5px; color:var(--muted); margin-bottom:20px; }
+  .breadcrumb a{ color:var(--muted); } .breadcrumb a:hover{ color:var(--blue); } .breadcrumb span{ margin:0 6px; }
+
+  .section{ padding:70px 48px; max-width:1280px; margin:0 auto; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; flex-wrap:wrap; gap:16px; }
+  .section-head h2{ font-size:26px; }
+  .section-head p{ color:var(--muted); font-size:14px; max-width:360px; }
+  .view-all-link a{ font-size:13.5px; font-weight:700; color:var(--blue); }
+
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media(max-width:900px){ .grid3{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:640px){ .grid3{ grid-template-columns:1fr; } }
+  .listing{ background:var(--card); border-radius:10px; overflow:hidden; border:1px solid var(--border); cursor:pointer; transition:transform 0.15s ease, box-shadow 0.15s ease; }
+  .listing:hover{ transform:translateY(-3px); box-shadow:0 14px 30px -18px rgba(11,34,69,0.3); }
+  .listing-img{ height:190px; position:relative; overflow:hidden; background:var(--navy); }
+  .listing-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .listing-badge{ position:absolute; top:12px; left:12px; font-size:10px; font-weight:800; letter-spacing:0.3px; text-transform:uppercase; padding:5px 10px; border-radius:4px; background:var(--blue); color:#fff; }
+  .listing-badge.exclusive{ background:var(--red); }
+  .listing-badge.promo{ background:#1E9E6B; }
+  .listing-ref{ position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.94); color:var(--muted); font-size:10px; font-weight:700; padding:4px 9px; border-radius:4px; }
+  .listing-info{ padding:18px; }
+  .listing-price{ font-size:19px; font-weight:800; }
+  .listing-price-m2{ font-size:11px; color:var(--muted); margin-top:1px; }
+  .listing-loc{ color:var(--muted); font-size:13px; margin:6px 0 12px; font-weight:500; }
+  .listing-meta{ display:flex; gap:16px; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; font-weight:600; }
+  .meta-item{ display:flex; align-items:center; gap:5px; }
+  .meta-item svg{ width:13px; height:13px; color:var(--blue); }
+
+  .filter-bar{ display:flex; gap:12px; flex-wrap:wrap; background:#fff; border:1px solid var(--border); border-radius:8px; padding:18px; margin-bottom:26px; }
+  .filter-bar select{ border:1px solid var(--border); border-radius:6px; padding:10px 12px; font-size:13.5px; font-family:'Inter',sans-serif; background:var(--gray); flex:1; min-width:140px; font-weight:600; }
+  .filter-count{ font-size:13px; color:var(--muted); margin-bottom:22px; font-weight:600; }
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--muted); font-size:14px; }
+
+  .detail-wrap{ max-width:1200px; margin:0 auto; padding:36px 48px 90px; }
+  .back-link{ font-size:13px; font-weight:700; color:var(--muted); margin-bottom:20px; display:inline-block; }
+  .back-link:hover{ color:var(--navy); }
+  .detail-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:36px; }
+  @media(max-width:860px){ .detail-grid{ grid-template-columns:1fr; } }
+  .gallery-main{ height:380px; border-radius:10px; overflow:hidden; margin-bottom:10px; background:var(--navy); }
+  .gallery-main img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .gallery-thumbs{ display:flex; gap:8px; }
+  .gallery-thumb{ width:70px; height:52px; border-radius:6px; overflow:hidden; cursor:pointer; border:2px solid transparent; opacity:0.6; transition:opacity 0.15s ease, border-color 0.15s ease; flex-shrink:0; }
+  .gallery-thumb.active{ opacity:1; border-color:var(--blue); }
+  .gallery-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .detail-title{ font-size:24px; margin:24px 0 6px; }
+  .detail-loc{ color:var(--muted); font-size:14px; margin-bottom:18px; font-weight:600; }
+  .detail-desc{ font-size:14.5px; color:#33415A; line-height:1.75; font-weight:400; }
+  .side-card{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:26px; }
+  .side-price{ font-size:26px; font-weight:800; }
+  .side-specs{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0 22px; }
+  .spec-item{ font-size:13px; font-weight:600; }
+  .spec-label{ color:var(--muted); font-size:10.5px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; font-weight:700; }
+  .agent-mini{ display:flex; gap:12px; align-items:center; border-top:1px solid var(--border); padding-top:18px; margin-top:18px; }
+  .agent-mini-photo{ width:44px; height:44px; border-radius:6px; overflow:hidden; flex-shrink:0; }
+  .agent-mini-photo svg{ width:100%; height:100%; display:block; }
+  .agent-mini-name{ font-size:13px; font-weight:700; }
+  .agent-mini-role{ font-size:11px; color:var(--muted); font-weight:600; }
+  .calc-card{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; margin-top:16px; }
+  .calc-title{ font-size:13px; font-weight:800; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .calc-title svg{ width:16px; height:16px; color:var(--blue); }
+  .calc-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:13px; font-weight:600; }
+  .calc-row input[type=range]{ width:110px; accent-color:var(--blue); }
+  .calc-result{ border-top:1px solid var(--border); padding-top:14px; margin-top:6px; text-align:center; }
+  .calc-result-num{ font-size:22px; font-weight:800; color:var(--blue); }
+  .calc-result-label{ font-size:11px; color:var(--muted); margin-top:2px; font-weight:600; }
+  .similar-strip{ margin-top:56px; }
+
+  .team-hero{ padding:56px 48px 0; text-align:center; max-width:640px; margin:0 auto; }
+  .team{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media(max-width:820px){ .team{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:600px){ .team{ grid-template-columns:1fr; } }
+  .agent-card{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; text-align:center; }
+  .agent-photo{ width:78px; height:78px; margin:0 auto 14px; border-radius:8px; overflow:hidden; }
+  .agent-photo svg{ width:100%; height:100%; display:block; }
+  .agent-name{ font-size:16px; font-weight:800; margin-bottom:2px; }
+  .agent-role{ color:var(--blue); font-size:11px; letter-spacing:0.3px; text-transform:uppercase; font-weight:700; margin-bottom:8px; }
+  .agent-bio{ color:var(--muted); font-size:13px; font-weight:500; }
+
+  .contact-wrap{ max-width:1100px; margin:0 auto; padding:56px 48px 100px; display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+  @media(max-width:820px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .contact-info h2{ font-size:24px; margin-bottom:14px; }
+  .contact-info p{ color:var(--muted); font-size:14.5px; margin-bottom:24px; font-weight:500; }
+  .contact-detail{ display:flex; gap:12px; margin-bottom:14px; font-size:14px; font-weight:600; }
+  .contact-detail strong{ display:block; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; font-weight:700; }
+  .contact-form{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:28px; }
+  .form-row{ margin-bottom:14px; }
+  .form-row label{ display:block; font-size:11.5px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; }
+  .form-row input, .form-row textarea{ width:100%; border:1px solid var(--border); border-radius:6px; padding:11px; font-size:14px; font-family:'Inter',sans-serif; background:var(--gray); }
+  .form-row textarea{ resize:vertical; min-height:90px; }
+  .form-submit{ width:100%; margin-top:4px; padding:13px; }
+  .form-success{ display:none; background:#E7F5EE; border:1px solid #1E9E6B; color:#0F5C3F; padding:14px 16px; border-radius:6px; font-size:13.5px; margin-top:14px; font-weight:600; }
+  .form-success.show{ display:block; }
+
+  footer{ padding:40px 48px; text-align:center; border-top:1px solid var(--border); font-size:13px; color:var(--muted); font-weight:500; background:#fff; }
+</style>
+</head>
+<body>
+<div class="top-bar">Licencjonowane biuro nieruchomości · Członek Polskiej Federacji Rynku Nieruchomości</div>
+<span class="demo-tag">Szablon DealBase — Korporacyjny</span>
+
+<nav>
+  <div class="nav-inner">
+  <div class="logo"><div class="logo-mark">M</div>Metro Nieruchomości</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#/" data-route="/">Start</a>
+    <a href="#/oferty" data-route="/oferty">Oferty</a>
+    <a href="#/zespol" data-route="/zespol">Zespół</a>
+    <a href="#/kontakt" data-route="/kontakt">Kontakt</a>
+  </div>
+  <a href="#/kontakt" class="btn-blue">Umów spotkanie</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B2245" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+</div>
+  </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#/" data-route="/">Start</a>
+  <a href="#/oferty" data-route="/oferty">Oferty</a>
+  <a href="#/zespol" data-route="/zespol">Zespół</a>
+  <a href="#/kontakt" data-route="/kontakt">Kontakt</a>
+</div>
+
+<section class="view" id="view-home">
+  <div class="hero">
+    <div class="hero-bg" style="background-image:url('https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/00e0538b-e5c1-4843-954d-5de5f50d4927/00e0538b-e5c1-4843-954d-5de5f50d4927_1.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div>
+        <span class="hero-badge">🏆 #1 biuro w regionie kołobrzeskim</span>
+        <h1>Sieć biur, jeden standard obsługi w całym regionie.</h1>
+        <p>Ponad 300 zamkniętych transakcji i zespół 12 licencjonowanych agentów działających na jednej, wspólnej bazie ofert.</p>
+        <div class="hero-stats-row">
+          <div class="hstat"><div class="hstat-num">300+</div><div class="hstat-label">transakcji</div></div>
+          <div class="hstat"><div class="hstat-num">12</div><div class="hstat-label">agentów</div></div>
+          <div class="hstat"><div class="hstat-num">18 lat</div><div class="hstat-label">na rynku</div></div>
+        </div>
+      </div>
+      <div class="search-widget">
+        <div class="sw-title">Znajdź nieruchomość</div>
+        <select class="sw-field"><option>Typ nieruchomości</option><option>Apartament</option><option>Dom</option><option>Mieszkanie</option><option>Inwestycja</option></select>
+        <select class="sw-field"><option>Lokalizacja</option><option>Kołobrzeg</option><option>Trzebiatów</option><option>Gościno</option></select>
+        <select class="sw-field"><option>Budżet</option><option>do 500 000 zł</option><option>do 1 500 000 zł</option><option>bez limitu</option></select>
+        <button class="sw-submit" onclick="location.hash='#/oferty'">Szukaj ofert →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div><h2>Aktualne oferty</h2><p>Baza aktualizowana codziennie przez zespół agentów.</p></div>
+      <div class="view-all-link"><a href="#/oferty">Zobacz wszystkie oferty →</a></div>
+    </div>
+    <div class="grid3" id="homeListings"></div>
+  </div>
+</section>
+
+<section class="view" id="view-oferty">
+  <div class="section" style="padding-bottom:0;">
+    <div class="breadcrumb"><a href="#/">Strona główna</a><span>/</span>Oferty</div>
+    <div class="section-head" style="margin-bottom:20px;"><h2>Wszystkie oferty</h2></div>
+    <div class="filter-bar">
+      <select id="filterType"><option value="">Typ nieruchomości</option><option value="Apartament">Apartament</option><option value="Dom">Dom</option><option value="Mieszkanie">Mieszkanie</option><option value="Inwestycja">Inwestycja</option></select>
+      <select id="filterPrice"><option value="">Budżet</option><option value="500000">do 500 000 zł</option><option value="1500000">do 1 500 000 zł</option><option value="99999999">bez limitu</option></select>
+      <select id="filterSort"><option value="default">Sortowanie: domyślne</option><option value="price-asc">Cena: od najniższej</option><option value="price-desc">Cena: od najwyższej</option></select>
+    </div>
+    <div class="filter-count" id="filterCount"></div>
+    <div class="grid3" id="allListings"></div>
+    <div id="emptyState" class="empty-state" style="display:none;">Brak ofert spełniających wybrane kryteria. Zmień filtry, żeby zobaczyć więcej wyników.</div>
+  </div>
+</section>
+
+<section class="view" id="view-detail">
+  <div class="detail-wrap">
+    <div class="breadcrumb"><a href="#/">Strona główna</a><span>/</span><a href="#/oferty">Oferty</a><span>/</span><span id="breadcrumbTitle"></span></div>
+    <a href="#/oferty" class="back-link">← Wróć do listy ofert</a>
+    <div class="detail-grid">
+      <div>
+        <div class="gallery-main" id="galleryMain"></div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+        <h1 class="detail-title" id="detailTitle"></h1>
+        <div class="detail-loc" id="detailLoc"></div>
+        <p class="detail-desc" id="detailDesc"></p>
+      </div>
+      <div>
+        <div class="side-card">
+          <div class="side-price" id="detailPrice"></div>
+          <div id="detailPriceM2" style="font-size:12px; color:var(--muted); margin-top:4px; font-weight:600;"></div>
+          <div class="side-specs" id="detailSpecs"></div>
+          <a href="#/kontakt" class="btn-blue" style="display:block; text-align:center; width:100%; padding:13px;">Zapytaj o ofertę</a>
+          <div class="agent-mini">
+            <div class="agent-mini-photo"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="#1A4FA0"/><circle cx="22" cy="17" r="8" fill="#fff"/></svg></div>
+            <div><div class="agent-mini-name" id="detailAgentName">Robert Kaczmarek</div><div class="agent-mini-role">Kierownik biura</div></div>
+          </div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M6 15h4"/></svg>Kalkulator raty kredytu</div>
+          <div class="calc-row"><span>Wkład własny: <strong id="calcDownVal">20%</strong></span><input type="range" id="calcDown" min="10" max="50" value="20"></div>
+          <div class="calc-row"><span>Okres: <strong id="calcYearsVal">25 lat</strong></span><input type="range" id="calcYears" min="10" max="35" value="25"></div>
+          <div class="calc-row"><span>Oprocentowanie: <strong id="calcRateVal">7,2%</strong></span><input type="range" id="calcRate" min="50" max="100" value="72"></div>
+          <div class="calc-result">
+            <div class="calc-result-num" id="calcResult">— zł</div>
+            <div class="calc-result-label">szacunkowa rata miesięczna</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="similar-strip">
+      <div class="section-head" style="margin-bottom:22px;"><h2 style="font-size:20px;">Podobne oferty</h2></div>
+      <div class="grid3" id="similarListings"></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="view-zespol">
+  <div class="team-hero">
+    <h1 style="font-size:30px; margin-bottom:14px;">Nasz zespół agentów</h1>
+    <p style="color:var(--muted); font-size:15px; font-weight:500;">12 licencjonowanych agentów, jedna baza ofert, wspólny standard obsługi.</p>
+  </div>
+  <div class="section">
+    <div class="team">
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 78 78"><rect width="78" height="78" fill="#1A4FA0"/><circle cx="39" cy="31" r="14" fill="#fff"/></svg></div><div class="agent-name">Robert Kaczmarek</div><div class="agent-role">Kierownik biura</div><div class="agent-bio">18 lat w branży, licencja pośrednika nr 12405.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 78 78"><rect width="78" height="78" fill="#0F3572"/><circle cx="39" cy="31" r="14" fill="#fff"/></svg></div><div class="agent-name">Anna Krupa</div><div class="agent-role">Starszy agent</div><div class="agent-bio">Specjalizacja: nieruchomości komercyjne.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 78 78"><rect width="78" height="78" fill="#5B6B85"/><circle cx="39" cy="31" r="14" fill="#fff"/></svg></div><div class="agent-name">Michał Wieczorek</div><div class="agent-role">Agent</div><div class="agent-bio">Domy i działki w regionie kołobrzeskim.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="view-kontakt">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h2>Skontaktuj się z naszym biurem</h2>
+      <p>Odpowiadamy w ciągu jednego dnia roboczego — dane biura poniżej.</p>
+      <div class="contact-detail"><div><strong>Adres</strong>ul. Zwycięzców 15, 78-100 Kołobrzeg</div></div>
+      <div class="contact-detail"><div><strong>Telefon</strong>+48 94 444 44 44</div></div>
+      <div class="contact-detail"><div><strong>E-mail</strong>biuro@metro-nieruchomosci.pl</div></div>
+      <div class="contact-detail"><div><strong>Godziny</strong>Pon–Pt 8:00–18:00, Sob 9:00–14:00</div></div>
+    </div>
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="form-row"><label>Imię i nazwisko</label><input type="text" required></div>
+        <div class="form-row"><label>E-mail</label><input type="email" required></div>
+        <div class="form-row"><label>Wiadomość</label><textarea required placeholder="W czym możemy pomóc?"></textarea></div>
+        <button type="submit" class="btn-blue form-submit">Wyślij wiadomość</button>
+        <div class="form-success" id="formSuccess">Dziękujemy! To demonstracja — w realnym wdrożeniu wiadomość trafiłaby prosto do Twojego CRM-a.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Metro Nieruchomości — przykładowa treść demonstracyjna szablonu DealBase.
+</footer>
+
+<script>
+const BASE_URL = 'https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/';
+function photoUrl(folder, n){ return BASE_URL + folder + '/' + folder + '_' + n + '.jpg'; }
+
+const ICON = {
+  bed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9v9M2 12h20M22 9v9M6 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4M14 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>',
+  area: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v6H3zM15 15h6v6h-6z"/><path d="M9 3h12v12"/></svg>'
+};
+
+const BADGE_LABEL = { exclusive:'Na wyłączności', promo:'W promocji' };
+
+const OFFERS = [
+  { id:1, folder:'8835aaaa-c02a-4acb-b7ab-d8b2f2106236', ref:'M-4401', badge:'exclusive', title:'Dom, Grzybowo', type:'Dom', price:6500000, area:968, rooms:null, loc:'Kołobrzeg, Grzybowo', desc:'Wyjątkowa rezydencja w prestiżowej części Grzybowa, blisko plaży.' },
+  { id:2, folder:'00e0538b-e5c1-4843-954d-5de5f50d4927', ref:'M-4388', badge:'promo', title:'Obiekt inwestycyjny, Grzybowo', type:'Inwestycja', price:2290000, area:472, rooms:null, loc:'Kołobrzeg, Grzybowo', desc:'Obiekt inwestycyjny o dużym potencjale, blisko strefy nadmorskiej.' },
+  { id:3, folder:'7eccc42a-e2db-4162-b1a0-1bae2fa2ccb2', ref:'M-4275', badge:null, title:'Apartament, Kołobrzeg', type:'Apartament', price:879000, area:113, rooms:4, loc:'Kołobrzeg', desc:'Przestronny apartament czteropokojowy, wysoki standard.' },
+  { id:4, folder:'227425c6-c8bf-4ed3-97b8-4965d30c1547', ref:'M-4162', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:359000, area:33, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowa kawalerka, świetna pod wynajem sezonowy.' },
+  { id:5, folder:'816a144d-02de-4259-8407-0d3ab3b02c96', ref:'M-4049', badge:null, title:'Dom, Wartkowo', type:'Dom', price:660000, area:200, rooms:5, loc:'Gościno', desc:'Komfortowy dom pięciopokojowy z ogrodem i garażem.' },
+  { id:6, folder:'aca93f60-0b47-4f34-b71b-a5ec3af73d58', ref:'M-3937', badge:'exclusive', title:'Apartament, Trzebiatów', type:'Apartament', price:699000, area:300, rooms:4, loc:'Trzebiatów', desc:'Unikalny apartament o dużym metrażu, elastyczny układ.' },
+  { id:7, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', ref:'M-3822', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem.' },
+  { id:8, folder:'f5983c09-200d-47ae-ba37-c11f56ba6839', ref:'M-3710', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:499000, area:48, rooms:2, loc:'Kołobrzeg', desc:'Dwupokojowe mieszkanie blisko promenady.' },
+  { id:9, folder:'a5120e4f-c2ee-4ac4-a35b-4806a41134d3', ref:'M-3599', badge:null, title:'Działka, Niekanin', type:'Inwestycja', price:79000, area:470, rooms:null, loc:'Kołobrzeg, Niekanin', desc:'Działka budowlana w spokojnej okolicy Niekanina.' }
+];
+
+const fmt = n => n.toLocaleString('pl-PL') + ' zł';
+
+function listingCard(o){
+  const pricePerM2 = Math.round(o.price / o.area).toLocaleString('pl-PL');
+  return `<div class="listing" onclick="location.hash='#/oferta/${o.id}'">
+    <div class="listing-img">
+      <img src="${photoUrl(o.folder,1)}" alt="${o.title}" loading="lazy">
+      ${o.badge ? `<span class="listing-badge ${o.badge}">${BADGE_LABEL[o.badge]}</span>` : `<span class="listing-badge">${o.type}</span>`}
+      <span class="listing-ref">${o.ref}</span>
+    </div>
+    <div class="listing-info">
+      <div class="listing-price">${fmt(o.price)}</div>
+      <div class="listing-price-m2">${pricePerM2} zł/m²</div>
+      <div class="listing-loc">${o.title} — ${o.loc}</div>
+      <div class="listing-meta">
+        ${o.rooms ? `<span class="meta-item">${ICON.bed}${o.rooms} pok.</span>` : ''}
+        <span class="meta-item">${ICON.area}${o.area} m²</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('homeListings').innerHTML = OFFERS.slice(0,3).map(listingCard).join('');
+
+function renderListings(){
+  const type = document.getElementById('filterType').value;
+  const maxPrice = document.getElementById('filterPrice').value;
+  const sort = document.getElementById('filterSort').value;
+  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!maxPrice || o.price <= Number(maxPrice)));
+  if(sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+  if(sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  document.getElementById('allListings').innerHTML = filtered.map(listingCard).join('');
+  document.getElementById('filterCount').textContent = `${filtered.length} ${filtered.length === 1 ? 'oferta' : 'ofert'} spełnia wybrane kryteria`;
+  document.getElementById('emptyState').style.display = filtered.length ? 'none' : 'block';
+}
+['filterType','filterPrice','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
+
+function renderDetail(id){
+  const o = OFFERS.find(x => x.id === Number(id));
+  if(!o) return;
+  document.getElementById('galleryMain').innerHTML = `<img src="${photoUrl(o.folder,1)}" alt="${o.title}">`;
+  document.getElementById('galleryThumbs').innerHTML = [1,2,3,4].map((n,i) => `<div class="gallery-thumb ${i===0?'active':''}" onclick="document.getElementById('galleryMain').innerHTML='<img src=\\'${photoUrl(o.folder,n)}\\' alt=\\'${o.title}\\'>'; document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');"><img src="${photoUrl(o.folder,n)}" alt=""></div>`).join('');
+  document.getElementById('detailTitle').textContent = o.title;
+  document.getElementById('detailLoc').textContent = o.loc;
+  document.getElementById('detailDesc').textContent = o.desc;
+  document.getElementById('detailPrice').textContent = fmt(o.price);
+  document.getElementById('detailPriceM2').textContent = Math.round(o.price / o.area).toLocaleString('pl-PL') + ' zł/m²';
+  document.getElementById('breadcrumbTitle').textContent = o.title;
+  document.getElementById('detailSpecs').innerHTML = `
+    <div class="spec-item"><div class="spec-label">Powierzchnia</div>${o.area} m²</div>
+    ${o.rooms ? `<div class="spec-item"><div class="spec-label">Pokoje</div>${o.rooms}</div>` : ''}
+    <div class="spec-item"><div class="spec-label">Typ</div>${o.type}</div>
+  `;
+  const similar = OFFERS.filter(x => x.type === o.type && x.id !== o.id).slice(0,3);
+  document.getElementById('similarListings').innerHTML = (similar.length ? similar : OFFERS.filter(x=>x.id!==o.id).slice(0,3)).map(listingCard).join('');
+  initCalculator(o.price);
+  window.scrollTo(0,0);
+}
+
+function initCalculator(price){
+  const downEl = document.getElementById('calcDown');
+  const yearsEl = document.getElementById('calcYears');
+  const rateEl = document.getElementById('calcRate');
+  function update(){
+    const downPct = Number(downEl.value);
+    const years = Number(yearsEl.value);
+    const rate = Number(rateEl.value) / 10;
+    document.getElementById('calcDownVal').textContent = downPct + '%';
+    document.getElementById('calcYearsVal').textContent = years + ' lat';
+    document.getElementById('calcRateVal').textContent = rate.toFixed(1).replace('.', ',') + '%';
+    const loan = price * (1 - downPct / 100);
+    const monthlyRate = rate / 100 / 12;
+    const n = years * 12;
+    const payment = monthlyRate === 0 ? loan / n : loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -n));
+    document.getElementById('calcResult').textContent = Math.round(payment).toLocaleString('pl-PL') + ' zł';
+  }
+  downEl.oninput = update; yearsEl.oninput = update; rateEl.oninput = update;
+  update();
+}
+
+const routes = ['home','oferty','detail','zespol','kontakt'];
+function navigate(){
+  const hash = location.hash || '#/';
+  const parts = hash.replace('#/','').split('/').filter(Boolean);
+  let view = 'home';
+  if(parts[0] === 'oferty') view = 'oferty';
+  else if(parts[0] === 'oferta' && parts[1]) { view = 'detail'; renderDetail(parts[1]); }
+  else if(parts[0] === 'zespol') view = 'zespol';
+  else if(parts[0] === 'kontakt') view = 'kontakt';
+
+  routes.forEach(r => document.getElementById('view-' + r).classList.toggle('active', r === view));
+  document.querySelectorAll('[data-route]').forEach(a => {
+    const r = a.dataset.route;
+    const active = (r === '/' && view === 'home') || (r === '/oferty' && (view === 'oferty' || view === 'detail')) || (r === '/zespol' && view === 'zespol') || (r === '/kontakt' && view === 'kontakt');
+    a.classList.toggle('active', active);
+  });
+  if(view === 'oferty') renderListings();
+  document.getElementById('mobileMenu').classList.remove('open');
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', navigate);
+navigate();
+
+document.getElementById('hamburgerBtn').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.add('show');
+  this.reset();
+});
+</script>
+</body>
+</html>
