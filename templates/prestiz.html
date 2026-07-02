@@ -295,17 +295,17 @@
     </div>
     <div class="team" style="margin-bottom:20px;">
       <div class="agent-card">
-        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><defs><linearGradient id="agrad0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D1F3C"/><stop offset="100%" stop-color="#BF9A4A"/></linearGradient></defs><rect width="120" height="120" fill="url(#agrad0)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, serif" font-size="40" font-weight="600" fill="#fff" opacity="0.95">JK</text></svg></div>
         <div class="agent-name">Aleksandra Wójcik</div>
         <div class="agent-role">Współwłaścicielka</div>
         <div class="agent-bio">15 lat na rynku nieruchomości premium. Specjalizuje się w transakcjach powyżej 1 mln zł.</div>
       </div><div class="agent-card">
-        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#16294A"/><circle cx="60" cy="48" r="24" fill="#E4CD98" opacity="0.6"/><path d="M20 110 Q60 70 100 110 Z" fill="#E4CD98" opacity="0.6"/></svg></div>
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><defs><linearGradient id="agrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D1F3C"/><stop offset="100%" stop-color="#BF9A4A"/></linearGradient></defs><rect width="120" height="120" fill="url(#agrad1)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, serif" font-size="40" font-weight="600" fill="#fff" opacity="0.95">AW</text></svg></div>
         <div class="agent-name">Michał Sokołowski</div>
         <div class="agent-role">Starszy agent</div>
         <div class="agent-bio">Specjalizacja: apartamenty inwestycyjne i nieruchomości komercyjne w centrum.</div>
       </div><div class="agent-card">
-        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><defs><linearGradient id="agrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D1F3C"/><stop offset="100%" stop-color="#BF9A4A"/></linearGradient></defs><rect width="120" height="120" fill="url(#agrad2)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, serif" font-size="40" font-weight="600" fill="#fff" opacity="0.95">MS</text></svg></div>
         <div class="agent-name">Julia Kamińska</div>
         <div class="agent-role">Agentka</div>
         <div class="agent-bio">Prowadzi klientów zagranicznych, mówi po angielsku i niemiecku.</div>
@@ -348,6 +348,7 @@
         <option value="Mieszkanie">Mieszkanie</option>
         <option value="Działka">Działka</option>
       </select>
+      <select id="filterRooms"><option value="">Liczba pokoi</option><option value="1">1 pokój</option><option value="2">2 pokoje</option><option value="3">3 pokoje</option><option value="4">4+ pokoje</option></select>
       <select id="filterPrice">
         <option value="">Budżet</option>
         <option value="800000">do 800 000 zł</option>
@@ -426,19 +427,19 @@
   <div class="section">
     <div class="team">
       <div class="agent-card">
-        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><defs><linearGradient id="agrad3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D1F3C"/><stop offset="100%" stop-color="#BF9A4A"/></linearGradient></defs><rect width="120" height="120" fill="url(#agrad3)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, serif" font-size="40" font-weight="600" fill="#fff" opacity="0.95">JK</text></svg></div>
         <div class="agent-name">Aleksandra Wójcik</div>
         <div class="agent-role">Współwłaścicielka</div>
         <div class="agent-bio">15 lat na rynku nieruchomości premium. Specjalizuje się w transakcjach powyżej 1 mln zł.</div>
       </div>
       <div class="agent-card">
-        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#16294A"/><circle cx="60" cy="48" r="24" fill="#E4CD98" opacity="0.6"/><path d="M20 110 Q60 70 100 110 Z" fill="#E4CD98" opacity="0.6"/></svg></div>
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><defs><linearGradient id="agrad4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D1F3C"/><stop offset="100%" stop-color="#BF9A4A"/></linearGradient></defs><rect width="120" height="120" fill="url(#agrad4)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, serif" font-size="40" font-weight="600" fill="#fff" opacity="0.95">AW</text></svg></div>
         <div class="agent-name">Michał Sokołowski</div>
         <div class="agent-role">Starszy agent</div>
         <div class="agent-bio">Specjalizacja: apartamenty inwestycyjne i nieruchomości komercyjne w centrum.</div>
       </div>
       <div class="agent-card">
-        <div class="agent-photo"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#0D1F3C"/><circle cx="60" cy="48" r="24" fill="#BF9A4A" opacity="0.7"/><path d="M20 110 Q60 70 100 110 Z" fill="#BF9A4A" opacity="0.7"/></svg></div>
+        <div class="agent-photo"><svg viewBox="0 0 120 120"><defs><linearGradient id="agrad5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D1F3C"/><stop offset="100%" stop-color="#BF9A4A"/></linearGradient></defs><rect width="120" height="120" fill="url(#agrad5)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, serif" font-size="40" font-weight="600" fill="#fff" opacity="0.95">MS</text></svg></div>
         <div class="agent-name">Julia Kamińska</div>
         <div class="agent-role">Agentka</div>
         <div class="agent-bio">Prowadzi klientów zagranicznych, mówi po angielsku i niemiecku.</div>
@@ -495,7 +496,11 @@ const OFFERS = [
   { id:6, folder:'7eccc42a-e2db-4162-b1a0-1bae2fa2ccb2', ref:'REF-1156', badge:null, title:'Apartament, Kołobrzeg', type:'Apartament', price:879000, area:113, rooms:4, loc:'Kołobrzeg', desc:'Przestronny apartament czteropokojowy w Kołobrzegu, wysoki standard, doskonała lokalizacja blisko centrum.' },
   { id:7, folder:'aca93f60-0b47-4f34-b71b-a5ec3af73d58', ref:'REF-1092', badge:'promo', title:'Apartament, Trzebiatów', type:'Apartament', price:699000, area:300, rooms:4, loc:'Trzebiatów', desc:'Unikalny apartament o dużym metrażu, elastyczny układ pomieszczeń, możliwość adaptacji na cele komercyjne.' },
   { id:8, folder:'816a144d-02de-4259-8407-0d3ab3b02c96', ref:'REF-0987', badge:null, title:'Dom, Wartkowo', type:'Dom', price:660000, area:200, rooms:5, loc:'Gościno', desc:'Komfortowy dom pięciopokojowy w spokojnej okolicy Gościna, z ogrodem i garażem.' },
-  { id:9, folder:'82a5a535-354a-4b19-b2b5-387130e9eb0a', ref:'REF-0844', badge:null, title:'Apartament, Kołobrzeg', type:'Apartament', price:550000, area:34, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowy apartament inwestycyjny w Kołobrzegu, bardzo dobra lokalizacja pod wynajem sezonowy.' }
+  { id:9, folder:'82a5a535-354a-4b19-b2b5-387130e9eb0a', ref:'REF-0844', badge:null, title:'Apartament, Kołobrzeg', type:'Apartament', price:550000, area:34, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowy apartament inwestycyjny w Kołobrzegu, bardzo dobra lokalizacja pod wynajem sezonowy.' },
+  { id:10, folder:'07dfa70f-9ed8-4f5d-82eb-49fcc5ff3ccd', ref:'REF-0731', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:410000, area:52, rooms:2, loc:'Kołobrzeg', desc:'Dwupokojowe mieszkanie o dobrym rozkładzie, blisko szkoły i komunikacji miejskiej.' },
+  { id:11, folder:'f5983c09-200d-47ae-ba37-c11f56ba6839', ref:'REF-0623', badge:'promo', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:499000, area:48, rooms:2, loc:'Kołobrzeg', desc:'Mieszkanie blisko promenady, świetne pod wynajem sezonowy premium.' },
+  { id:12, folder:'4f7091fa-f53b-4cbd-8e79-219f569f7c03', ref:'REF-0518', badge:null, title:'Obiekt, Mielno Gąski', type:'Inwestycja', price:1100000, area:1604, rooms:null, loc:'Mielno', desc:'Rozległy obiekt inwestycyjny blisko wydm i morza, duży potencjał na wynajem sezonowy premium.' },
+  { id:13, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', ref:'REF-0409', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem, dobra lokalizacja.' }
 ];
 
 const fmt = n => n.toLocaleString('pl-PL') + ' zł';
@@ -525,16 +530,17 @@ document.getElementById('homeListings').innerHTML = OFFERS.slice(0,3).map(listin
 
 function renderListings(){
   const type = document.getElementById('filterType').value;
+  const roomsFilter = document.getElementById('filterRooms').value;
   const maxPrice = document.getElementById('filterPrice').value;
   const sort = document.getElementById('filterSort').value;
-  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!maxPrice || o.price <= Number(maxPrice)));
+  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!maxPrice || o.price <= Number(maxPrice)) && (!roomsFilter || (roomsFilter === '4' ? (o.rooms && o.rooms >= 4) : o.rooms === Number(roomsFilter))));
   if(sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
   if(sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
   document.getElementById('allListings').innerHTML = filtered.map(listingCard).join('');
   document.getElementById('filterCount').textContent = `${filtered.length} ${filtered.length === 1 ? 'oferta' : 'ofert'} spełnia wybrane kryteria`;
   document.getElementById('emptyState').style.display = filtered.length ? 'none' : 'block';
 }
-['filterType','filterPrice','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
+['filterType','filterPrice','filterRooms','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
 
 function renderDetail(id){
   const o = OFFERS.find(x => x.id === Number(id));
