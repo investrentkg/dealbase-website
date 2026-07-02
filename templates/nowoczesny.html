@@ -175,6 +175,12 @@
   .tq{ font-size:34px; color:var(--lime); line-height:1; margin-bottom:6px; font-family:serif; }
   .testimonial-card p{ font-size:14px; line-height:1.6; margin-bottom:12px; }
   .testimonial-card span{ font-size:12.5px; color:var(--gray); }
+
+  .section-tint{ background: rgba(196,245,66,0.06); }
+  .ab-stat{ background: rgba(196,245,66,0.05); border-radius:8px; padding:14px; }
+  .why-item{ background: rgba(196,245,66,0.045) !important; }
+  .testimonial-card{ background: rgba(196,245,66,0.055) !important; }
+  .hero-glow{ position:absolute; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(196,245,66,0.35), transparent 70%); filter:blur(10px); pointer-events:none; z-index:1; top: -120px; right: -60px; }
 </style>
 </head>
 <body>
@@ -206,6 +212,7 @@
   <div class="hero">
     <div class="hero-bg" style="background-image:url('https://sqpepaiqwxginqnglspl.supabase.co/storage/v1/object/public/offer-photos/7ad9fdd7-f5c9-43e5-81e7-74f6438e1441/7ad9fdd7-f5c9-43e5-81e7-74f6438e1441_1.jpg');"></div>
     <div class="hero-overlay"></div>
+    <div class="hero-glow"></div>
     <div class="hero-inner">
       <div>
         <h1>Znajdź mieszkanie, <span class="hl">nie stres</span></h1>
@@ -243,7 +250,7 @@
   </div>
 
   
-  <div class="section reveal-inline">
+  <div class="section reveal-inline section-tint">
     <div class="about-split">
       <div>
         <h2 style="font-size:26px; margin-bottom:14px;">O Nexo Nieruchomości</h2>
@@ -260,7 +267,7 @@
     <div class="why-grid"><div class="why-item"><div class="why-num">01</div><h3>Odpowiedź tego samego dnia</h3><p>Żadne zapytanie nie czeka dłużej niż do końca dnia roboczego — sprawdzamy to co tydzień.</p></div><div class="why-item"><div class="why-num">02</div><h3>Zero prowizji ukrytych w cenie</h3><p>Warunki finansowe podajemy z góry, zanim podpiszesz jakikolwiek dokument.</p></div><div class="why-item"><div class="why-num">03</div><h3>Baza aktualizowana codziennie</h3><p>Oferty, które widzisz na stronie, to te samo dane, na których pracują nasi agenci — bez opóźnień.</p></div><div class="why-item"><div class="why-num">04</div><h3>Cyfrowy proces od A do Z</h3><p>Dokumenty, podpisy i komunikację prowadzimy cyfrowo — mniej papieru, mniej wizyt w biurze.</p></div></div>
   </div>
 
-  <div class="section reveal-inline" style="padding-top:0;">
+  <div class="section reveal-inline section-tint" style="padding-top:0;">
     <div class="section-head">
       <h2 style="font-size:26px;">Co mówią klienci</h2>
     </div>
