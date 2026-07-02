@@ -279,7 +279,7 @@
       <p style="margin-top:8px;">Poznaj zespół, zanim zadzwonisz.</p>
     </div>
     <div class="team" style="margin-bottom:20px;">
-      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#C4F542"/><circle cx="40" cy="32" r="14" fill="#111214"/></svg></div><div class="agent-name">Tomek Adamski</div><div class="agent-role">Założyciel</div><div class="agent-bio">10 lat doświadczenia w obrocie nieruchomościami.</div></div><div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#8FB82E"/><circle cx="40" cy="32" r="14" fill="#111214"/></svg></div><div class="agent-name">Natalia Górska</div><div class="agent-role">Agentka</div><div class="agent-bio">Specjalizacja: wynajem długoterminowy.</div></div><div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#111214"/><circle cx="40" cy="32" r="14" fill="#C4F542"/></svg></div><div class="agent-name">Piotr Zieliński</div><div class="agent-role">Agent</div><div class="agent-bio">Domy i działki poza miastem.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><defs><linearGradient id="agrad0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs><rect width="80" height="80" fill="url(#agrad0)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif" font-size="27" font-weight="600" fill="#fff" opacity="0.95">PZ</text></svg></div><div class="agent-name">Tomek Adamski</div><div class="agent-role">Założyciel</div><div class="agent-bio">10 lat doświadczenia w obrocie nieruchomościami.</div></div><div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><defs><linearGradient id="agrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs><rect width="80" height="80" fill="url(#agrad1)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif" font-size="27" font-weight="600" fill="#fff" opacity="0.95">TA</text></svg></div><div class="agent-name">Natalia Górska</div><div class="agent-role">Agentka</div><div class="agent-bio">Specjalizacja: wynajem długoterminowy.</div></div><div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><defs><linearGradient id="agrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs><rect width="80" height="80" fill="url(#agrad2)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif" font-size="27" font-weight="600" fill="#fff" opacity="0.95">NG</text></svg></div><div class="agent-name">Piotr Zieliński</div><div class="agent-role">Agent</div><div class="agent-bio">Domy i działki poza miastem.</div></div>
     </div>
     <div class="view-all-link"><a href="#/zespol">Zobacz cały zespół →</a></div>
   </div>
@@ -315,6 +315,7 @@
         <option value="Dom">Dom</option>
         <option value="Działka">Działka</option>
       </select>
+      <select id="filterRooms"><option value="">Liczba pokoi</option><option value="1">1 pokój</option><option value="2">2 pokoje</option><option value="3">3 pokoje</option><option value="4">4+ pokoje</option></select>
       <select id="filterPrice">
         <option value="">Budżet</option>
         <option value="500000">do 500 000 zł</option>
@@ -382,9 +383,9 @@
   </div>
   <div class="section">
     <div class="team">
-      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#C4F542"/><circle cx="40" cy="32" r="14" fill="#111214"/></svg></div><div class="agent-name">Tomek Adamski</div><div class="agent-role">Założyciel</div><div class="agent-bio">10 lat doświadczenia w obrocie nieruchomościami.</div></div>
-      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#8FB82E"/><circle cx="40" cy="32" r="14" fill="#111214"/></svg></div><div class="agent-name">Natalia Górska</div><div class="agent-role">Agentka</div><div class="agent-bio">Specjalizacja: wynajem długoterminowy.</div></div>
-      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#111214"/><circle cx="40" cy="32" r="14" fill="#C4F542"/></svg></div><div class="agent-name">Piotr Zieliński</div><div class="agent-role">Agent</div><div class="agent-bio">Domy i działki poza miastem.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><defs><linearGradient id="agrad3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs><rect width="80" height="80" fill="url(#agrad3)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif" font-size="27" font-weight="600" fill="#fff" opacity="0.95">PZ</text></svg></div><div class="agent-name">Tomek Adamski</div><div class="agent-role">Założyciel</div><div class="agent-bio">10 lat doświadczenia w obrocie nieruchomościami.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><defs><linearGradient id="agrad4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs><rect width="80" height="80" fill="url(#agrad4)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif" font-size="27" font-weight="600" fill="#fff" opacity="0.95">TA</text></svg></div><div class="agent-name">Natalia Górska</div><div class="agent-role">Agentka</div><div class="agent-bio">Specjalizacja: wynajem długoterminowy.</div></div>
+      <div class="agent-card"><div class="agent-photo"><svg viewBox="0 0 80 80"><defs><linearGradient id="agrad5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#111214"/><stop offset="100%" stop-color="#C4F542"/></linearGradient></defs><rect width="80" height="80" fill="url(#agrad5)"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Space Grotesk, sans-serif" font-size="27" font-weight="600" fill="#fff" opacity="0.95">NG</text></svg></div><div class="agent-name">Piotr Zieliński</div><div class="agent-role">Agent</div><div class="agent-bio">Domy i działki poza miastem.</div></div>
     </div>
   </div>
 </section>
@@ -434,7 +435,11 @@ const OFFERS = [
   { id:6, folder:'22f68641-9e13-4b00-8716-81f5e1e8020c', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:60, rooms:3, loc:'Trzebiatów', desc:'Trzypokojowe mieszkanie z dobrym nasłonecznieniem, blisko centrum.' },
   { id:7, folder:'c6523d12-cd39-4b50-8fab-745f934a5d28', badge:null, title:'Lokal usługowy, Trzebiatów', type:'Lokal', price:182000, area:46, rooms:1, loc:'Trzebiatów', desc:'Lokal użytkowy na parterze, dobra widoczność, idealny pod działalność usługową.' },
   { id:8, folder:'0e10151e-07d1-48b4-8ec2-7b19abdb4cb4', badge:'promo', title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:299000, area:68, rooms:3, loc:'Trzebiatów', desc:'Mieszkanie trzypokojowe o funkcjonalnym rozkładzie, spore pokoje.' },
-  { id:9, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem, dobra lokalizacja.' }
+  { id:9, folder:'61126a52-3a59-4115-b76a-928b0c3c0594', badge:null, title:'Mieszkanie, Trzebiatów', type:'Mieszkanie', price:329000, area:70, rooms:3, loc:'Trzebiatów', desc:'Duże mieszkanie trzypokojowe z balkonem, dobra lokalizacja.' },
+  { id:10, folder:'82a5a535-354a-4b19-b2b5-387130e9eb0a', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:550000, area:34, rooms:1, loc:'Kołobrzeg', desc:'Kompaktowe mieszkanie inwestycyjne blisko promenady.' },
+  { id:11, folder:'2abbfc8f-9c1b-4182-991f-4736162c5a41', badge:'promo', title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:450000, area:38, rooms:2, loc:'Kołobrzeg', desc:'Dwupokojowe mieszkanie w dobrej lokalizacji, blisko centrum.' },
+  { id:12, folder:'f5983c09-200d-47ae-ba37-c11f56ba6839', badge:null, title:'Mieszkanie, Kołobrzeg', type:'Mieszkanie', price:499000, area:48, rooms:2, loc:'Kołobrzeg', desc:'Mieszkanie blisko promenady, dobre pod wynajem.' },
+  { id:13, folder:'a5120e4f-c2ee-4ac4-a35b-4806a41134d3', badge:null, title:'Działka, Niekanin', type:'Działka', price:79000, area:470, rooms:null, loc:'Kołobrzeg, Niekanin', desc:'Działka budowlana w spokojnej okolicy, blisko Kołobrzegu.' }
 ];
 
 const fmt = n => n.toLocaleString('pl-PL') + ' zł';
@@ -464,16 +469,17 @@ document.getElementById('homeListings').innerHTML = OFFERS.slice(0,3).map(listin
 
 function renderListings(){
   const type = document.getElementById('filterType').value;
+  const roomsFilter = document.getElementById('filterRooms').value;
   const maxPrice = document.getElementById('filterPrice').value;
   const sort = document.getElementById('filterSort').value;
-  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!maxPrice || o.price <= Number(maxPrice)));
+  let filtered = OFFERS.filter(o => (!type || o.type === type) && (!maxPrice || o.price <= Number(maxPrice)) && (!roomsFilter || (roomsFilter === '4' ? (o.rooms && o.rooms >= 4) : o.rooms === Number(roomsFilter))));
   if(sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
   if(sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
   document.getElementById('allListings').innerHTML = filtered.map(listingCard).join('');
   document.getElementById('filterCount').textContent = `${filtered.length} ${filtered.length === 1 ? 'oferta' : 'ofert'} spełnia wybrane kryteria`;
   document.getElementById('emptyState').style.display = filtered.length ? 'none' : 'block';
 }
-['filterType','filterPrice','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
+['filterType','filterPrice','filterRooms','filterSort'].forEach(id => document.getElementById(id).addEventListener('change', renderListings));
 
 function renderDetail(id){
   const o = OFFERS.find(x => x.id === Number(id));
