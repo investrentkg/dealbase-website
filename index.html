@@ -136,6 +136,20 @@
   .feature-grid-3{ grid-template-columns:repeat(3,1fr); }
   @media(max-width:900px){ .feature-grid-3{ grid-template-columns:repeat(2,1fr); } }
   @media(max-width:600px){ .feature-grid-3{ grid-template-columns:1fr; } }
+
+  .feature-grid-flagship{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media(max-width:900px){ .feature-grid-flagship{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:560px){ .feature-grid-flagship{ grid-template-columns:1fr; } }
+
+  .feature-compact-head{ font-size:13px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin:44px 0 18px; }
+  .feature-compact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  @media(max-width:700px){ .feature-compact-grid{ grid-template-columns:1fr; } }
+  .feature-compact-item{ background:var(--card); padding:18px 20px; display:flex; align-items:flex-start; gap:14px; }
+  .fc-icon{ width:30px; height:30px; border-radius:7px; background:var(--cream); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .fc-icon svg{ width:15px; height:15px; color:var(--teal); }
+  .fc-text h4{ font-size:14px; font-weight:600; margin-bottom:3px; }
+  .fc-text p{ font-size:12.5px; color:var(--muted); line-height:1.5; }
+  .fc-badge{ display:inline-block; font-size:10px; font-weight:600; color:#8A5A16; background:#FFF3E6; padding:2px 8px; border-radius:100px; margin-left:8px; vertical-align:middle; }
   .feature-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); display:block; margin-bottom:16px; }
   .feature-card h3{ font-size:19px; margin-bottom:10px; }
   .feature-card p{ font-size:14.5px; color:var(--muted); }
@@ -435,75 +449,67 @@
     <div class="section-head">
       <span class="section-tag">Funkcje</span>
       <h2>System budowany szybciej niż konkurencja nadąża go kopiować</h2>
-      <p class="section-desc">Bez integracji od zewnętrznych dostawców doklejanych na siłę. Wszystko żyje w jednym systemie, i wszystko rozwija się na bieżąco — zobacz changelog niżej.</p>
+      <p class="section-desc">Cztery rzeczy, które wyróżniają nas najmocniej — reszta funkcji rośnie na bieżąco, zobacz changelog niżej.</p>
     </div>
-    <div class="feature-grid feature-grid-3">
+
+    <div class="feature-grid-flagship">
       <div class="feature-card">
         <span class="diff-badge">Wyróżnik</span>
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg></div>
         <span class="feature-tag">moduł / asystent-ai</span>
         <h3>Asystent AI</h3>
-        <p>Pisze opisy ofert, odpowiada na pytania klientów i podpowiada agentowi następny krok w lejku sprzedaży. W typowym systemie klasy korporacyjnej to osobny, płatny dodatek — tu jest wbudowany.</p>
+        <p>Pisze opisy ofert, odpowiada na pytania klientów i podpowiada agentowi następny krok. W typowym systemie to płatny dodatek — tu jest wbudowany.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
-        <span class="feature-tag">moduł / wyszukiwanie-portali</span>
-        <h3>Wyszukiwanie 5 portali</h3>
-        <p>Jedno zapytanie przeszukuje Otodom, OLX, Gratkę, Morizon i Nieruchomości-online równolegle. Wyniki trafiają prosto do bazy ofert.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="m8 12 4-4 4 4 4-8"/></svg></div>
-        <span class="feature-tag">moduł / publikacja-portali</span>
-        <h3>Publikacja ofert na portale</h3>
-        <p>Dodajesz ofertę raz w CRM-ie — jednym kliknięciem trafia na Otodom, bez ręcznego przepisywania w panelu portalu. Kolejne portale (Nieruchomości-online, Domiporta) w trakcie wdrażania.</p>
+        <span class="diff-badge">Wyróżnik</span>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <span class="feature-tag">moduł / wycena-ai</span>
+        <h3>Wycena AI z rejestrami cen</h3>
+        <p>Łączy dane RCN z bazą ofert porównawczych — dwa punkty odniesienia: szybka sprzedaż i sprzedaż cierpliwa.</p>
       </div>
       <div class="feature-card">
         <span class="diff-badge">Wyróżnik</span>
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8a5 5 0 1 0-9.9 1.1"/><path d="M3 21v-2a4 4 0 0 1 4-4h3"/><circle cx="17" cy="17" r="4"/><path d="m20 20-1.5-1.5"/></svg></div>
         <span class="feature-tag">moduł / dopasowania</span>
         <h3>Dopasowania klient ↔ oferta</h3>
-        <p>System śledzi kryteria klienta i automatycznie podpowiada pasujące oferty z bazy, z procentowym wskaźnikiem zgodności — bez ręcznego przeglądania ofert.</p>
+        <p>System automatycznie podpowiada pasujące oferty z procentowym wskaźnikiem zgodności — bez ręcznego przeglądania.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg></div>
-        <span class="feature-tag">moduł / dokumenty</span>
-        <h3>Automatyczne dokumenty</h3>
-        <p>Umowy, prezentacje ofertowe i karty klienta generują się z danych już wpisanych do systemu — bez przepisywania niczego po raz drugi.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+        <span class="feature-tag">moduł / wyszukiwanie-portali</span>
+        <h3>Wyszukiwanie 5 portali</h3>
+        <p>Jedno zapytanie przeszukuje Otodom, OLX, Gratkę, Morizon i Nieruchomości-online równolegle.</p>
       </div>
-      <div class="feature-card">
-        <span class="diff-badge">Wyróżnik</span>
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-        <span class="feature-tag">moduł / wycena-ai</span>
-        <h3>Wycena AI z trzema źródłami danych</h3>
-        <p>Asystent AI szacuje wartość nieruchomości łącząc ceny transakcyjne z ogólnopolskiego rejestru (RCN), oferty porównawcze z Twojej bazy oraz wspólne, stale rosnące archiwum ofert z portali ogłoszeniowych — dwa punkty odniesienia: szybka sprzedaż (4-6 tygodni) i sprzedaż cierpliwa (3-6 miesięcy).</p>
+    </div>
+
+    <div class="feature-compact-head">Pozostałe funkcje w systemie</div>
+    <div class="feature-compact-grid">
+      <div class="feature-compact-item">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="m8 12 4-4 4 4 4-8"/></svg></div>
+        <div class="fc-text"><h4>Publikacja ofert na portale</h4><p>Jednym kliknięciem na Otodom, bez ręcznego przepisywania. Kolejne portale w trakcie wdrażania.</p></div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <span class="feature-tag">moduł / kalendarz</span>
-        <h3>Synchronizacja z Kalendarzem Google</h3>
-        <p>Zadania z CRM-u trafiają do Twojego Kalendarza Google automatycznie, w obie strony — bez ręcznego przepisywania spotkań między systemami.</p>
+      <div class="feature-compact-item">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg></div>
+        <div class="fc-text"><h4>Automatyczne dokumenty</h4><p>Umowy i karty klienta generują się z danych już wpisanych do systemu.</p></div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg></div>
-        <span class="feature-tag">moduł / aplikacja-mobilna</span>
-        <h3>Działa jak aplikacja na telefonie</h3>
-        <p>Pełna responsywność i instalacja na ekranie głównym telefonu (PWA) — agent zarządza ofertami i klientami bez laptopa, prosto z terenu.</p>
+      <div class="feature-compact-item">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg></div>
+        <div class="fc-text"><h4>Działa jak aplikacja na telefonie</h4><p>Pełna responsywność i instalacja na ekranie głównym (PWA).</p></div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
-        <span class="feature-tag">moduł / branding-biura</span>
-        <h3>Własne logo i branding biura</h3>
-        <p>Panel biura z logo, kolorami i danymi kontaktowymi widocznymi na wydrukach, ofertach i we wszystkich materiałach generowanych z systemu.</p>
+      <div class="feature-compact-item">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <div class="fc-text"><h4>Własne logo i branding biura</h4><p>Logo i dane biura widoczne na wydrukach i wszystkich materiałach.</p></div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div>
-        <span class="feature-tag">moduł / raporty</span>
-        <h3>Raporty i finanse w jednym miejscu</h3>
-        <p>Prowizje, rozliczenia agentów i integracja z fakturowaniem — bez przenoszenia danych do osobnego arkusza kalkulacyjnego.</p>
+      <div class="feature-compact-item">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div>
+        <div class="fc-text"><h4>Raporty i finanse</h4><p>Prowizje i rozliczenia z integracją fakturowania w jednym miejscu.</p></div>
+      </div>
+      <div class="feature-compact-item">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div class="fc-text"><h4>Synchronizacja z Kalendarzem Google</h4><p>Zadania trafiają do kalendarza automatycznie, w obie strony.</p></div>
       </div>
     </div>
   </section>
-
   <section class="section reveal" id="w-akcji">
     <div class="section-head">
       <span class="section-tag">Zobacz w akcji</span>
