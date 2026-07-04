@@ -48,6 +48,15 @@
   .reveal.in{ opacity:1; transform:translateY(0); }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
+  /* CTA: subtelna, "oddychająca" poświata w kolorze koralowym (ten sam wzorzec co na investrent.com.pl) */
+  @keyframes ctaGlowPulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(232,99,63,.55); transform:scale(1); }
+    50%{ box-shadow:0 0 0 13px rgba(232,99,63,0); transform:scale(1.025); }
+  }
+  .cta-pulse{ animation:ctaGlowPulse 2.2s ease-in-out infinite; }
+  .cta-pulse-limited{ animation:ctaGlowPulse 2.2s ease-in-out 3; }
+  @media (prefers-reduced-motion: reduce){ .cta-pulse, .cta-pulse-limited{ animation:none; } }
+
   .nav-outer{ position:sticky; top:0; z-index:50; background:rgba(250,248,243,0.86); backdrop-filter:blur(10px); border-bottom:1px solid transparent; transition:border-color 0.3s ease; }
   .nav-outer.scrolled{ border-bottom-color:var(--border); }
   nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:1120px; margin:0 auto; }
@@ -390,7 +399,7 @@
       <h1>CRM zbudowany <em>wokół AI</em>,<br>nie z AI doklejonym na koniec.</h1>
       <p class="hero-sub">Asystent AI, wyszukiwanie ofert z siedmiu portali i dopasowania klient↔oferta są częścią architektury DealBase od pierwszej linii kodu — nie wtyczką dodaną do starego systemu.</p>
       <div class="hero-actions">
-        <a href="#kontakt" class="btn-primary">Umów demo →</a>
+        <a href="#kontakt" class="btn-primary cta-pulse">Umów demo →</a>
         <a href="#w-akcji" class="btn-ghost">Zobacz w akcji</a>
       </div>
       <div class="hero-reassure">
@@ -839,7 +848,7 @@
     <div class="contact-box">
       <h2>Zobacz DealBase na żywo</h2>
       <p>30 minut, Twoje realne dane wejściowe — bez slajdów, bez gotowego demo na pokaz.</p>
-      <a href="mailto:zarzad@investrent.com.pl?subject=Demo%20DealBase%20CRM&body=Cze%C5%9B%C4%87%2C%20chcia%C5%82bym%20um%C3%B3wi%C4%87%20demo%20DealBase%20CRM%20dla%20mojego%20biura." class="btn-primary">Umów demo →</a>
+      <a href="mailto:zarzad@investrent.com.pl?subject=Demo%20DealBase%20CRM&body=Cze%C5%9B%C4%87%2C%20chcia%C5%82bym%20um%C3%B3wi%C4%87%20demo%20DealBase%20CRM%20dla%20mojego%20biura." class="btn-primary cta-pulse">Umów demo →</a>
     </div>
   </section>
 
@@ -893,7 +902,7 @@
       <button type="submit" class="cw-send">Wyślij wiadomość</button>
     </form>
   </div>
-  <button class="cw-bubble" id="cwBubble" aria-label="Otwórz kontakt" aria-expanded="false">
+  <button class="cw-bubble cta-pulse-limited" id="cwBubble" aria-label="Otwórz kontakt" aria-expanded="false">
     <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
     <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     <span class="cw-dot"></span>
@@ -1008,13 +1017,36 @@
   var calcTotal = document.getElementById('calcTotal');
   var calcPlanBtns = document.querySelectorAll('.calc-plan-btn');
   var currentPricePerAgent = 149;
+  var calcTotalCurrentValue = 745; // stan animacji - poprzednia wartosc, z ktorej "dojezdzamy"
 
-  function fmtZl(n){ return n.toLocaleString('pl-PL') + ' zł'; }
+  function fmtZl(n){ return Math.round(n).toLocaleString('pl-PL') + ' zł'; }
+
+  // Plynnie animuje wielka liczbe kalkulatora z poprzedniej do nowej wartosci
+  // (ease-out-cubic, ~400ms) zamiast blyskawicznego skoku - ten sam efekt "zywej"
+  // liczby, ktory wdrozylismy w kalkulatorze kredytowym na investrent.com.pl
+  var calcTotalRaf = null;
+  function animateCalcTotal(to){
+    var from = calcTotalCurrentValue;
+    if(from === to){ calcTotal.textContent = fmtZl(to) + '/mies.'; return; }
+    if(prefersReduced){ calcTotalCurrentValue = to; calcTotal.textContent = fmtZl(to) + '/mies.'; return; }
+    if(calcTotalRaf) cancelAnimationFrame(calcTotalRaf);
+    var start = performance.now();
+    var duration = 350;
+    function tick(now){
+      var progress = Math.min(Math.max((now - start) / duration, 0), 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = from + (to - from) * eased;
+      calcTotal.textContent = fmtZl(current) + '/mies.';
+      if(progress < 1){ calcTotalRaf = requestAnimationFrame(tick); }
+      else { calcTotalCurrentValue = to; }
+    }
+    calcTotalRaf = requestAnimationFrame(tick);
+  }
 
   function updateCalc(){
     var agents = Number(calcAgentsInput.value);
     calcAgentsVal.textContent = agents;
-    calcTotal.textContent = fmtZl(agents * currentPricePerAgent) + '/mies.';
+    animateCalcTotal(agents * currentPricePerAgent);
     document.getElementById('calcCompare1').textContent = fmtZl(1 * currentPricePerAgent) + '/mies.';
     document.getElementById('calcCompare5').textContent = fmtZl(5 * currentPricePerAgent) + '/mies.';
     document.getElementById('calcCompare15').textContent = fmtZl(15 * currentPricePerAgent) + '/mies.';
