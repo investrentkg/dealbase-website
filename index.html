@@ -44,8 +44,8 @@
   .promo-bar strong{ color:#5DCAA5; font-weight:600; }
   .promo-bar a{ text-decoration:underline; text-underline-offset:2px; margin-left:6px; }
 
-  .reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal{ opacity:0; transform:translateY(32px) scale(0.98); transition:opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0) scale(1); }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
   /* CTA: subtelna, "oddychająca" poświata w kolorze koralowym (ten sam wzorzec co na investrent.com.pl) */
@@ -81,8 +81,36 @@
   .mobile-menu a{ font-size:15px; font-weight:500; padding:12px 0; border-bottom:1px solid var(--border); }
   .mobile-menu a:last-child{ border-bottom:none; }
 
-  .hero{ padding:80px 32px 56px; max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; }
+  .hero{ padding:80px 32px 56px; max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; overflow:visible; }
   @media(max-width:920px){ .hero{ grid-template-columns:1fr; padding-top:48px; } }
+
+  /* Delikatnie "żywe" tło hero - dwie miękkie, rozmyte plamy koloru dryfujące bardzo
+     powoli, dają wrażenie premium bez potrzeby wideo/AI-generowanych materiałów */
+  .hero-glow{ position:absolute; inset:-60px -10% -10% -10%; z-index:0; pointer-events:none; overflow:hidden; }
+  .hero-glow::before, .hero-glow::after{
+    content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:.35;
+  }
+  .hero-glow::before{
+    width:420px; height:420px; top:-120px; left:-60px;
+    background:radial-gradient(circle, var(--coral) 0%, transparent 70%);
+    animation:heroGlowDrift1 16s ease-in-out infinite;
+  }
+  .hero-glow::after{
+    width:380px; height:380px; top:60px; right:-80px;
+    background:radial-gradient(circle, var(--teal) 0%, transparent 70%);
+    animation:heroGlowDrift2 18s ease-in-out infinite;
+  }
+  @keyframes heroGlowDrift1{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(40px,30px) scale(1.12); }
+  }
+  @keyframes heroGlowDrift2{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-30px,-40px) scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-glow::before, .hero-glow::after{ animation:none; }
+  }
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--teal); border:1px solid var(--border); background:var(--card); padding:6px 14px; border-radius:100px; margin-bottom:26px; }
   .eyebrow::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); }
   .hero h1{ font-size:clamp(34px,4.4vw,54px); line-height:1.08; }
@@ -393,8 +421,9 @@
     </div>
   </div>
 
-  <section class="hero">
-    <div>
+  <section class="hero" style="position:relative;">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div style="position:relative; z-index:1;">
       <span class="eyebrow">Dla biur nieruchomości w Polsce</span>
       <h1>CRM zbudowany <em>wokół AI</em>,<br>nie z AI doklejonym na koniec.</h1>
       <p class="hero-sub">Asystent AI, wyszukiwanie ofert z siedmiu portali i dopasowania klient↔oferta są częścią architektury DealBase od pierwszej linii kodu — nie wtyczką dodaną do starego systemu.</p>
