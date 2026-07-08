@@ -246,6 +246,22 @@
   @media(max-width:820px){ .origin{ grid-template-columns:1fr; padding:32px; } }
   .origin-quote{ font-family:'Fraunces',serif; font-size:clamp(20px,2.6vw,26px); line-height:1.4; color:var(--ink); }
   .origin-quote span{ color:var(--teal); }
+
+  .story-split{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; }
+  @media(max-width:860px){ .story-split{ grid-template-columns:1fr; } }
+  .story-text p{ font-size:15px; color:var(--muted); line-height:1.75; margin-bottom:16px; }
+  .story-text p:last-child{ margin-bottom:0; }
+  .story-text strong{ color:var(--ink); }
+  .story-video-slot{ position:relative; }
+  .video-placeholder{
+    aspect-ratio:16/9; background:var(--ink); border-radius:16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:var(--cream); border:1px dashed rgba(245,245,243,0.25);
+  }
+  .video-play-icon{ width:56px; height:56px; border-radius:50%; background:rgba(245,245,243,0.1); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .video-play-icon svg{ width:26px; height:26px; color:var(--teal); }
+  .video-placeholder p{ font-size:14.5px; font-weight:600; margin-bottom:4px; }
+  .video-placeholder span{ font-size:12px; color:#8B93A6; text-transform:uppercase; letter-spacing:1px; }
   .origin-meta{ margin-top:20px; font-size:14px; color:var(--muted); }
   .origin-stats{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
   .origin-stat{ background:var(--cream); border:1px solid var(--border); border-radius:12px; padding:20px; }
@@ -744,6 +760,28 @@
       <div class="process-step"><div class="step-num">02</div><h3>Migracja danych</h3><p>Import klientów, ofert i historii z obecnego systemu — wykonujemy to za Was.</p></div>
       <div class="process-step"><div class="step-num">03</div><h3>Konfiguracja zespołu</h3><p>Konta agentów, uprawnienia i branding biura gotowe przed pierwszym logowaniem.</p></div>
       <div class="process-step"><div class="step-num">04</div><h3>Start i wsparcie</h3><p>Zespół pracuje w DealBase od pierwszego dnia, z bezpośrednim wsparciem przy pytaniach.</p></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head">
+      <span class="section-tag">Nasza historia</span>
+      <h2>Nie zaczęliśmy od pomysłu na biznes. Zaczęliśmy od własnego problemu.</h2>
+    </div>
+    <div class="story-split">
+      <div class="story-text">
+        <p>DealBase nie powstał w biurze software house'u, który zgadywał, czego potrzebują agenci nieruchomości. Powstał w InvestRent Nieruchomości — biurze, które sami prowadzimy w Kołobrzegu — bo żaden z dostępnych systemów nie robił tego, czego naprawdę potrzebowaliśmy każdego dnia.</p>
+        <p>Zaczęliśmy go budować wyłącznie na nasz własny użytek. Narzędzie miało rozwiązać nasze frustracje: zbyt wolne wyszukiwanie ofert, AI doklejone na siłę do starego systemu, brak realnej automatyzacji dokumentów. Nie planowaliśmy nikomu tego pokazywać.</p>
+        <p>Im dłużej z niego korzystaliśmy, tym trudniej było nam myśleć o nim jako o czymś tylko na własny użytek. Działał tak dobrze, że chowanie go przed resztą branży zaczęło wydawać się nie fair wobec kolegów po fachu, którzy zmagają się z dokładnie tymi samymi problemami, z jakimi my zmagaliśmy się kiedyś.</p>
+        <p><strong>Kluczowa różnica: nie jesteśmy informatykami, którzy postanowili zrobić CRM dla nieruchomości.</strong> Jesteśmy przede wszystkim praktykami tego biznesu — agentami prowadzącymi każdego dnia realne transakcje. Słabe strony innych systemów znamy nie z recenzji czy demo, tylko z własnego, wieloletniego korzystania z nich, zanim zbudowaliśmy własny. Dlatego DealBase ich nie powiela.</p>
+      </div>
+      <div class="story-video-slot">
+        <div class="video-placeholder">
+          <div class="video-play-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></div>
+          <p>Wideo-prezentacja DealBase</p>
+          <span>już wkrótce</span>
+        </div>
+      </div>
     </div>
   </section>
 
