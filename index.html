@@ -469,6 +469,8 @@
           <div class="ai-dots">
             <span class="ai-dot active" data-dot="0"></span>
             <span class="ai-dot" data-dot="1"></span>
+            <span class="ai-dot" data-dot="2"></span>
+            <span class="ai-dot" data-dot="3"></span>
           </div>
         </div>
 
@@ -492,6 +494,29 @@
           <div class="ai-card-foot">
             <span class="ai-pill">3 dopasowania</span>
             <span class="ai-pill">aktualizacja co godzinę</span>
+          </div>
+        </div>
+
+        <div class="ai-slide" data-slide="2">
+          <span class="ai-offer-tag">Wycena • Mieszkanie, Kołobrzeg-Podczele</span>
+          <div class="ai-field-label">Szacowana wartość (RCN + baza ofert)</div>
+          <div class="match-row"><span class="match-score high">620–645k</span>Szybka sprzedaż, 4–6 tygodni</div>
+          <div class="match-row"><span class="match-score mid">655–680k</span>Sprzedaż cierpliwa, 3–6 miesięcy</div>
+          <div class="ai-card-foot">
+            <span class="ai-pill">Mediana RCN: 10 763 zł/m²</span>
+            <span class="ai-pill">1016 transakcji</span>
+          </div>
+        </div>
+
+        <div class="ai-slide" data-slide="3">
+          <span class="ai-offer-tag">Wyszukiwanie • 5 portali jednocześnie</span>
+          <div class="ai-field-label">Wyniki napływają na żywo</div>
+          <div class="match-row"><span class="match-score high">12</span>Otodom</div>
+          <div class="match-row"><span class="match-score high">9</span>OLX</div>
+          <div class="match-row"><span class="match-score mid">6</span>Gratka, Morizon, N-online</div>
+          <div class="ai-card-foot">
+            <span class="ai-pill">27 wyników łącznie</span>
+            <span class="ai-pill">bez duplikatów</span>
           </div>
         </div>
       </div>
@@ -1017,7 +1042,7 @@
   }
   startTyping();
 
-  var slideLabels = ["Generowanie opisu oferty", "Dopasowanie klienta do oferty"];
+  var slideLabels = ["Generowanie opisu oferty", "Dopasowanie klienta do oferty", "Wycena AI z rejestrem cen", "Wyszukiwanie 5 portali"];
   var slideIndex = 0;
   var slides = document.querySelectorAll('.ai-slide');
   var dots = document.querySelectorAll('.ai-dot');
@@ -1030,7 +1055,7 @@
   }
   dots.forEach(function(d){ d.addEventListener('click', function(){ showSlide(parseInt(d.dataset.dot)); }); });
   if(!prefersReduced){
-    setInterval(function(){ showSlide(slideIndex === 0 ? 1 : 0); }, 6000);
+    setInterval(function(){ showSlide((slideIndex + 1) % slideLabels.length); }, 5000);
   }
 
   var tabs = document.querySelectorAll('.tour-tab');
